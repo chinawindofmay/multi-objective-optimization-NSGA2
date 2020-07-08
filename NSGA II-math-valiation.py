@@ -14,7 +14,7 @@ from numpy import *
 
 #Main program starts here
 POP_SIZE = 100
-MAX_GEN = 200
+MAX_GEN = 100
 
 CROSSOVER_PROB__THRESHOLD =0.4
 MUTATION_PROB__THRESHOLD=0.05
@@ -165,24 +165,24 @@ def draw_3d_plot(population, y1_values,y2_values,y3_values):
     ax3d.scatter(x1_list, x2_list, y3_values, c='b',marker=".",linewidths=4)
 
     #曲面y1的
-    x1 = np.arange(MIN_X, MAX_X, 1)
-    x2 = np.arange(MIN_X, MAX_X, 1)
+    x1 = np.arange(MIN_X, MAX_X+1, 1)
+    x2 = np.arange(MIN_X, MAX_X+1, 1)
     def f1(x1, x2):
         return (200-3*x1-7*x2)
     x1, x2 = np.meshgrid(x1, x2)
     ax3d.plot_surface(x1, x2, f1(x1, x2), rstride=1, cstride=1, cmap=plt.cm.spring)
 
     # 曲面y2的
-    x1 = np.arange(MIN_X, MAX_X, 1)
-    x2 = np.arange(MIN_X, MAX_X, 1)
+    x1 = np.arange(MIN_X, MAX_X+1, 1)
+    x2 = np.arange(MIN_X, MAX_X+1, 1)
     def f2(x1, x2):
         return ((x1-1)**2+(x2-2)**2)
     x1, x2 = np.meshgrid(x1, x2)
     ax3d.plot_surface(x1, x2, f2(x1, x2), rstride=1, cstride=1, cmap=plt.cm.coolwarm)
 
     # 曲面y3的
-    x1 = np.arange(MIN_X, MAX_X, 1)
-    x2 = np.arange(MIN_X, MAX_X, 1)
+    x1 = np.arange(MIN_X, MAX_X+1, 1)
+    x2 = np.arange(MIN_X, MAX_X+1, 1)
     def f3(x1, x2):
         return (x1**2+x2**2)**0.5
     x1, x2 = np.meshgrid(x1, x2)
@@ -225,7 +225,6 @@ def execute_nsga2():
                    MIN_X + (MAX_X - MIN_X) * random.random(),
                    MIN_X + (MAX_X - MIN_X) * random.random()] for i in range(0, POP_SIZE)]
     gen_no = 0
-
     #大的循环
     while (gen_no < MAX_GEN):
         print(gen_no)
@@ -291,5 +290,5 @@ if __name__=="__main__":
     execute_nsga2()
     # draw_3d_plot_test3333()
 	# 增加一句测试的话
-#测试完毕
+
 

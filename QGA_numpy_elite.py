@@ -8,13 +8,15 @@ import numpy as np
 import random
 import math
 import matplotlib.pyplot as plt
-
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+####################################################################BEGIN 完成类定义######################################################
 ## 2. QGA算法
 class QGA(object):
     ###2.1 类初始化
     '''定义QGA类
     '''
-    def __init__(self, population_size, chromosome_num, chromosome_length, max_value, min_value, iter_num, deta):
+    def __init__(self, population_size, X_num, chromosome_length, max_value, min_value, iter_num, deta, F):
         '''初始化类参数
         population_size(int):种群数
         chromosome_num(int):染色体数，对应需要寻优的参数个数
@@ -25,12 +27,13 @@ class QGA(object):
         deta(float):量子旋转角度
         '''
         self.population_size = population_size
-        self.chromosome_num = chromosome_num
+        self.X_num = X_num
         self.chromosome_length = chromosome_length
         self.max_value = max_value
         self.min_value = min_value
         self.iter_num = iter_num
         self.deta = deta
+        self.F=F
 
     ### 2.2 种群的量子形式初始化
     def initial_population_angle_np(self):
@@ -39,9 +42,9 @@ class QGA(object):
         output:population_Angle(list):种群的量子角度列表
                population_Angle2(list):空的种群的量子角度列表，用于存储交叉后的量子角度列表
         '''
-        initial_population_np=np.random.random(size=(self.chromosome_num, self.population_size, self.chromosome_length))
-        initial_population_np= np.pi * 2 *initial_population_np
-        return initial_population_np
+        initial_population_angle_np=np.random.random(size=(self.X_num, self.population_size, self.chromosome_length))
+        initial_population_angle_np= np.pi * 2 *initial_population_angle_np
+        return initial_population_angle_np
 
     def population_qubit_np(self, population_angle):
         '''将初始化的量子角度序列转换为种群的量子系数列表
@@ -74,7 +77,7 @@ class QGA(object):
               population_Q(list):种群的量子列表
         output:population_Binary:种群的二进制列表
         '''
-        initial_judge = np.random.random(size=(self.chromosome_num, self.population_size, self.chromosome_length))
+        initial_judge = np.random.random(size=(self.X_num, self.population_size, self.chromosome_length))
         population_bit_np=np.array(population_Q[:,:,0,:]>initial_judge,np.int)
         # print(population_bit_np.shape)
         return population_bit_np
@@ -88,7 +91,7 @@ class QGA(object):
                parameters(list):对应寻优参数的列表
         '''
         ##1.染色体的二进制表现形式转换为十进制并设置在[min_value,max_value]之间
-        X = np.full((self.chromosome_num,self.population_size),0.0)  ##存储所有参数的可能取值
+        X = np.full((self.X_num, self.population_size), 0.0)  ##存储所有参数的可能取值
         for i in range(len(population_bit)):
             tmp1 = []  ##存储一个参数的可能取值
             for j in range(len(population_bit[i])):
@@ -101,9 +104,7 @@ class QGA(object):
                 tmp1.append(value)
             X[i]=tmp1
         #计算适应度函数
-        # fitness_value = [(200 - (X[0][i] - 5) ** 2- (X[1][i] - 6) ** 2) for i in range(len(X[0]))]
-        fitness_value = np.array([(-(20 + X[0][i] ** 2 + X[1][i] ** 2 - 10 * (np.cos(2 * np.pi * X[0][i]) + np.cos(2 * np.pi * X[1][i])))) for i in range(len(X[0]))])
-
+        fitness_value = np.array([self.F(X[0][i],X[1][i]) for i in range(len(X[0]))])
         ##3.找到最优的适应度函数值和对应的参数二进制表现形式
         best_fitness = np.max(fitness_value)
         index=np.where(fitness_value==best_fitness)
@@ -118,7 +119,7 @@ class QGA(object):
               population_Angle(list):种群的量子角度列表
         '''
         ## 初始化一个空列表，全干扰交叉后的量子角度列表
-        population_Angle_crossover = np.full((self.chromosome_num, self.population_size, self.chromosome_length),0.0)
+        population_Angle_crossover = np.full((self.X_num, self.population_size, self.chromosome_length), 0.0)
         for i in range(len(population_angle_np)):
             for j in range(len(population_angle_np[i])):
                 for m in range(len(population_angle_np[i][j])):
@@ -141,7 +142,7 @@ class QGA(object):
         rotation_angle_np = np.full((population_angle_crossover_np.shape[0], population_angle_crossover_np.shape[1], population_angle_crossover_np.shape[2]), 0.0)
         deta = self.deta
         ##3. 求每个量子位的旋转角度
-        for i in range(self.chromosome_num):
+        for i in range(self.X_num):
             for j in range(self.population_size):
                 if fitnesses_crossover[j] <= current_fitness:
                     for m in range(self.chromosome_length):
@@ -212,8 +213,7 @@ class QGA(object):
         return population_angle_mutation_np,fitnesses_crossover,fitnesses_mutation
 
     #精英策略
-    def select_np(self,population_angle_current_np,population_angle_crossover_np, population_angle_mutation_np,
-                                                       fitnesses_current,fitnesses_crossover, fitnesses_mutation):
+    def select_np(self,population_angle_current_np,population_angle_crossover_np, population_angle_mutation_np,fitnesses_current,fitnesses_crossover, fitnesses_mutation):
         angle_np=np.hstack((population_angle_current_np,population_angle_crossover_np, population_angle_mutation_np))
         fitnesses_np=np.hstack((fitnesses_current,fitnesses_crossover, fitnesses_mutation))
         #归一化
@@ -231,23 +231,7 @@ class QGA(object):
         return angle_selected_np
 
 
-    ### 2.5 画出适应度函数值变化图
-    def plot(self, mean_fitness_results,median_fitness_results,all_record_fitnesses):
-        '''画图
-        '''
-        X = [i+1 for i in range(self.iter_num)]
-        mean_tend = np.polyfit(X, mean_fitness_results, 2)
-        p=np.poly1d(mean_tend)
-        # plt.plot(X, best_fitness_results, 'r-', label='best')
-        plt.plot(X, mean_fitness_results, 'b--', label="mean")
-        plt.plot(X, median_fitness_results, 'y--', label="median")
-        plt.plot(X, p(X), 'r-', label="median")
-        plt.plot(all_record_fitnesses, 'g.')  # 每次循环的目标函数值
-        plt.xlabel('Number of iteration', size=15)
-        plt.ylabel('Value', size=15)
-        plt.title('QGA')
-        plt.legend()
-        plt.show()
+
 
     ### 2.6 主函数
     def main(self):
@@ -261,11 +245,11 @@ class QGA(object):
         population_angle_current_np = self.initial_population_angle_np()
         ## 迭代
         for i in range(self.iter_num):
+            #将角度转为量子位，一个X（x1,x2）解对应2*20个量子位，实际上只是用到了1*20个的量子位，sin(a)那部分
             population_qubit_np = self.population_qubit_np(population_angle_current_np)
-            ## 将量子系数转换为二进制形式
+            ## 将量子位转换为二进制形式，量子bit决定了编码的多样性，这是非常关键的。
             population_bit_np = self.translation_bit_np(population_qubit_np)
             ## 计算本次迭代的适应度函数值列表，最优适应度函数值及对应的参数
-            # , fitness_value, , best_fitness,
             X, fitnesses_current, current_x_bit, iteration_best_fitness, current_x = self.fitness_np(population_bit_np)
             ## 找出到目前为止最优的适应度函数值和对应的参数
             if iteration_best_fitness > best_fitness:
@@ -284,20 +268,96 @@ class QGA(object):
             population_angle_current_np=self.select_np(population_angle_current_np,population_angle_crossover_np, population_angle_mutation_np, fitnesses_current,fitnesses_crossover, fitnesses_mutation)
         ## 结果展示
         # best_fitness_results.sort()
-        self.plot(mean_fitness_results,median_fitness_results,all_record_fitnesses)
+        return best_fitness_results,mean_fitness_results,median_fitness_results,all_record_fitnesses
 
+##############################################################################END 完成类定义######################################################
+
+#####################################################################BENGIN 工具函数###############################################################
+
+# 绘制3D图形
+def plot_3d(F):
+    # 绘制函数三维图像
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    # plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
+    X = np.linspace(*[MIN_VALUE,MAX_VALUE], 100)  # 等差数列
+    Y = np.linspace(*[MIN_VALUE,MAX_VALUE], 100)
+    X, Y = np.meshgrid(X, Y)  # 坐标矩阵，每个交叉点对应网格
+    Z = F(X, Y)
+    # 绘制3D图形，X,Y,Z:2D数组形式的数据值
+    # rstride:数组行距（步长大小）
+    # cstride:数组列距(步长大小）
+    # cmap:曲面块颜色映射
+    # color:曲面块颜色
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
+    # ax.set_zlim(-100, 0)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    # plt.pause(3)  # 不仅可以绘图而且鼠标可以继续交互
+    plt.show()
+
+
+### 2.5 画出适应度函数值变化图
+def plot_all_records(mean_fitness_results,median_fitness_results,all_record_fitnesses):
+    '''画图
+    '''
+    X = [i+1 for i in range(ITER_NUM)]
+    mean_tend = np.polyfit(X, mean_fitness_results, 2)
+    p=np.poly1d(mean_tend)
+    # plt.plot(X, best_fitness_results, 'r-', label='best')
+    plt.plot(X, mean_fitness_results, 'b--', label="mean")
+    plt.plot(X, median_fitness_results, 'y--', label="median")
+    plt.plot(X, p(X), 'r-', label="median")
+    plt.plot(all_record_fitnesses, 'g.')  # 每次循环的目标函数值
+    plt.xlabel('Number of iteration', size=15)
+    plt.ylabel('Value', size=15)
+    plt.title('QGA')
+    plt.legend()
+    plt.show()
+
+### 2.5 画出适应度函数值变化图
+def plot_lines(best_fitness_results,mean_fitness_results,median_fitness_results,symbol_str,title,show_able):
+    '''画图
+    '''
+    X = [i+1 for i in range(ITER_NUM)]
+    plt.plot(X, best_fitness_results, 'r'+symbol_str, label=title+' best')
+    plt.plot(X, mean_fitness_results, 'b'+symbol_str, label=title+" mean")
+    plt.plot(X, median_fitness_results, 'y'+symbol_str, label=title+" median")
+    plt.xlabel('Number of iteration', size=15)
+    plt.ylabel('Value', size=15)
+    plt.title(title)
+    plt.legend()
+    if show_able:
+        plt.show()
+
+def F1(x,y):
+    return (200 - (x - 5) ** 2- (y - 6) ** 2)
+
+def F2(x,y):
+    # 计算适应度函数2 参考https://www.cnblogs.com/devilmaycry812839668/p/6371704.html?utm_source=itdadao&utm_medium=referral
+    return (-(20 + x ** 2 + y ** 2 - 10 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y))))
+
+def F3(x,y):
+    # 计算适应度函数3 参考https://www.cnblogs.com/devilmaycry812839668/p/6371704.html?utm_source=itdadao&utm_medium=referral
+    return -(0.5 + ((np.sin(x ** 2 - y ** 2)) ** 2 - 0.5) / ((1 + 0.001 * (x ** 2 + y ** 2)) ** 2))
+def F4(x,y):
+    return (100*np.sqrt(np.abs(x-0.01*(y**2)))+0.01*np.abs(y+10))
+#####################################################################END 工具函数###############################################################
+
+
+POP_SIZE = 200
+X_NUM = 2
+CHROMOSOME_LENGTH = 20
+MAX_VALUE = 5
+MIN_VALUE = -5
+ITER_NUM = 50
+DETA = 0.05 * np.pi
 
 if __name__ == '__main__':
-    print('----------------1.Parameter Seting------------')
-    population_size = 200
-    chromosome_num = 2
-    chromosome_length = 20
-    max_value = 5
-    min_value = -5
-    iter_num = 100
-    deta = 0.05 * np.pi
-    print('----------------2.QGA-----------------')
-    qga = QGA(population_size, chromosome_num, chromosome_length, max_value, min_value, iter_num, deta)
-    qga.main()
+    # plot_3d(F2)
+    qga = QGA(POP_SIZE, X_NUM, CHROMOSOME_LENGTH, MAX_VALUE, MIN_VALUE, ITER_NUM, DETA,F2)
+    best_fitness_results, mean_fitness_results, median_fitness_results, all_record_fitnesses=qga.main()
+    plot_lines(best_fitness_results, mean_fitness_results, median_fitness_results)
 
 

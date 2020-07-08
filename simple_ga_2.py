@@ -18,19 +18,19 @@ from mpl_toolkits.mplot3d import Axes3D
 DNA_SIZE = 24#染色体长度
 POP_SIZE = 200#种群规模
 CROSSOVER_RATE = 0.8#交叉概率
-MUTATION_RATE = 0.005#变异概率
-N_GENERATIONS = 100#迭代次数
+MUTATION_RATE = 0.01#变异概率
+N_GENERATIONS = 50#迭代次数
 X_BOUND = [-5, 5]
 Y_BOUND = [-5, 5]
 
 
-def F(x, y):
+def F222(x, y):
     # return 3 * (1 - x) ** 2 * np.exp(-(x ** 2) - (y + 1) ** 2) - 10 * (x / 5 - x ** 3 - y ** 5) * np.exp(
     #     -x ** 2 - y ** 2) - 1 / 3 ** np.exp(-(x + 1) ** 2 - y ** 2)
     return -(20+x**2+y**2-10*(np.cos(2*np.pi*x)+np.cos(2*np.pi*y)))
 
 #绘制3D图形
-def plot_3d(ax):
+def plot_3d(ax,F):
     X = np.linspace(*X_BOUND, 100)#等差数列
     Y = np.linspace(*Y_BOUND, 100)
     X, Y = np.meshgrid(X, Y)#坐标矩阵，每个交叉点对应网格
@@ -65,7 +65,7 @@ def plot(results):
     plt.show()
 
 #计算适应度函数
-def get_fitness(pop):
+def get_fitness(pop,F):
     x, y = translateDNA(pop)
     z = F(x, y)
     #为了防止0的出现（后面计算概率会有问题），可以在后面加上一个很小很小接近于0的值
@@ -119,46 +119,71 @@ def select(pop, fitness):  # nature selection wrt pop's fitness
                            p=(fitness) / (fitness.sum()))
     return pop[idx]
 
-def print_info(pop):
-    z,fitness = get_fitness(pop)
+def print_info(pop,F):
+    z,fitness = get_fitness(pop,F)
     max_fitness_index = np.argmax(fitness)
     print("max_fitness:", fitness[max_fitness_index])
     x, y = translateDNA(pop)
     print("最优的基因型：", pop[max_fitness_index])
     print("(x, y):", (x[max_fitness_index], y[max_fitness_index]))
 
-if __name__ == "__main__":
-    #绘制函数三维图像
-    fig = plt.figure()
-    ax = Axes3D(fig)
-    plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
-    plot_3d(ax)
 
+def traditional_ga(F):
     z_results = []
     best_z = -1000000
-
-    #编码
-    #pop表示种群矩阵，一行表示一个二进制编码表示的DNA，矩阵的行数为种群数目，DNA_SIZE为编码长度。
+    Z_result = []
+    Z_mean_result = []
+    Z_median_result = []
+    Z_max_result = []
+    # 编码
+    # pop表示种群矩阵，一行表示一个二进制编码表示的DNA，矩阵的行数为种群数目，DNA_SIZE为编码长度。
     pop = np.random.randint(2, size=(POP_SIZE, DNA_SIZE * 2))  # matrix (POP_SIZE, DNA_SIZE*2)#初始化群体的生产
     for _ in range(N_GENERATIONS):  # 迭代N代
-        x, y = translateDNA(pop)#二进制解码
-        #locals() 函数会以字典类型返回当前位置的全部局部变量。
-        if 'sca' in locals():
-            sca.remove()
-        sca = ax.scatter(x, y, F(x, y), c='black', marker='o');
-        plt.show();#显示所绘制的图像
-        plt.pause(0.1)
-        pop = np.array(crossover_and_mutation(pop, CROSSOVER_RATE))#交叉和变异
+        x, y = translateDNA(pop)  # 二进制解码
+        # locals() 函数会以字典类型返回当前位置的全部局部变量。
+        # if 'sca' in locals():
+        #     sca.remove()
+        # sca = ax.scatter(x, y, F(x, y), c='black', marker='o');
+        # plt.show();#显示所绘制的图像
+        # plt.pause(0.1)
+        pop = np.array(crossover_and_mutation(pop, CROSSOVER_RATE))  # 交叉和变异
         # F_values = F(translateDNA(pop)[0], translateDNA(pop)[1])#x, y --> Z matrix
-        Z,fitness = get_fitness(pop)#计算适应度
-        z=np.max(Z)
+        Z, fitness = get_fitness(pop, F)  # 计算适应度
+        Z_result.append(Z)
+        #  Z_mean= np.sum(Z)/POP_SIZE
+        Z_mean = np.mean(Z)
+        Z_median=np.median(Z)
+        Z_max = np.max(Z)
+        Z_mean_result.append(Z_mean)
+        Z_median_result.append(Z_median)
+        Z_max_result.append(Z_max)
+        z = np.max(Z)
         ## 找出到目前为止最优的适应度函数值和对应的参数
         if z > best_z:
             best_z = z
         z_results.append(best_z)
         pop = select(pop, fitness)  # 选择生成新的种群
-    print_info(pop)
+    print_info(pop, F)
+    return Z_max_result,Z_mean_result,Z_median_result,Z_result
+if __name__ == "__main__":
+    #绘制函数三维图像
+    # fig = plt.figure()
+    # ax = Axes3D(fig)
+    # plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
+    # plot_3d(ax)
+    Z_result, Z_mean_result, Z_median, Z_max_result=traditional_ga(F222)
+
     #如果在脚本中使用ion()命令开启了交互模式，没有使用ioff()关闭的话，则图像会一闪而过，并不会常留。
-    plt.ioff()
-    plot_3d(ax)
-    plot(z_results)
+    # plt.ioff()
+    # plot_3d(ax)
+    #plot(z_results)
+    #二维可视化结果
+   #  axes = plt.subplot()
+   #  axes.plot(Z_result, 'g.')  # 每次循环的目标函数值
+   #  axes.plot( Z_mean_result,'r-',label="mean_funcValue")
+   #  axes.plot(Z_max_result, 'b-', label="max_funcValue")
+   # # axes.plot(z_results, 'b--', label="best_fitness")
+   #  axes.set(xlim=(-1,N_GENERATIONS + 1), xlabel='$iterCount$', ylabel='$value$')
+   #  axes.legend()
+   #  plt.show()
+    #plot(Z/POP_SIZE)

@@ -9,7 +9,7 @@ import numpy as np
 if __name__=="__main__":
     # Main program starts here
     POP_SIZE = 100
-    MAX_GEN = 100
+    MAX_GEN = 200
     X_COUNT = 2
     CROSSOVER_PROB__THRESHOLD = 0.5
     MUTATION_PROB__THRESHOLD = 0.5

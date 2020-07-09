@@ -26,10 +26,10 @@ MAX_X=10
 DELATE=2e-7
 DISTANCE_INFINTE=444444444
 #First function to optimize
-#希望求最大值
+#希望求最小值
 #三维平面
 def y1(x1,x2):
-    value = 200-3*x1-7*x2
+    value = (200-3*x1-7*x2)
     return value
 
 #Second function to optimize
@@ -211,12 +211,20 @@ def draw_3d_plot_test3333():
 
 
 #二维制图表达
-def draw_2d_plot(y1_values,y2_values):
-    fig = plt.figure(figsize=(12, 12))
-    ax11 = fig.add_subplot(111)
+def draw_2d_plot(y1_values,y2_values,y3_values):
+    fig = plt.figure(figsize=(4, 12))
+    ax11 = fig.add_subplot(131)
     ax11.set_xlabel('y1', fontsize=15)
     ax11.set_ylabel('y2', fontsize=15)
     ax11.scatter(y1_values, y2_values)
+    ax12 = fig.add_subplot(132)
+    ax12.set_xlabel('y2', fontsize=15)
+    ax12.set_ylabel('y3', fontsize=15)
+    ax12.scatter(y2_values, y3_values)
+    ax13 = fig.add_subplot(133)
+    ax13.set_xlabel('y1', fontsize=15)
+    ax13.set_ylabel('y3', fontsize=15)
+    ax13.scatter(y1_values, y3_values)
     plt.show()
 
 #NSGA2的主函数
@@ -282,8 +290,8 @@ def execute_nsga2():
     pof_y2_values = [y2(pof_population[i][0], pof_population[i][1]) for i in range(0, len(pof_population))]
     pof_y3_values = [y3(pof_population[i][0], pof_population[i][1]) for i in range(0, len(pof_population))]
     # 将最后一代的fitness结果打印出来
-    # draw_2d_plot( pof_y1_values, pof_y2_values)
-    draw_3d_plot(pof_population, pof_y1_values,pof_y2_values,pof_y3_values)
+    draw_2d_plot( pof_y1_values, pof_y2_values,pof_y3_values)
+    # draw_3d_plot(pof_population, pof_y1_values,pof_y2_values,pof_y3_values)
 
 
 if __name__=="__main__":

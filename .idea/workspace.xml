@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9382d07d-646f-476b-83a3-d445026e5cc9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simple_ga_II.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simple_ga_old.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" afterPath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NSGA II-math-valiation.py" afterPath="$PROJECT_DIR$/NSGA II-math-valiation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QGA_numpy_elite.py" afterPath="$PROJECT_DIR$/QGA_numpy_elite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/NSGA II-math-valiation.py" afterPath="$PROJECT_DIR$/NSGA2_02_math_valiation.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/NSGA II-traditional.py" afterPath="$PROJECT_DIR$/NSGA2_01_traditional.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/NSGA2_math_valiation_numpy.py" afterPath="$PROJECT_DIR$/NSGA2_03_math_valiation_np.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py" afterPath="$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA_OLD.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +17,9 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$QGA_numpy_elite_comprason.coverage" NAME="QGA_numpy_elite_comprason Coverage Results" MODIFIED="1593606131904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA_II_traditional.coverage" NAME="NSGA II-traditional Coverage Results" MODIFIED="1593590096879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA_II_traditional.coverage" NAME="NSGA II-traditional Coverage Results" MODIFIED="1594283976806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$search_famous_people.coverage" NAME="search_famous_people Coverage Results" MODIFIED="1594076557220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_06_math_valiation_np_add_Quantum_compason.coverage" NAME="NSGA2_06_math_valiation_np_add_Quantum_compason Coverage Results" MODIFIED="1594299586065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$simple_ga_II.coverage" NAME="simple_ga_II Coverage Results" MODIFIED="1592956246064" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$QGA_numpy_elite.coverage" NAME="QGA_numpy_elite Coverage Results" MODIFIED="1593560447731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$comprason.coverage" NAME="comprason Coverage Results" MODIFIED="1593351155571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -30,9 +29,12 @@
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$simple_ga.coverage" NAME="simple_ga Coverage Results" MODIFIED="1592645673406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$Nosetests_in_QGA_numpy_NSGA2_math_valiation_py.coverage" NAME="Nosetests in QGA_numpy_NSGA2_math_valiation.py Coverage Results" MODIFIED="1593415709751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_QGA.coverage" NAME="NSGA2_QGA Coverage Results" MODIFIED="1593607273368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_math_valiation.coverage" NAME="NSGA2-math-valiation Coverage Results" MODIFIED="1594284440385" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_numpy.coverage" NAME="NSGA2 numpy Coverage Results" MODIFIED="1594284602078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$QGA_numpy.coverage" NAME="QGA_numpy Coverage Results" MODIFIED="1593253954365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$QGA.coverage" NAME="QGA Coverage Results" MODIFIED="1593241021331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_QGA_ADD.coverage" NAME="NSGA2_QGA_ADD Coverage Results" MODIFIED="1594213991557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$Q_NSGA2_evaluation.coverage" NAME="Q_NSGA2_evaluation Coverage Results" MODIFIED="1594285210060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$simple_ga_old.coverage" NAME="simple_ga_old Coverage Results" MODIFIED="1592646794449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -50,32 +52,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NSGA2_math_valiation_numpy_add_QGA.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py">
+      <file leaf-file-name="NSGA2_06_math_valiation_np_add_Quantum_compason.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NSGA2_06_math_valiation_np_add_Quantum_compason.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="511" column="15" lean-forward="true" selection-start-line="511" selection-start-column="15" selection-end-line="511" selection-end-column="15" />
+            <state relative-caret-position="-1929">
+              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+              <folding>
+                <element signature="e#16#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NSGA2_05_evaluation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NSGA2_05_evaluation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="187" column="68" lean-forward="false" selection-start-line="187" selection-start-column="68" selection-end-line="187" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QGA_numpy_elite.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/QGA_numpy_elite.py">
+      <file leaf-file-name="NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="354" column="19" lean-forward="true" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="171">
+              <caret line="212" column="106" lean-forward="false" selection-start-line="212" selection-start-column="106" selection-end-line="212" selection-end-column="106" />
+              <folding>
+                <element signature="e#263#274#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NSGA2_math_valiation_numpy.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NSGA2_math_valiation_numpy.py">
+      <file leaf-file-name="NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10710">
-              <caret line="360" column="17" lean-forward="false" selection-start-line="360" selection-start-column="17" selection-end-line="360" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="171">
+              <caret line="589" column="45" lean-forward="false" selection-start-line="589" selection-start-column="38" selection-end-line="589" selection-end-column="45" />
+              <folding>
+                <element signature="e#263#274#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,19 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mutation_rate</find>
-      <find>lines = f.readlines()</find>
-      <find>points_index</find>
-      <find>get_result</find>
-      <find>selection</find>
-      <find>points_name</find>
-      <find>points_location</find>
-      <find>points_distance</find>
-      <find>get_total_distance</find>
-      <find>improve</find>
-      <find>file encoding</find>
-      <find>QGA</find>
-      <find>math.pow</find>
       <find>max(</find>
       <find>2</find>
       <find>p=(fitness) / (fitness.sum()))</find>
@@ -121,6 +126,19 @@
       <find>mutation</find>
       <find>deta</find>
       <find>if bit_a[m,n] == 0 and bit_target[m,n] == 1 and qbit_sin_a * qbit_cos_a &gt; 0:</find>
+      <find>get_index_of</find>
+      <find>population_double_X_np[i, :], population_double_angle_np[i, :, :] = self.rotate_and_mutation(population_angle_np[a1, :, :],population_angle_np[b1, :, :],  gen_no)  ###改改改</find>
+      <find>MAX_X</find>
+      <find>POP_SIZE</find>
+      <find>CROSSOVER_PROB_THRESHOLD</find>
+      <find>DELATE</find>
+      <find>execute_nsga2</find>
+      <find>while (gen_no &lt; MAX_GEN):</find>
+      <find>DISTANCE_INFINTE</find>
+      <find>pof_population = np.random.uniform(MIN_X, MAX_X, (len_non_dominated_sorted_fronts, X_COUNT))  # 存放x1,x2</find>
+      <find>MAX_</find>
+      <find>MAX_GEN</find>
+      <find>ax11.scatter(traditional_pof_y1_values_np, traditional_pof_y2_values_np,&quot;g&quot;,label='traditional NSGA2')</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -138,15 +156,23 @@
         <option value="$PROJECT_DIR$/QGA_numpy.py" />
         <option value="$PROJECT_DIR$/simple_ga_2.py" />
         <option value="$PROJECT_DIR$/comprason.py" />
-        <option value="$PROJECT_DIR$/NSGA II-math-valiation.py" />
         <option value="$PROJECT_DIR$/QGA_numpy_NSGA2_math_valiation.py" />
         <option value="$PROJECT_DIR$/QGA_numpy_NSGA2_math_valiation_add_QGA.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/QGA_numpy_elite.py" />
         <option value="$PROJECT_DIR$/QGA_numpy_elite_comprason.py" />
-        <option value="$PROJECT_DIR$/NSGA2_math_valiation_numpy.py" />
         <option value="$PROJECT_DIR$/search_famous_people.py" />
         <option value="$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py" />
+        <option value="$PROJECT_DIR$/NSGA II-traditional.py" />
+        <option value="$PROJECT_DIR$/NSGA II-math-valiation.py" />
+        <option value="$PROJECT_DIR$/NSGA2_math_valiation_numpy.py" />
+        <option value="$PROJECT_DIR$/NSGA2_math_valiation_np_add_Quantum_evaluation.py" />
+        <option value="$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA.py" />
+        <option value="$PROJECT_DIR$/NSGA2_03_math_valiation_np.py" />
+        <option value="$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py" />
+        <option value="$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py" />
+        <option value="$PROJECT_DIR$/NSGA2_05_evaluation.py" />
+        <option value="$PROJECT_DIR$/NSGA2_06_math_valiation_np_add_Quantum_compason.py" />
       </list>
     </option>
   </component>
@@ -200,7 +226,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QGA_numpy_NSGA2_math_valiation_add_QGA.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/NSGA II-math-valiation.py" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -220,7 +246,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NSGA2_QGA_ADD">
+  <component name="RunManager" selected="Python.NSGA2_06_math_valiation_np_add_Quantum_compason">
     <configuration default="false" name="QGA_numpy_elite" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -253,27 +279,10 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="E_multi-objective-optimization-NSGA2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NSGA II-traditional.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_01_traditional.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Nosetests in NSGA2_math_valiation_numpy.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="E_multi-objective-optimization-NSGA2" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_regexPattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/NSGA2_math_valiation_numpy.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="false" name="QGA_numpy_elite_comprason" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -309,6 +318,25 @@
       <module name="E_multi-objective-optimization-NSGA2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/search_famous_people.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NSGA2_06_math_valiation_np_add_Quantum_compason" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="E_multi-objective-optimization-NSGA2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NSGA2_06_math_valiation_np_add_Quantum_compason.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -463,25 +491,6 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <configuration default="false" name="NSGA2 validation" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\ProgramData\Anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="E_multi-objective-optimization-NSGA2" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NSGA II-math-valiation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="NSGA2_QGA" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -495,7 +504,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="E_multi-objective-optimization-NSGA2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_math_valiation_numpy.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_03_math_valiation_np.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -514,29 +523,88 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="E_multi-objective-optimization-NSGA2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_math_valiation_numpy_add_QGA.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_04_math_valiation_np_add_QGA_OLD.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="Python.NSGA2 validation" />
-      <item index="1" class="java.lang.String" itemvalue="Python.NSGA2_QGA" />
-      <item index="2" class="java.lang.String" itemvalue="Python.NSGA2_QGA_ADD" />
-      <item index="3" class="java.lang.String" itemvalue="Python.QGA_numpy_elite" />
-      <item index="4" class="java.lang.String" itemvalue="Python.NSGA II-traditional" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Nosetests in NSGA2_math_valiation_numpy.py" />
-      <item index="6" class="java.lang.String" itemvalue="Python.QGA_numpy_elite_comprason" />
-      <item index="7" class="java.lang.String" itemvalue="Python.search_famous_people" />
+    <configuration default="false" name="Q_NSGA2_evaluation" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="E_multi-objective-optimization-NSGA2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NSGA2 numpy" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="E_multi-objective-optimization-NSGA2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_03_math_valiation_np.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NSGA2-math-valiation" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="E_multi-objective-optimization-NSGA2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_02_math_valiation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <list size="10">
+      <item index="0" class="java.lang.String" itemvalue="Python.NSGA2_QGA" />
+      <item index="1" class="java.lang.String" itemvalue="Python.NSGA2_QGA_ADD" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Q_NSGA2_evaluation" />
+      <item index="3" class="java.lang.String" itemvalue="Python.NSGA2 numpy" />
+      <item index="4" class="java.lang.String" itemvalue="Python.NSGA2-math-valiation" />
+      <item index="5" class="java.lang.String" itemvalue="Python.QGA_numpy_elite" />
+      <item index="6" class="java.lang.String" itemvalue="Python.NSGA II-traditional" />
+      <item index="7" class="java.lang.String" itemvalue="Python.QGA_numpy_elite_comprason" />
+      <item index="8" class="java.lang.String" itemvalue="Python.search_famous_people" />
+      <item index="9" class="java.lang.String" itemvalue="Python.NSGA2_06_math_valiation_np_add_Quantum_compason" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.search_famous_people" />
-        <item index="1" class="java.lang.String" itemvalue="Python.QGA_numpy_elite_comprason" />
-        <item index="2" class="java.lang.String" itemvalue="Python.NSGA II-traditional" />
-        <item index="3" class="java.lang.String" itemvalue="Python.QGA_numpy_elite" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in NSGA2_math_valiation_numpy.py" />
+        <item index="0" class="java.lang.String" itemvalue="Python.NSGA2_06_math_valiation_np_add_Quantum_compason" />
+        <item index="1" class="java.lang.String" itemvalue="Python.NSGA II-traditional" />
+        <item index="2" class="java.lang.String" itemvalue="Python.search_famous_people" />
+        <item index="3" class="java.lang.String" itemvalue="Python.QGA_numpy_elite_comprason" />
+        <item index="4" class="java.lang.String" itemvalue="Python.QGA_numpy_elite" />
       </list>
     </recent_temporary>
   </component>
@@ -583,18 +651,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1748401" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35359117" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32596686" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29637527" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32596686" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -603,7 +672,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -687,39 +755,54 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA II-math-valiation.py</url>
-          <line>285</line>
+          <url>file://$PROJECT_DIR$/NSGA2_02_math_valiation.py</url>
+          <line>293</line>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA II-traditional.py</url>
+          <url>file://$PROJECT_DIR$/NSGA2_01_traditional.py</url>
           <line>99</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA II-math-valiation.py</url>
-          <line>255</line>
+          <url>file://$PROJECT_DIR$/NSGA2_02_math_valiation.py</url>
+          <line>263</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA II-math-valiation.py</url>
+          <url>file://$PROJECT_DIR$/NSGA2_02_math_valiation.py</url>
           <line>111</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py</url>
-          <line>174</line>
+          <url>file://$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA_OLD.py</url>
+          <line>175</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py</url>
-          <line>185</line>
+          <url>file://$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA_OLD.py</url>
+          <line>186</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py</url>
-          <line>409</line>
+          <url>file://$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA_OLD.py</url>
+          <line>410</line>
           <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py</url>
+          <line>511</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA2_03_math_valiation_np.py</url>
+          <line>188</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA2_03_math_valiation_np.py</url>
+          <line>204</line>
+          <option name="timeStamp" value="131" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -729,7 +812,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="128" />
+      <option name="time" value="132" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -784,39 +867,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TSP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4230">
-          <caret line="141" column="4" lean-forward="false" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TSP_QGA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="23" column="12" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-math-valiation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5340">
-          <caret line="182" column="9" lean-forward="false" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/QGA_numpy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6480">
@@ -854,7 +904,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
           <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
@@ -862,11 +912,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-math-valiation.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_02_math_valiation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5460">
           <caret line="182" column="9" lean-forward="false" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -910,7 +962,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
           <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
@@ -918,11 +970,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-math-valiation.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_02_math_valiation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5340">
           <caret line="182" column="9" lean-forward="false" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -936,7 +990,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
           <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
@@ -944,11 +998,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-math-valiation.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_02_math_valiation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5340">
           <caret line="182" column="9" lean-forward="false" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -982,7 +1038,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
           <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
@@ -1010,7 +1066,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
           <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
@@ -1125,42 +1181,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-math-valiation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="275" column="46" lean-forward="false" selection-start-line="275" selection-start-column="19" selection-end-line="275" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA II-traditional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="140" column="50" lean-forward="false" selection-start-line="140" selection-start-column="50" selection-end-line="140" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/QGA_numpy_elite_comprason.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="7" column="70" lean-forward="true" selection-start-line="7" selection-start-column="70" selection-end-line="7" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="7" column="116" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA2_math_valiation_numpy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10710">
-          <caret line="360" column="17" lean-forward="false" selection-start-line="360" selection-start-column="17" selection-end-line="360" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1182,19 +1206,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QGA_numpy_elite.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_01_traditional.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="354" column="19" lean-forward="true" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="19" />
+        <state relative-caret-position="-400">
+          <caret line="165" column="35" lean-forward="false" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA2_math_valiation_numpy_add_QGA.py">
+    <entry file="file://$PROJECT_DIR$/NSGA2_04_math_valiation_np_add_QGA_OLD.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="511" column="15" lean-forward="true" selection-start-line="511" selection-start-column="15" selection-end-line="511" selection-end-column="15" />
+        <state relative-caret-position="450">
+          <caret line="560" column="100" lean-forward="false" selection-start-line="560" selection-start-column="100" selection-end-line="560" selection-end-column="100" />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+            <element signature="e#503#25029#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_02_math_valiation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QGA_numpy_elite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="329" column="4" lean-forward="false" selection-start-line="329" selection-start-column="4" selection-end-line="329" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QGA_numpy_elite_comprason.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_03_math_valiation_np.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="131" column="33" lean-forward="false" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="33" />
+          <folding>
+            <element signature="e#233#244#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="212" column="106" lean-forward="false" selection-start-line="212" selection-start-column="106" selection-end-line="212" selection-end-column="106" />
+          <folding>
+            <element signature="e#263#274#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="589" column="45" lean-forward="false" selection-start-line="589" selection-start-column="38" selection-end-line="589" selection-end-column="45" />
+          <folding>
+            <element signature="e#263#274#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_05_evaluation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="187" column="68" lean-forward="false" selection-start-line="187" selection-start-column="68" selection-end-line="187" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA2_06_math_valiation_np_add_Quantum_compason.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1929">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="e#16#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,18 +1,18 @@
 #coding:utf-8
-# Program Name: NSGA-II.py
-# Description: This is a python implementation of Prof. Kalyanmoy Deb's popular NSGA-II algorithm
-# Author: Haris Ali Khan 
-# Supervisor: Prof. Manoj Kumar Tiwari
+# Program Name: Quantum NSGA-II
+# Description: This is a python implementation of Prof. Kalyanmoy Deb's popular NSGA-II algorithm and Quantum optimizatin mechanism.
+# Author: Xinxin Zhou
+# Supervisor: Prof. Linwang Yuan
 
 #Importing required modules
 import math
 import random
 import matplotlib.pyplot as plt
 import numpy as np
+import NSGA2_05_evaluation as evaluation
 
 ####################################################BEGIN:Quantum_NSGA2类####################################################
 class Quantum_NSGA2:
-
     #初始化函数
     def __init__(self,
                  POP_SIZE,
@@ -146,11 +146,11 @@ class Quantum_NSGA2:
         sorted2 = self.sort_by_values_max(front, y2_values.copy())
         sorted3 = self.sort_by_values_max(front, y3_values.copy())
         # 第一个个体和最后一个个体，定义为无限远
-        distance_ls[0] = DISTANCE_INFINTE
-        distance_ls[len(front) - 1] = DISTANCE_INFINTE
-        distance_y1 = np.max(y1_values) - np.min(y1_values) + DELATE
-        distance_y2 = np.max(y2_values) - np.min(y2_values) + DELATE
-        distance_y3 = np.max(y3_values) - np.min(y3_values) + DELATE
+        distance_ls[0] = self.DISTANCE_INFINTE
+        distance_ls[len(front) - 1] = self.DISTANCE_INFINTE
+        distance_y1 = np.max(y1_values) - np.min(y1_values) + self.DELATE
+        distance_y2 = np.max(y2_values) - np.min(y2_values) + self.DELATE
+        distance_y3 = np.max(y3_values) - np.min(y3_values) + self.DELATE
         # 计算中间个体的距离
         for k in range(1, len(front) - 1):
             distance_ls[k] = distance_ls[k] + (y1_values[sorted1[k + 1]] - y2_values[sorted1[k - 1]]) / distance_y1
@@ -174,9 +174,9 @@ class Quantum_NSGA2:
         chromosome_angle_a_new=chromosome_angle_a.copy()
         crossover_prob = random.random()
         mutation_prob=random.random()
-        if crossover_prob < self.ROTATE_PROB_THRESHOLD*(1-gen_no/MAX_GEN):   #改进为变长概率
+        if crossover_prob < self.ROTATE_PROB_THRESHOLD*(1-gen_no/self.MAX_GEN):   #改进为变长概率
             chromosome_angle_a_new[self.BEGIN_C_M:,:]=chromosome_angle_b[self.BEGIN_C_M:,:]
-        if mutation_prob<self.MUTATION_PROB_THRESHOLD*(1-gen_no/MAX_GEN):    #改进为变长概率
+        if mutation_prob<self.MUTATION_PROB_THRESHOLD*(1-gen_no/self.MAX_GEN):    #改进为变长概率
             chromosome_angle_a_new = self.mutation(chromosome_angle_a_new)  #这里有优化的空间
             #到这里了
         chromosome_qubit_a=np.sin(chromosome_angle_a_new)
@@ -198,7 +198,7 @@ class Quantum_NSGA2:
         chromosome_angle[self.BEGIN_C_M:,:]=np.pi * 2 * np.random.random(size=(self.CHROMOSOME_LEN-self.BEGIN_C_M,self.X_COUNT))
         return chromosome_angle
 
-    def get_result(self, population):
+    def output_final_result(self, population):
         """
         :param population:
         :return: 将进化出的结果，进一步提取最优的进行制图表达
@@ -210,7 +210,7 @@ class Quantum_NSGA2:
         #非支配排序，non_dominated_sorted_fronts[0]为最优支配曲面
         non_dominated_sorted_fronts = self.fast_non_dominated_sort(y1_values[:], y2_values[:], y3_values[:])
         len_non_dominated_sorted_fronts = len(non_dominated_sorted_fronts[0])
-        pof_population = np.random.uniform(MIN_X, MAX_X, (len_non_dominated_sorted_fronts, X_COUNT))  # 存放x1,x2
+        pof_population = np.random.uniform(self.MIN_X, self.MAX_X, (len_non_dominated_sorted_fronts, self.X_COUNT))  # 存放x1,x2
         # 获取POF，最优非支配曲面(Pareto - optimal front)
         pof_i = 0
         for index_x in non_dominated_sorted_fronts[0]:
@@ -267,7 +267,7 @@ class Quantum_NSGA2:
             X[i] = tmp1
         return X
 
-    def fitness_non_distance(self, population_double_X_np):
+    def fitness_and_nondominated_sort_and_crowd_distance_and_gd_sp(self, population_double_X_np):
         # fitness评价
         y1_values_double_np = self.fitness1(population_double_X_np[:, 0], population_double_X_np[:, 1])
         y2_values_double_np = self.fitness2(population_double_X_np[:, 0], population_double_X_np[:, 1])
@@ -281,7 +281,11 @@ class Quantum_NSGA2:
             distance_front_ls = self.crowding_distance(y1_values_double_np, y2_values_double_np, y3_values_double_np,
                                                        non_do_sorted_double_fronts_ls[i])
             c_distance_double_ls.append(distance_front_ls)
-        return c_distance_double_ls, non_do_sorted_double_fronts_ls,non_do_sorted_double_fronts_ls[0]
+
+        #generation distance 计算
+        gd=self.evaluation_generation_distance(y1_values_double_np, y2_values_double_np, y3_values_double_np,non_do_sorted_double_fronts_ls[0])
+        sp=self.evaluation_space_presentation(y1_values_double_np, y2_values_double_np, y3_values_double_np)
+        return c_distance_double_ls, non_do_sorted_double_fronts_ls,non_do_sorted_double_fronts_ls[0],gd,sp
 
     def generation_first(self, population_angle_np):
         """
@@ -299,9 +303,9 @@ class Quantum_NSGA2:
         population_double_X_np = np.vstack((population_X_np, population_X_np))
         population_double_angle_np = np.vstack((population_angle_np, population_angle_np))
         # 采用交叉、旋转、变异来更新population_double_X_np，population_double_angle_np
-        for i in range(POP_SIZE, POP_SIZE * 2):
-            a1 = random.randint(0, POP_SIZE - 1)
-            b1 = random.randint(0, POP_SIZE - 1)
+        for i in range(self.POP_SIZE, self.POP_SIZE * 2):
+            a1 = random.randint(0, self.POP_SIZE - 1)
+            b1 = random.randint(0, self.POP_SIZE - 1)
             # 通过crossover和mutation的方式生成新的soultion
             population_double_X_np[i, :], population_double_angle_np[i, :, :] = self.crossover_and_mutation(
                 population_angle_np[a1, :, :], population_angle_np[b1, :, :], 0)  ###改改改
@@ -325,12 +329,15 @@ class Quantum_NSGA2:
         population_double_X_np = np.vstack((population_X_np, population_X_np))
         population_double_angle_np = np.vstack((population_angle_np, population_angle_np))
         # 采用交叉、旋转、变异来更新population_double_X_np，population_double_angle_np
-        for i in range(POP_SIZE, POP_SIZE * 2):
-            a1 = random.randint(0, POP_SIZE - 1)
+        for i in range(self.POP_SIZE, self.POP_SIZE * 2):
+            a1 = random.randint(0, self.POP_SIZE - 1)
             if len(first_POF)>0:
-                b1 = random.randint(0, len(first_POF) )
+                if  len(first_POF)<self.POP_SIZE:
+                    b1 = random.randint(0, len(first_POF) )
+                else:
+                    b1 = random.randint(0, self.POP_SIZE - 1)
             else:
-                b1 = random.randint(0, POP_SIZE - 1)
+                b1 = random.randint(0, self.POP_SIZE - 1)
             # 通过rotate和mutation的方式生成新的soultion
             population_double_X_np[i, :], population_double_angle_np[i, :, :] = self.rotate_and_mutation(population_angle_np[a1, :, :],population_angle_np[b1, :, :],  gen_no)  ###改改改
         return population_double_X_np, population_double_angle_np
@@ -343,10 +350,10 @@ class Quantum_NSGA2:
         :return: 交叉，Function to carry out the crossover
         """
         #开展量子旋转门
-        chromosome_angle_a_new=self.rotate(chromosome_angle_a, chromosome_angle_target)
+        chromosome_angle_a_new=self.hilbert_rotate(chromosome_angle_a, chromosome_angle_target)
         #变异
         mutation_prob = random.random()
-        if mutation_prob<self.MUTATION_PROB_THRESHOLD*(1-gen_no/MAX_GEN):    #改进为变长概率
+        if mutation_prob<self.MUTATION_PROB_THRESHOLD*(1-gen_no/self.MAX_GEN):    #改进为变长概率
             chromosome_angle_a_new = self.mutation(chromosome_angle_a_new)  #这里有优化的空间
             #到这里了
         chromosome_qubit_a=np.sin(chromosome_angle_a_new)
@@ -380,7 +387,7 @@ class Quantum_NSGA2:
             x.append(value)
         return x,qbit_sin,qbit_cos,bit_np
 
-    def rotate(self,chromosome_angle_a, chromosome_angle_target):
+    def hilbert_rotate(self, chromosome_angle_a, chromosome_angle_target):
         """
         量子旋转
         :param chromosome_angle_a:
@@ -485,11 +492,29 @@ class Quantum_NSGA2:
             front_ls.reverse()
             for index in front_ls:
                 index_new_popu_ls.append(index)
-                if (len(index_new_popu_ls) == POP_SIZE):
+                if (len(index_new_popu_ls) == self.POP_SIZE):
                     break
-            if (len(index_new_popu_ls) == POP_SIZE):
+            if (len(index_new_popu_ls) == self.POP_SIZE):
                 break
         return index_new_popu_ls
+
+    def evaluation_generation_distance(self,y1_values_double_np, y2_values_double_np, y3_values_double_np,pof):
+        generation_distance=0
+        for index_y in range(self.POP_SIZE):
+            for index_pof in range(len(pof)):
+                generation_distance=generation_distance+np.power((y1_values_double_np[index_y]-y1_values_double_np[pof[index_pof]]),2)+np.power((y2_values_double_np[index_y] - y2_values_double_np[pof[index_pof]]), 2)+np.power((y3_values_double_np[index_y] - y3_values_double_np[pof[index_pof]]), 2)
+        generation_distance=np.power(generation_distance,0.5)/self.POP_SIZE
+        return generation_distance
+
+    def evaluation_space_presentation(self,y1_values_double_np, y2_values_double_np, y3_values_double_np):
+        di_np_array=np.full(self.POP_SIZE,0.0)
+        for index_i in range(self.POP_SIZE):
+            Di=np.abs(y1_values_double_np[index_i]-y1_values_double_np)+np.abs(y2_values_double_np[index_i]-y2_values_double_np)+np.abs(y3_values_double_np[index_i]-y3_values_double_np)
+            Di_temp = Di[np.where(Di > 0)]  #过滤掉0值
+            di=np.min(Di_temp)
+            di_np_array[index_i]=di
+        space_presentation=np.power(np.var(di_np_array)/(self.POP_SIZE-1),0.5)
+        return space_presentation
 
 
     def execute_quantum_nsga2(self):
@@ -500,136 +525,39 @@ class Quantum_NSGA2:
         population_angle_np = self.initial_population_angle_np()
         pof=[]
         gen_no = 0
+        gd_array=np.full(self.MAX_GEN,0.0)
+        sp_array=np.full(self.MAX_GEN,0.0)
         # 大的循环
-        while (gen_no < MAX_GEN):
-            print(gen_no)
+        while (gen_no < self.MAX_GEN):
             if gen_no==0:
                 #生成第一代,采用交叉和变异的方式
                 population_double_X_np, population_double_angle_np = self.generation_first( population_angle_np)
             else:
-                # 生成第一代之后的各代,采用旋转和变异的方式
+                # 方式1：生成第一代之后的各代,采用旋转和变异的方式
                 # population_double_X_np, population_double_angle_np = self.generation_second(gen_no, population_angle_np,first_POF=pof)
-                # 无旋转的方式
+                # 方式2：无旋转的方式
                 population_double_X_np, population_double_angle_np = self.generation_first(population_angle_np)
-            c_distance_double_ls, non_do_sorted_double_fronts_ls,pof = self.fitness_non_distance(population_double_X_np)
+            c_distance_double_ls, non_do_sorted_double_fronts_ls,pof,gd,sp = self.fitness_and_nondominated_sort_and_crowd_distance_and_gd_sp(population_double_X_np)
+            gd_array[gen_no]=gd
+            sp_array[gen_no]=sp
             # 生成新的一代，返回是用于筛选的index列表
             index_new_popu_ls = self.new_generation_from_nondominated_fronts(c_distance_double_ls,non_do_sorted_double_fronts_ls)
             # 从index列表中筛选出angle和X
             population_angle_np=np.array([population_double_angle_np[index] for index in index_new_popu_ls])
             population_X_np=np.array([population_double_X_np[index] for index in index_new_popu_ls])
+            print("第{0}代，POF个数为{1}个".format(gen_no,len(pof)))
             gen_no = gen_no + 1
         # 从最终的结果population中提取出结果
-        pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np = self.get_result(population_X_np)
+        pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np = self.output_final_result(population_X_np)
         #返回结果
-        return pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np
+        return pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np,gd_array,sp_array
 
 ####################################################END:Quantum_NSGA2类####################################################
-
-
-
-####################################################BEGIN：工具函数################################################
-#希望求最小值
-#三维平面
-def y1(x1,x2):
-    value = 200-3*x1-7*x2
-    return value
-
-#希望求最大值
-#抛物面
-def y2(x1,x2):
-    value = (x1-1)**2+(x2-2)**2
-    return value
-
-#希望求最大值
-#选择曲面
-def y3(x1,x2):
-    value = (x1**2+x2**2)**0.5
-    return value
-
-#三维制图表达
-def draw_3d_plot(population, y1_values,y2_values,y3_values):
-    """
-    :param population:
-    :param y1_values:
-    :param y2_values:
-    :param y3_values:
-    :return: 三维制图
-    """
-    fig = plt.figure(figsize=(16, 16))
-    from mpl_toolkits.mplot3d import Axes3D
-    ax3d = Axes3D(fig)
-    # set figure information
-    ax3d.set_title("The comparison between formula result and NSGA2 result")
-    ax3d.set_xlabel("x1")
-    ax3d.set_ylabel("x2")
-    ax3d.set_zlabel("y")
-    x1_list=[ solution[0] for solution in population]
-    x2_list=[ solution[1] for solution in population]
-    ax3d.scatter(x1_list, x2_list, y1_values, c='r',marker="v",linewidths=4)
-    ax3d.scatter(x1_list, x2_list, y2_values, c='g',marker="*",linewidths=4)
-    ax3d.scatter(x1_list, x2_list, y3_values, c='b',marker=".",linewidths=4)
-    #曲面y1的
-    x1 = np.arange(MIN_X, MAX_X+1, 1)
-    x2 = np.arange(MIN_X, MAX_X+1, 1)
-    def f1(x1, x2):
-        return (200-3*x1-7*x2)
-    x1, x2 = np.meshgrid(x1, x2)
-    ax3d.plot_surface(x1, x2, f1(x1, x2), rstride=1, cstride=1, cmap=plt.cm.spring)
-
-    # 曲面y2的
-    x1 = np.arange(MIN_X, MAX_X+1, 1)
-    x2 = np.arange(MIN_X, MAX_X+1, 1)
-    def f2(x1, x2):
-        return ((x1-1)**2+(x2-2)**2)
-    x1, x2 = np.meshgrid(x1, x2)
-    ax3d.plot_surface(x1, x2, f2(x1, x2), rstride=1, cstride=1, cmap=plt.cm.coolwarm)
-
-    # 曲面y3的
-    x1 = np.arange(MIN_X, MAX_X+1, 1)
-    x2 = np.arange(MIN_X, MAX_X+1, 1)
-    def f3(x1, x2):
-        return (x1**2+x2**2)**0.5
-    x1, x2 = np.meshgrid(x1, x2)
-    ax3d.plot_surface(x1, x2, f3(x1, x2), rstride=1, cstride=1, cmap=plt.cm.coolwarm)
-    plt.show()
-
-#三维制图表达
-def draw_3d_plot_test3333():
-    """
-    :return: 测试代码
-    """
-    fig = plt.figure(figsize=(16, 16))
-    from mpl_toolkits.mplot3d import Axes3D
-    ax3d = Axes3D(fig)
-    # set figure information
-    ax3d.set_title("The comparison between formula result and NSGA2 result")
-    ax3d.set_xlabel("x1")
-    ax3d.set_ylabel("x2")
-    ax3d.set_zlabel("y")
-    # # 曲面y3的
-    x1 = np.arange(MIN_X, MAX_X+1, 1)
-    x2 = np.arange(MIN_X, MAX_X+1, 1)
-    def f3(x1, x2):
-        return (x1**2+x2**2)**0.5
-    x1, x2 = np.meshgrid(x1, x2)
-    ax3d.plot_surface(x1, x2, f3(x1, x2), rstride=1, cstride=1, cmap=plt.cm.coolwarm)
-    plt.show()
-
-# #二维制图表达
-# def draw_2d_plot(y1_values,y2_values):
-#     fig = plt.figure(figsize=(12, 12))
-#     ax11 = fig.add_subplot(111)
-#     ax11.set_xlabel('y1', fontsize=15)
-#     ax11.set_ylabel('y2', fontsize=15)
-#     ax11.scatter(y1_values, y2_values)
-#     plt.show()
-####################################################END:工具函数#####################################
-
 
 if __name__=="__main__":
     # Main program starts here
     POP_SIZE = 100
-    MAX_GEN = 30
+    MAX_GEN = 100
     X_COUNT = 2
     CROSSOVER_PROB__THRESHOLD = 0.5
     MUTATION_PROB__THRESHOLD = 0.5
@@ -650,14 +578,19 @@ if __name__=="__main__":
                             MAX_X,
                             DELATE,
                             DISTANCE_INFINTE,
-                            y1,
-                            y2,
-                            y3,
+                            evaluation.y1,
+                            evaluation.y2,
+                            evaluation.y3,
                             CHROMOSOME_LEN,
                             BEGIN_C_M,
                             ANGLE_DETA)
-    pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np=nsga2_obj.execute_quantum_nsga2()  #执行
-    draw_3d_plot(pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np)
+    pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np,gd_array,sp_array=nsga2_obj.execute_quantum_nsga2()  #执行
+    #将GD、SP结果展示出来
+    evaluation.draw_2d_plot_gd_and_sp(MAX_GEN, gd_array, sp_array)
+    #将POF展示出来
+    evaluation.draw_2d_plot_evaluation_pof(pof_y1_values_np, pof_y2_values_np, pof_y3_values_np)
+    #将求解函数展示出来
+    evaluation.draw_3d_plot(pof_population_np, pof_y1_values_np, pof_y2_values_np, pof_y3_values_np,evaluation.y1,evaluation.y2,evaluation.y3)
     # draw_3d_plot_test3333()
 
 

@@ -207,8 +207,9 @@ def execute_nsga2():
         x_solution_popu = [x_solution_popu_double[i] for i in index_list_new_solution_popu]
         gen_no = gen_no + 1
     # 将最后一代的fitness结果打印出来
+    #支配解的分布查看
     draw_2d_combined_plot(x_solution_popu, y1_values, y2_values)
-    draw_3d_plot(x_solution_popu, y1_values, y2_values)
+    # draw_3d_plot(x_solution_popu, y1_values, y2_values)
 
 if __name__=="__main__":
     execute_nsga2()

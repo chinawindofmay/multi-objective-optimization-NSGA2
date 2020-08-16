@@ -3,6 +3,11 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/B_MOO_NSGA3_0710" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nsga2-master" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nsga2-master/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/NSGA2_with_quantum_0630" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A_SGA_with_quantum_0620" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

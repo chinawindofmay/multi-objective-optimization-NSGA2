@@ -182,12 +182,12 @@ def look_neighbor(lamda,T):
 
 def bestvalue(P):
     best=[]
-    for i in range(len(P[0].f)):
-        best.append(P[0].f[i])
+    for i in range(len(P[0].fitness_fun_mate_infor)):
+        best.append(P[0].fitness_fun_mate_infor[i])
     for i in range(1,len(P)):
-        for j in range(len(P[i].f)):
-            if P[i].f[j]<best[j]:
-                best[j]=P[i].f[j]
+        for j in range(len(P[i].fitness_fun_mate_infor)):
+            if P[i].fitness_fun_mate_infor[j]<best[j]:
+                best[j]=P[i].fitness_fun_mate_infor[j]
     return best
 
 def cross_mutation(parent1,parent2,f_num,x_num,x_min,x_max,pc,pm,yita1,yita2,fun):
@@ -251,16 +251,16 @@ def dominate(y1,y2):
     less=0#y1的目标函数值小于y2个体的目标函数值数目
     equal=0#y1的目标函数值等于y2个体的目标函数值数目
     greater=0#y1的目标函数值大于y2个体的目标函数值数目
-    for i in range(len(y1.f)):
-        if y1.f[i]>y2.f[i]:
+    for i in range(len(y1.fitness_fun_mate_infor)):
+        if y1.fitness_fun_mate_infor[i]>y2.fitness_fun_mate_infor[i]:
             greater=greater+1
-        elif y1.f[i]==y2.f[i]:
+        elif y1.fitness_fun_mate_infor[i]==y2.fitness_fun_mate_infor[i]:
             equal=equal+1
         else:
             less=less+1
-    if(greater==0 and equal!=len(y1.f)):
+    if(greater==0 and equal!=len(y1.fitness_fun_mate_infor)):
         return True#y1支配y2返回正确
-    elif(less==0 and equal!=len(y1.f)):
+    elif(less==0 and equal!=len(y1.fitness_fun_mate_infor)):
         return False#y2支配y1返回false
     else:
         return None
@@ -270,9 +270,9 @@ def Dominate(y1,y2):
     equal=0#y1的目标函数值等于y2个体的目标函数值数目
     greater=0#y1的目标函数值大于y2个体的目标函数值数目
     for i in range(len(y1)):
-        if y1[i]>y2.f[i]:
+        if y1[i]>y2.fitness_fun_mate_infor[i]:
             greater=greater+1
-        elif y1[i]==y2.f[i]:
+        elif y1[i]==y2.fitness_fun_mate_infor[i]:
             equal=equal+1
         else:
             less=less+1
@@ -285,14 +285,14 @@ def Dominate(y1,y2):
 
 def Tchebycheff(x,lamb,z):
     temp=[]
-    for i in range(len(x.f)):
-        temp.append(np.abs(x.f[i]-z[i])*lamb[i])
+    for i in range(len(x.fitness_fun_mate_infor)):
+        temp.append(np.abs(x.fitness_fun_mate_infor[i] - z[i]) * lamb[i])
     return np.max(temp)
 
 def ws(x,lamba):
     temp=0.0
-    for i in range(len(x.f)):
-        temp=temp+float(x.f[i]*lamda[i])
+    for i in range(len(x.fitness_fun_mate_infor)):
+        temp=temp+float(x.fitness_fun_mate_infor[i] * lamda[i])
     return temp
 
 #------------------------------------------------------------------------------       

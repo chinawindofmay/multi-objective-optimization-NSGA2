@@ -20,54 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9382d07d-646f-476b-83a3-d445026e5cc9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_02_ps_accessbiliity_equality_pouplation_change_DS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_03_naga3_ps_change_DS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_MOEAD0709/MOEAD(EP版)/MOEAD.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_MOEAD0709/MOEAD(EP版)/MOEAD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_MOEAD0709/MOEAD/MOEAD.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_MOEAD0709/MOEAD/MOEAD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA2_0710/nsga2.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA2_0710/nsga2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0710/naga3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0710/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/3a103921.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/968db0ff5def458ae57171debc52af4e.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA_python-master/QGA_python-master/3_量子进化算法.caj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA_python-master/QGA_python-master/QGA_RBF_SVM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA_python-master/QGA_python-master/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA_python-master/QGA_python-master/RESEARCH OF QUAN_省略_OURCE SEPARATION.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/QGA_python-master/QGA_python-master/rbf_data" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/b4e6117d.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/examples/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/examples/plotter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/metrics/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/metrics/hvr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/metrics/problems/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/metrics/problems/zdt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/evolution.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/individual.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/population.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/problem_definitions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/zdt/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/zdt/zdt1_definitions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/zdt/zdt2_definitions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/problems/zdt/zdt3_definitions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/nsga2/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/nsga2-master/nsga2-master/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_01_traditional.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_01_traditional.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_02_math_valiation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_02_math_valiation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_03_math_valiation_np.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_03_math_valiation_np.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_03_math_valiation_np_ZDT3.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_03_math_valiation_np_ZDT3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_04_math_valiation_np_add_QGA_OLD.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_04_math_valiation_np_add_QGA_OLD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_05_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_05_evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_05_math_valiation_np_add_Quantum_evaluation_no_rotate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_05_math_valiation_np_add_Quantum_evaluation_rotate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NSGA2_with_quantum_0630/NSGA2_06_math_valiation_np_add_Quantum_compason.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_NSGA2_with_quantum_0630/NSGA2_06_math_valiation_np_add_Quantum_compason.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_initial_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_initial_provider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_mongo_operater.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_mongo_operater.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/d_NSGA2_PMROA_no_encoding_pandas_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/d_NSGA2_PMROA_no_encoding_pandas_numpy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_00_naga3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +84,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/chinawindofmay/multi-objective-optimization-NSGA2.git" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1gA9kSaoF6iA8AK3UUv9keDZ7jb" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -138,16 +105,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="PyScientificConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA2_0710" />
-      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\C_COPY" />
-      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\TSP" />
-      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\GA_with_quantum" />
-      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_with_quantum" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA3_0810_PS" />
       <recent name="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA3_0822" />
@@ -155,8 +115,15 @@
       <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2" />
       <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA3_0710" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA2_0710" />
+      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\C_COPY" />
+      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\TSP" />
+      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\GA_with_quantum" />
+      <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\NSGA2_with_quantum" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.nsga2_JH (1)">
+  <component name="RunManager" selected="Python.e_03_naga3_ps_change_DS (1)">
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -324,7 +291,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="e_naga3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_00_naga3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -337,7 +304,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_00_naga3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -346,7 +313,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="e_naga3_ps" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_01_naga3_ps" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -359,7 +326,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py" />
+      <option name="SCRIPT_NAME" value="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA3_0810_PS\e_01_naga3_ps.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -368,7 +335,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="naga3 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_02_ps_accessbiliity_equality_pouplation_change_DS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -376,12 +343,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_original_reference/python-NSGA3-xiaofeng supply" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_original_reference/python-NSGA3-xiaofeng supply/naga3.py" />
+      <option name="SCRIPT_NAME" value="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA3_0810_PS\e_02_ps_accessbiliity_equality_pouplation_change_DS.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -390,7 +357,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="nsga2_JH (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_03_naga3_ps_change_DS (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -398,12 +365,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_NSGA2_0710" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA2_0710/nsga2_JH.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_03_naga3_ps_change_DS.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -412,7 +379,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="nsga2_JH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_03_naga3_ps_change_DS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -420,12 +387,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA2_0710\nsga2_JH.py" />
+      <option name="SCRIPT_NAME" value="E:\02research\000github\E_multi-objective-optimization-NSGA2\B_MOO_NSGA3_0810_PS\e_03_naga3_ps_change_DS.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -467,19 +434,19 @@
       <item itemvalue="Python.NSGA2-math-valiation" />
       <item itemvalue="Python.NSGA2_01_traditional" />
       <item itemvalue="Python.a_initial_provider" />
-      <item itemvalue="Python.e_naga3" />
-      <item itemvalue="Python.e_naga3_ps" />
-      <item itemvalue="Python.naga3 (1)" />
-      <item itemvalue="Python.nsga2_JH" />
-      <item itemvalue="Python.nsga2_JH (1)" />
+      <item itemvalue="Python.e_03_naga3_ps_change_DS" />
+      <item itemvalue="Python.e_02_ps_accessbiliity_equality_pouplation_change_DS" />
+      <item itemvalue="Python.e_01_naga3_ps" />
+      <item itemvalue="Python.e_03_naga3_ps_change_DS (1)" />
+      <item itemvalue="Python.e_00_naga3" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.nsga2_JH (1)" />
-        <item itemvalue="Python.nsga2_JH" />
-        <item itemvalue="Python.e_naga3_ps" />
-        <item itemvalue="Python.e_naga3" />
-        <item itemvalue="Python.naga3 (1)" />
+        <item itemvalue="Python.e_03_naga3_ps_change_DS (1)" />
+        <item itemvalue="Python.e_00_naga3" />
+        <item itemvalue="Python.e_03_naga3_ps_change_DS" />
+        <item itemvalue="Python.e_02_ps_accessbiliity_equality_pouplation_change_DS" />
+        <item itemvalue="Python.e_01_naga3_ps" />
       </list>
     </recent_temporary>
   </component>
@@ -501,32 +468,10 @@
       <workItem from="1598075116008" duration="25621000" />
       <workItem from="1599462085833" duration="1187000" />
       <workItem from="1599693189487" duration="14663000" />
-      <workItem from="1600221782111" duration="1656000" />
+      <workItem from="1600221782111" duration="21243000" />
+      <workItem from="1600667962089" duration="36579000" />
     </task>
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="Nosetests_in_NSGA2_05_evaluation_py - 2020.07.11 at 09h 13m 17s.xml">
-      <configuration name="Nosetests in NSGA2_05_evaluation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_NSGA_II-math-valiation_py - 2020.06.29 at 14h 56m 33s.xml">
-      <configuration name="Nosetests in NSGA II-math-valiation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_NSGA_II-math-valiation_py - 2020.06.29 at 15h 01m 14s.xml">
-      <configuration name="Nosetests in NSGA II-math-valiation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_NSGA_II-math-valiation_py - 2020.06.29 at 15h 01m 50s.xml">
-      <configuration name="Nosetests in NSGA II-math-valiation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_NSGA_II-math-valiation_py - 2020.06.29 at 15h 03m 03s.xml">
-      <configuration name="Nosetests in NSGA II-math-valiation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_NSGA_II-math-valiation_py - 2020.06.29 at 15h 03m 18s.xml">
-      <configuration name="Nosetests in NSGA II-math-valiation.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Nosetests_in_QGA_numpy_NSGA2_math_valiation_py - 2020.06.29 at 15h 28m 32s.xml">
-      <configuration name="Nosetests in QGA_numpy_NSGA2_math_valiation.py" configurationId="tests" />
-    </history-entry>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
@@ -560,54 +505,62 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="767" y="213" key="#xdebugger.XInspectDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599701289868" />
+    <state width="1918" height="516" key="DebuggerActiveHint" timestamp="1600679466826">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1918" height="516" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1600679466826" />
     <state x="687" y="215" key="FileChooserDialogImpl" timestamp="1598077130946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="687" y="215" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598077130946" />
-    <state width="1867" height="235" key="GridCell.Tab.0.bottom" timestamp="1600221939124">
+    <state width="1867" height="275" key="GridCell.Tab.0.bottom" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600221939124" />
-    <state width="1867" height="235" key="GridCell.Tab.0.center" timestamp="1600221939124">
+    <state width="1867" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.0.center" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="235" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600221939124" />
-    <state width="1867" height="235" key="GridCell.Tab.0.left" timestamp="1600221939123">
+    <state width="1867" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.0.left" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="235" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600221939123" />
-    <state width="1867" height="235" key="GridCell.Tab.0.right" timestamp="1600221939124">
+    <state width="1867" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.0.right" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="235" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600221939124" />
-    <state width="1867" height="282" key="GridCell.Tab.1.bottom" timestamp="1599741586173">
+    <state width="1867" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.1.bottom" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599741586173" />
-    <state width="1867" height="282" key="GridCell.Tab.1.center" timestamp="1599741586173">
+    <state width="1867" height="275" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.1.center" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599741586173" />
-    <state width="1867" height="282" key="GridCell.Tab.1.left" timestamp="1599741586173">
+    <state width="1867" height="275" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.1.left" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599741586173" />
-    <state width="1867" height="282" key="GridCell.Tab.1.right" timestamp="1599741586173">
+    <state width="1867" height="275" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state width="1867" height="275" key="GridCell.Tab.1.right" timestamp="1600783748004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599741586173" />
-    <state x="461" y="155" key="SettingsEditor" timestamp="1597619794447">
+    <state width="1867" height="275" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600783748004" />
+    <state x="461" y="155" key="SettingsEditor" timestamp="1600305136122">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="155" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597619794447" />
+    <state x="461" y="155" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600305136122" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1600691550183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1600691550183" />
     <state x="586" y="186" width="811" height="668" key="find.popup" timestamp="1597667075265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="586" y="186" width="811" height="668" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597667075265" />
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1599177933700">
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1600755458245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599177933700" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600755458245" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -768,16 +721,6 @@
           <option name="timeStamp" value="186" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_initial_provider.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_initial_provider.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/b_save_data_for_rpq.py</url>
           <line>120</line>
           <option name="timeStamp" value="192" />
@@ -853,69 +796,99 @@
           <option name="timeStamp" value="245" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_00_naga3.py</url>
           <line>265</line>
           <option name="timeStamp" value="252" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
-          <line>310</line>
-          <option name="timeStamp" value="254" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="260" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
-          <line>309</line>
-          <option name="timeStamp" value="263" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
-          <line>311</line>
-          <option name="timeStamp" value="264" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_00_naga3.py</url>
           <line>101</line>
           <option name="timeStamp" value="265" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="266" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_mongo_operater.py</url>
-          <line>45</line>
+          <line>44</line>
           <option name="timeStamp" value="271" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py</url>
-          <line>55</line>
-          <option name="timeStamp" value="285" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>603</line>
+          <option name="timeStamp" value="303" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py</url>
-          <line>552</line>
-          <option name="timeStamp" value="286" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>608</line>
+          <option name="timeStamp" value="304" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py</url>
-          <line>214</line>
-          <option name="timeStamp" value="287" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="305" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="288" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/b_save_data_for_rpq.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_naga3_ps.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="289" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/b_route_planner.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/b_route_planner.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/b_route_plan_calculator.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="325" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/a_initial_provider.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>240</line>
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>244</line>
+          <option name="timeStamp" value="346" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_01_naga3_ps.py</url>
+          <line>246</line>
+          <option name="timeStamp" value="347" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_02_ps_accessbiliity_equality_pouplation_change_DS.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="359" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_02_ps_accessbiliity_equality_pouplation_change_DS.py</url>
+          <line>196</line>
+          <option name="timeStamp" value="380" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_03_naga3_ps_change_DS.py</url>
+          <line>452</line>
+          <option name="timeStamp" value="391" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_03_naga3_ps_change_DS.py</url>
+          <line>544</line>
+          <option name="timeStamp" value="396" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0810_PS/e_00_naga3.py</url>
+          <line>291</line>
+          <option name="timeStamp" value="397" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -967,7 +940,7 @@
         <watch expression="list(self.collection.find())" language="Python" />
         <watch expression="list(self.collection.find().sort([(&quot;demand_id&quot;,1)]))" language="Python" />
         <watch expression="list(self.collection.find().sort([(&quot;demand_id&quot;, 1)]))" language="Python" />
-        <watch expression="records_list[i][&quot;population&quot;]" />
+        <watch expression="records_list[i]" language="Python" />
         <watch expression="demands_np" language="Python" />
         <watch expression="demands_np[0, :, 2, 2]" language="Python" />
         <watch expression="demands_np.shape" />
@@ -979,24 +952,93 @@
         <watch expression="self.low" />
         <watch expression="self.low[0,0]" language="Python" />
         <watch expression="popu[:,0,:,0,2]" language="Python" />
+        <watch expression="cipf_np" />
+        <watch expression="popu" />
+        <watch expression="demands_np.shape[0]" />
+        <watch expression="demands_np_copy[j, :, 3, 2]" />
+        <watch expression="pop_fitness" />
+        <watch expression="np.nansum(demands_np[0, :, 2, 2]) " />
+        <watch expression="demands_np[0, :, 2, 2]" />
+        <watch expression="np.nansum(vj) " />
+        <watch expression="popu_fitness" />
+        <watch expression="popu[matingpool, :]" />
+        <watch expression="popu.shape[0]" />
+        <watch expression=" np.full(shape=(popu.shape[0],),fill_value=1, dtype=np.float32)" />
+        <watch expression="solution[40]" language="Python" />
+        <watch expression="providers_np" />
+        <watch expression="provider_list_dict_list[j][&quot;demands&quot;][i]" language="Python" />
+        <watch expression="demands_np[1, 0, 0, 0]" language="Python" />
+        <watch expression="demands_np[0,0,0,0]" language="Python" />
+        <watch expression="records_list[i][&quot;population&quot;]" language="Python" />
+        <watch expression="records_list[i][&quot;provider&quot;][j][&quot;quickcharge&quot;]" />
+        <watch expression="records_list[i][&quot;provider&quot;][j]['travel'][&quot;D_T&quot;]" language="Python" />
+        <watch expression="records_list[i]" language="Python" />
+        <watch expression="records_list[i]" language="Python" />
+        <watch expression=" self.collection.create_index([(&quot;demand_id&quot;,1)])" />
+        <watch expression="self.collection.create_index" />
+        <watch expression="list(self.collection.find().sort([(&quot;demand_id&quot;, 1)]))" />
+        <watch expression="list(records)[begin_counter:end_counter]" language="Python" />
+        <watch expression="demands_np[:,0,0,0]" language="Python" />
+        <watch expression="vj_list" />
+        <watch expression="demands_np[i, :, 0, 2]" language="Python" />
+        <watch expression="solution" />
+        <watch expression="demands_np[i, :, 2, 2]" language="Python" />
+        <watch expression="y1_values_double[i] " />
+        <watch expression="y2_values_double[i]" />
+        <watch expression="y5_values_double" />
+        <watch expression="demands_np[i, :, 2, 2]" language="Python" />
+        <watch expression="np.hstack(np.full(shape=self.old_providers_count,fill_value=0),creating_ps_2)" />
+        <watch expression="new_soultion" />
+        <watch expression="len(provider_list_dict_list)" />
+        <watch expression="demands_provider_np[:,0,1]" language="Python" />
+        <watch expression="effective_providers_np" />
+        <watch expression="effective_providers_np.shape[0]" />
+        <watch expression="mask" />
+        <watch expression="np.tile(np.array(vj_list),(1,demands_provider_np[1]))" />
+        <watch expression="demands_provider_np[:,:,2]" />
+        <watch expression="np.array(vj_list)" />
+        <watch expression="demands_provider_np.shape[1]" />
+        <watch expression="np.tile(np.array(vj_list),(1,demands_provider_np.shape[1]))" />
+        <watch expression="np.array(vj_list).reshape(1,)" />
+        <watch expression="np.tile(vj_np,(1,demands_provider_np.shape[1]))" />
+        <watch expression="np.hstack(np.full(shape=self.old_providers_count, fill_value=0),solution)" />
+        <watch expression="np.hstack((np.full(shape=self.old_providers_count, fill_value=0),solution))" />
+        <watch expression="providers_np[:, :, 0]" />
+        <watch expression="np.tile(demands_pdd_np[:,0],(demands_provider_np.shape[0],1)) #pdd" />
+        <watch expression="providers_np[:, :, 0][mask,:]=0" language="Python" />
+        <watch expression="mask2" />
+        <watch expression="np.divide(&#10;                    np.add(demands_provider_np[ :, i,0][mask], solution_join[mask]),  # 快充+solution&#10;                    np.multiply(&#10;                        np.power(demands_provider_np[ :, i,1][mask], self.BEITA),  # D_T&#10;                        demands_provider_np[ :,i, 2][mask]  # vj&#10;                    )&#10;                )" />
+        <watch expression="np.nansum(demands_pdd_np[:,1])" />
+        <watch expression="        pop_fitness = np.vstack((10/y1_values_double, y2_values_double, y3_values_double, y4_values_double,10000000/y5_values_double, 0.0001*y6_values_double, y7_values_double)).T&#10;" />
+        <watch expression="off_spring_popu" />
+        <watch expression="pop2" />
+        <watch expression="off" />
+        <watch expression="off*creating_mark" />
+        <watch expression="np.linalg.pinv(np.mat(popfun[extreme,:])) " />
+        <watch expression="frontno" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$01_initial_provider.coverage" NAME="01-initial_provider Coverage Results" MODIFIED="1597565011396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
-    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_naga3_ps.coverage" NAME="e_naga3_ps Coverage Results" MODIFIED="1599741583618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_naga3_ps.coverage" NAME="e_naga3_ps Coverage Results" MODIFIED="1600695485698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_naga3_ps_change_DS.coverage" NAME="e_naga3_ps_change_DS Coverage Results" MODIFIED="1600768764117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_00_naga3.coverage" NAME="e_00_naga3 Coverage Results" MODIFIED="1600783634187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$a_initial_provider__1_.coverage" NAME="a_initial_provider (1) Coverage Results" MODIFIED="1600679936248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$NSGA2_03_math_valiation_np_ZDT3.coverage" NAME="NSGA2_03_math_valiation_np_ZDT3 Coverage Results" MODIFIED="1597707303072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_NSGA2_with_quantum_0630" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_naga3.coverage" NAME="e_naga3 Coverage Results" MODIFIED="1598446738130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2.coverage" NAME="nsga2 Coverage Results" MODIFIED="1597721388726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0710" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_ps_accessbiliity_equality_pouplation_change_DS.coverage" NAME="e_ps_accessbiliity_equality_pouplation_change_DS Coverage Results" MODIFIED="1600768715023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$naga3.coverage" NAME="naga3 Coverage Results" MODIFIED="1597813195693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0710" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_JH__1_.coverage" NAME="nsga2_JH (1) Coverage Results" MODIFIED="1600221939100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0710" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_0817__1_.coverage" NAME="nsga2_0817 (1) Coverage Results" MODIFIED="1597663179333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0817" />
-    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$b_route_plan_calculator.coverage" NAME="b_route_plan_calculator Coverage Results" MODIFIED="1597571310761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$b_route_plan_calculator.coverage" NAME="b_route_plan_calculator Coverage Results" MODIFIED="1600679958348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$mongo_operater.coverage" NAME="mongo_operater Coverage Results" MODIFIED="1597565002414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$a_mongo_operater__1_.coverage" NAME="a_mongo_operater (1) Coverage Results" MODIFIED="1597584736276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2__1_.coverage" NAME="nsga2 (1) Coverage Results" MODIFIED="1597662260343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0817" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_JH.coverage" NAME="nsga2_JH Coverage Results" MODIFIED="1600221895144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$d_NSGA2_PMROA_no_encoding_pandas_numpy.coverage" NAME="d_NSGA2_PMROA_no_encoding_pandas_numpy Coverage Results" MODIFIED="1597587370397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$naga3__1_.coverage" NAME="naga3 (1) Coverage Results" MODIFIED="1597845531775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_original_reference/python-NSGA3-xiaofeng supply" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_03_naga3_ps_change_DS__1_.coverage" NAME="e_03_naga3_ps_change_DS (1) Coverage Results" MODIFIED="1600783747996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
   </component>
 </project>

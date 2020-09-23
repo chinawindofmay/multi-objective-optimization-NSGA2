@@ -305,7 +305,7 @@ def main_function_numpy_gravity():
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_np = mongo_operater_obj.find_records_format_in_numpy_gravity(0, DEMANDS_COUNT, PROVIDERS_COUNT)
+    demands_np = mongo_operater_obj.find_records_format_numpy_1(0, DEMANDS_COUNT, PROVIDERS_COUNT)
     # 创建和计算vj，便于后面可达性计算复用，放入了demands_np array中；
     calculate_provider_vj_numpy_gravity(demands_np, DEMANDS_COUNT, PROVIDERS_COUNT)
     # 调取NSGA2函数

@@ -21,11 +21,12 @@ import math
 import a_mongo_operater
 
 class NSGA3:
-    def __init__(self,N_GENERATIONS,POP_SIZE,FUN_NUM,t1,t2,pc,pm,low,up,x_num,THROD,BEITA):
+    def __init__(self, N_GENERATIONS, POP_SIZE, FUN_NUM, t1, t2, pc, pm, low, up, old_providers_count, petential_new_providers_count, THROD, BEITA):
         self.GENERATIONS = N_GENERATIONS  # 迭代次数
         self.POP_SIZE = POP_SIZE  # 种群大小
         self.M = FUN_NUM  # 目标个数
-        self.X_COUNT = x_num # 定义自变量个数
+        self.old_providers_count=old_providers_count   #已建充电站数量
+        self.petential_new_providers_count = petential_new_providers_count # 定义自变量个数，需要新建的充电站数量
         self.t1 = t1  # 交叉参数t1
         self.t2 = t2  # 变异参数t2
         self.pc = pc  # 交叉概率
@@ -38,7 +39,7 @@ class NSGA3:
     ##############################################begin:fitness#########################################################
 
     # fitness计算
-    def fitness_population(self, cipf_np, popu):
+    def fitness_population(self,demands_np, cipf_np, popu,actural_popsize):
         """
         全局的适应度函数
         :param demands_np:
@@ -46,18 +47,22 @@ class NSGA3:
         :param popu:
         :return:
         """
-        y1_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 与居民区可达性
-        y2_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 与居民区公平性
-        y3_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 与服务设施可达性
-        y4_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 与服务设施公平性
-        y5_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 覆盖人口
-        y6_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 投资成本
-        y7_values_double = np.empty(shape=(popu.shape[0],), dtype=np.float32)  # 等待时间
-        for i in range(popu.shape[0]):
-            demands_np=popu[i,:,:,:,:]
+        y1_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 与居民区可达性
+        y2_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 与居民区公平性
+        y3_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 与服务设施可达性
+        y4_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 与服务设施公平性
+        y5_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 覆盖人口
+        y6_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 投资成本
+        y7_values_double = np.full(shape=(actural_popsize,),fill_value=1, dtype=np.float32)  # 等待时间
+        for i in range(actural_popsize):
+            solution=popu[i,:]
+            # 创建和计算vj，便于后面可达性计算复用，放入了demands_np array中；
+            # ???????????????
+            self.calculate_provider_vj_numpy(demands_np,solution)
+            self.calculate_provider_vj_numpy(cipf_np,solution)
             # 开始时间
             # start_time = time.time()
-            self.calculate_single_provider_gravity_value_np(demands_np)
+            self.calculate_single_provider_gravity_value_np(demands_np,solution)
             # 居民区 可达性适应度值，该值越大越好
             y1_values_double[i] = self.calculate_global_accessibility_numpy(demands_np)
             # 居民区  计算公平性数值，该值越小表示越公平
@@ -67,20 +72,21 @@ class NSGA3:
             # # 服务设施 可达性适应度值，该值越大越好
             # y3_values_double[i] = self.calculate_global_accessibility_numpy(cipf_np)
             # # 服务设施 计算公平性数值，该值越小表示越公平
-            # y4_values_double[i] = self.calculate_global_equality_numpy(demands_np)
+            # y4_values_double[i] = self.calculate_global_equality_numpy(cipf_np)
 
-            # 覆盖人口
+            # 覆盖人口，越大越好
             y5_values_double[i] = self.calcuate_global_cover_people(demands_np)
-            # # 投资成本
-            y6_values_double[i] = self.calculate_global_cost_numpy(demands_np )
-            # # 等待时间
-            y7_values_double[i] = self.calculate_global_waiting_time_numpy(demands_np)
+            # if i>10:
+            #     print("test")
+            # # 投资成本，越小越好
+            y6_values_double[i] = self.calculate_global_cost_numpy(demands_np,solution)
+            # # # 等待时间，越小越好
+            # y7_values_double[i] = self.calculate_global_waiting_time_numpy(demands_np)
             # 结束时间
             # end_time1 = time.time()
             # print('calculate_gravity_value() Running time: %s Seconds' % (end_time1 - start_time))
-
-        pop_fitness = np.vstack((y1_values_double, y2_values_double, y3_values_double, y4_values_double,
-                                 y5_values_double, y6_values_double, y7_values_double))
+        # 统一转成最小化问题
+        pop_fitness = np.vstack((10/y1_values_double, y2_values_double, y3_values_double, y4_values_double,10000000/y5_values_double, 0.0001*y6_values_double, y7_values_double)).T
         return pop_fitness
 
     def calculate_global_accessibility_numpy(self,demands_numpy):
@@ -123,24 +129,32 @@ class NSGA3:
         :param demands_np:
         :return:
         """
-        np.nansum(demands_np[0, :, 2, 2])  # 获取到每一个的provider的vj值，然后求和，之所以用nan，是为了过滤掉nan的值
+        vj=demands_np[0, :, 2, 2]
+        vj[np.isinf(vj)] = 0
+        vj[np.isnan(vj)] = 0
+        return np.nansum(vj)  # 获取到每一个的provider的vj值，然后求和，之所以用nan，是为了过滤掉nan的值
 
-    def calculate_global_cost_numpy(self,demands_np):
+    def calculate_global_cost_numpy(self,demands_np,solution):
         """
         计算全局建设成本cost
         :param demands_np:
         :param solution:
         :return:
         """
-        # ？？？？？？？？？？？？？？？？？？？？
-        DEMANDS_COUNT = demands_np.shape[0]
+        #总开销
+        sum_cost=0.0
         # 执行求取每个需求点的重力值
-        for i in range(DEMANDS_COUNT):
-            #将小汽车充电占地面积、配套设施占地面积、行车道占地面积加和可得，j点充电站占地面积。
-            #土地成本
-            sj=785+60*(mj/2)
-            cj2=210+35*mj
-        return 0
+        for i in range(solution.shape[0]):
+            # 方式一：新建，已有设施不做调整
+            if solution[i] !=0:
+                # 表明新建
+                #将小汽车充电占地面积、配套设施占地面积、行车道占地面积加和可得，j点充电站占地面积。
+                #土地成本
+                sj=785+60*(solution[i]/2)
+                cj2=210+35*solution[i]
+                sum_cost += sj
+                sum_cost += cj2
+        return sum_cost
 
     def calculate_global_waiting_time_numpy(self,demands_np, solution ):
         """
@@ -165,19 +179,21 @@ class NSGA3:
                 return provider
         return None
 
-    def create_providers_df_conversion_numpy_gravity(self,demands_np, DEMANDS_COUNT, PROVIDERS_COUNT):
+    def create_providers_df_conversion_numpy_gravity(self, demands_np, solution, new_providers_count):
         """
         构建以providers为主导的np数组
         :param demands_np:
-        :param DEMANDS_COUNT:
-        :param PROVIDERS_COUNT:
+        :param new_providers_count:
+        :param solution:
         :return:
         """
         # 以供给点为主体的dict_list_dict对象
         provider_list_dict_list = []
-        for i in range(DEMANDS_COUNT):
+        demands_count=demands_np.shape[0]
+        for i in range(demands_count):
             demand_population_count = demands_np[i, 0, 0, 0]
-            for j in range(PROVIDERS_COUNT):
+            # 已建设施
+            for j in range(self.old_providers_count):
                 D_T = demands_np[i, j, 1, 2]
                 provider_transposition = self.get_provider_transportion_by_provider_id(provider_list_dict_list, j)
                 if provider_transposition == None:
@@ -196,15 +212,41 @@ class NSGA3:
                     demand["demand_id"] = i
                     demand["population"] = demand_population_count
                     provider_transposition["demands"].append(demand)
+            # 即将新建的设施
+            for j in range(self.petential_new_providers_count):
+                D_T = demands_np[i, self.old_providers_count+j, 1, 2]
+                if solution[j]==0:
+                    continue    #去除掉solution新建为0的，这些是不需要建设的
+                else:
+                    provider_transposition = self.get_provider_transportion_by_provider_id(provider_list_dict_list, j)
+                    if provider_transposition == None:
+                        provider_transposition = {}
+                        provider_transposition["provider_id"] = j
+                        provider_transposition["demands"] = []
+                        demand = {}
+                        demand["D_T"] = D_T
+                        demand["demand_id"] = i
+                        demand["population"] = demand_population_count
+                        provider_transposition["demands"].append(demand)
+                        provider_list_dict_list.append(provider_transposition)
+                    else:
+                        demand = {}
+                        demand["D_T"] = D_T
+                        demand["demand_id"] = i
+                        demand["population"] = demand_population_count
+                        provider_transposition["demands"].append(demand)
 
-        providers_np = np.full((PROVIDERS_COUNT, DEMANDS_COUNT, 2, 1), 0.000000001)
-        for j in range(PROVIDERS_COUNT):
-            for i in range(DEMANDS_COUNT):
+        # test code
+        if len(provider_list_dict_list)==self.old_providers_count+new_providers_count:
+            print("yes")
+        providers_np = np.full((self.old_providers_count+new_providers_count, demands_count, 2, 1), 0.000000001)
+        for j in range(self.old_providers_count+new_providers_count):
+            for i in range(demands_count):
                 providers_np[j, i, 0, 0] = provider_list_dict_list[j]["demands"][i]["population"]
                 providers_np[j, i, 1, 0] = provider_list_dict_list[j]["demands"][i]["D_T"]
         return providers_np
 
-    def calculate_single_provider_gravity_value_np(self, demands_np):
+    def calculate_single_provider_gravity_value_np(self, demands_np,solution):
         """
         函数：计算重力值
         最费时的运算步骤，预计每一个solution，需要耗时0.5S
@@ -218,7 +260,7 @@ class NSGA3:
             mask = demands_np[i, :, 1, 2] <= self.THROD  # D_T在一定有效范围内的
             gravity_value = np.sum(
                 np.divide(
-                    np.add(demands_np[i, :, 0, 2][mask], demands_np[i, :, 3, 2][mask]),  # 快充+慢充+solution
+                    np.add(demands_np[i, :, 0, 2][mask], solution[mask]),  # 快充+solution
                     np.multiply(
                         np.power(demands_np[i, :, 1, 2][mask], self.BEITA),  # D_T
                         demands_np[i, :, 2, 2][mask]  # vj
@@ -227,7 +269,7 @@ class NSGA3:
             )
             demands_np[i, :, :, 1] = gravity_value
 
-    def calculate_provider_vj_numpy(self, demands_np):
+    def calculate_provider_vj_numpy(self, demands_np,solution):
         """
         计算vj
         :param demands_np:
@@ -235,25 +277,34 @@ class NSGA3:
         :param PROVIDERS_COUNT:
         :return:
         """
-        DEMANDS_COUNT=demands_np.shape[0]   #获取需求点数量
-        PROVIDERS_COUNT=demands_np.shape[1]  #获取供给者数量
+        new_providers_count = np.sum(solution>0)     #有效的供给者数量
+
         # 执行转置，计算得到每个provider的VJ
         # 以provider为一级主线，每个provider中存入所有社区的信息，以便用于vj的计算
-        providers_np = self.create_providers_df_conversion_numpy_gravity(demands_np, DEMANDS_COUNT, PROVIDERS_COUNT)
+        # 增加一个solution的过滤，因为新增部分有些建，有些不建
+        effective_providers_np = self.create_providers_df_conversion_numpy_gravity(demands_np,solution, new_providers_count)
         vj_list = []
-        for j in range(PROVIDERS_COUNT):
-            mask = providers_np[j, :, 1, 0] <= self.THROD
+        for j in range(new_providers_count):
+            mask = effective_providers_np[j, :, 1, 0] <= self.THROD   #对交通时间做对比
             vj_list.append(
                 np.sum(
                     np.divide(
-                        providers_np[j, :, 0, 0][mask]
-                        , np.power(providers_np[j, :, 1, 0][mask], self.BEITA)
+                        effective_providers_np[j, :, 0, 0][mask]
+                        , np.power(effective_providers_np[j, :, 1, 0][mask], self.BEITA)
                     )
                 )
             )
         # 更新vj列，每一个demand都是一样的，只是为了做一个存储。
         for i in range(DEMANDS_COUNT):
-            demands_np[i, :, 2, 2] = vj_list  # vj值存放在第3行
+            k=0
+            for j in range(ALL_PROVIDERS_COUNT):
+                quick_charge_count = demands_np[i, j, 0, 2]
+                if quick_charge_count == 0 and solution[j] == 0:
+                    continue
+                else:
+                    demands_np[i, j, 2, 2] = vj_list[k]  # vj值存放在第3行
+                    k+=1
+        # print("test")
 
     ##############################################end:fitness#########################################################
 
@@ -287,7 +338,7 @@ class NSGA3:
         popsize = Z.shape[0]
         return Z, popsize
 
-    def initial_pop_demands_np(self, popsize, demands_np):
+    def initial_population(self, popsize):
         """
         种群初始化
         :param popsize:
@@ -296,37 +347,32 @@ class NSGA3:
         """
         # 每一个供给者代表一个函数x
         # N为solution数量
-        pop=np.full(shape=(popsize, demands_np.shape[0], demands_np.shape[1], demands_np.shape[2], demands_np.shape[3]), fill_value=0.0)
+        pop=np.full(shape=(popsize, self.petential_new_providers_count), fill_value=0.0)
         for m in range(popsize):
-            demands_np_copy=np.copy(demands_np)
-            pop[m,:,:,:,:]=self.initial_solution(demands_np_copy)
+            pop[m,:]=self.initial_solution()
         return pop
 
-    def initial_solution(self, demands_np_copy):
-        # ？？？？？？？？？？？？？？？？？考虑规模约束 考虑0,1
-        # 获取已建CS的数量，其中quickchange的值大于0
-        quick_charge = demands_np_copy[0, :, 0, 2]
-        have_builded_count = len(quick_charge[np.where(quick_charge > 1)])
-        # pop_have_created =np.random.randint(low=0,high=2,size=(N, have_builded_count))   #首先，区分已建和未建，针对未建的停车场生成0和1
-        pop_creating = np.random.randint(low=0, high=2,size=(self.X_COUNT - have_builded_count))  # 首先，区分已建和未建，针对未建的停车场生成0和1
-        creating_ps = np.random.randint(low=self.low[0,0], high=self.up[0,0] + 1, size=(self.X_COUNT - have_builded_count))  # 新建的设施
-        # 将新建的设施creating_ps分布到每个位置上pop_creating
-        creating_ps_2 = pop_creating * creating_ps
-        # 将值填充到demands_np中
-        k = 0
-        for i in range(len(quick_charge)):
-            if quick_charge[i] <= 1:
-                quick_charge[i] = creating_ps_2[k]
-                k = k + 1
-        #将每一个demand体的provider赋值一遍
-        for j in range(demands_np_copy.shape[0]):
-            demands_np_copy[j, :, 0, 2] = quick_charge
-        return demands_np_copy
 
-    def crossover_and_mutation(self,pop, t1, t2, pc, pm):
+    def initial_solution(self):
+        """
+        产生solution
+        :param demands_np:
+        :return:
+        """
+        # 获取已建CS的数量，其中quickchange的值大于0
+        # 方式一：新增方式，已建不调整；方式二：新建，已建可调整；方式三：总数约束，新建
+        # 以下只针对未建服务设施的站点，部分新增设施，已建服务设施的站点，不做考虑
+        pop_creating_mark = np.random.randint(low=0, high=2, size=(self.petential_new_providers_count))  # 首先，区分已建和未建，针对未建的停车场生成0和1
+        creating_ps = np.random.randint(low=self.low, high=self.up + 1, size=(self.petential_new_providers_count))  # 新建的设施
+        # 将新建的设施creating_ps分布到每个位置上pop_creating
+        creating_ps_2 = pop_creating_mark * creating_ps
+        new_soultion=creating_ps_2
+        return new_soultion
+
+    def crossover_and_mutation(self, popu, t1, t2, pc, pm):
         """
         模拟二进制交叉和多项式变异
-        :param pop:
+        :param popu:
         :param t1:
         :param t2:
         :param pc:
@@ -335,8 +381,8 @@ class NSGA3:
         """
         # ？？？？？？？？？？？？？？？？？？？？
         # 考虑规模约束 考虑0,1
-        pop1 = copy.deepcopy(pop[0:int(pop.shape[0] / 2), :])
-        pop2 = copy.deepcopy(pop[(int(pop.shape[0] / 2)):(int(pop.shape[0] / 2) * 2), :])
+        pop1 = copy.deepcopy(popu[0:int(popu.shape[0] / 2), :])
+        pop2 = copy.deepcopy(popu[(int(popu.shape[0] / 2)):(int(popu.shape[0] / 2) * 2), :])
         N, D = pop1.shape[0], pop1.shape[1]
         # 模拟二进制交叉
         beta = np.zeros((N, D))
@@ -528,9 +574,10 @@ class NSGA3:
         return score
 
     # 选择
-    def envselect(self, demands_np,cipf_np,mixpop, N, Z, Zmin,  M):
+    def envselect(self, demands_np,cipf_np,mixpop, N, Z, Zmin, M,actural_popsize):
         # 非支配排序
-        mix_pop_fitness = self.fitness_population(demands_np, cipf_np, mixpop)
+        # ？？？？？？？？？？要整改
+        mix_pop_fitness = self.fitness_population(demands_np, cipf_np, mixpop,actural_popsize)
         frontno, maxfno = self.NDsort(mix_pop_fitness, N, M)
         Next = frontno < maxfno
         # 选择最后一个front的解
@@ -543,25 +590,26 @@ class NSGA3:
 
     # 主函数
     def excute(self, demands_np,cipf_np):
-        # 创建和计算vj，便于后面可达性计算复用，放入了demands_np array中；
-        self.calculate_provider_vj_numpy(demands_np)
-        self.calculate_provider_vj_numpy(cipf_np)
-
         # 产生一致性的参考点和随机初始化种群
-        Z, popsize = self.uniformpoint(self.POP_SIZE)  # 生成一致性的参考解
-        popu = self.initial_pop_demands_np(popsize, demands_np)  # 生成初始种群，修改了ps
-        popu_fitness = self.fitness_population( cipf_np, popu)  # 计算适应度函数值
-        Zmin = np.array(np.min(popu_fitness, 0)).reshape(1, self.M)  # 求理想点
+        Z, actural_popsize = self.uniformpoint(self.POP_SIZE)  # 生成一致性的参考解
+        popu = self.initial_population(actural_popsize)  # 生成初始种群，修改了ps
+        popu_fitness = self.fitness_population(demands_np, cipf_np, popu,actural_popsize)  # 计算适应度函数值
+        Zmin = np.array(np.min(popu_fitness,0)).reshape(1, self.M)  # 求理想点
         # 迭代过程
         for i in range(self.GENERATIONS):
             print("第{name}次迭代".format(name=i))
-            matingpool = random.sample(range(popsize), popsize)
-            off_spring_popu = self.crossover_and_mutation(popu[matingpool, :], self.t1, self.t2, self.pc, self.pm)  # 遗传算子,模拟二进制交叉和多项式变异
-            off_spring_fitness = self.fitness_population(demands_np, cipf_np, off_spring_popu)  # 计算适应度函数
+            matingpool = random.sample(range(actural_popsize), actural_popsize)
+            # ？？？？？？？？？？要整改
+            # 前面部分不需要变化，后面部分需要变化
+            off_spring_popu = np.hstack(np.full(shape=self.old_providers_count, fill_value=0),
+                              self.crossover_and_mutation(popu[matingpool, self.old_providers_count:], self.t1, self.t2, self.pc, self.pm)
+                                        )# 遗传算子,模拟二进制交叉和多项式变异
+            off_spring_fitness = self.fitness_population( demands_np,cipf_np, off_spring_popu,actural_popsize)  # 计算适应度函数
             double_popu = copy.deepcopy(np.vstack((popu, off_spring_popu)))
             Zmin = np.array(np.min(np.vstack((Zmin, off_spring_fitness)), 0)).reshape(1, self.M)  # 更新理想点
-            popu = self.envselect(demands_np,cipf_np,double_popu, popsize, Z, Zmin,  self.M)
-            popu_fitness = self.fitness_population(demands_np, cipf_np, popu)
+            # ？？？？？？？？？？要整改
+            popu = self.envselect(demands_np,cipf_np,double_popu, actural_popsize, Z, Zmin, self.M,actural_popsize)
+            popu_fitness = self.fitness_population( demands_np,cipf_np, popu,actural_popsize)
         # 绘制PF
         fig1 = plt.figure()
         plt.xlim([0, self.M])
@@ -591,21 +639,22 @@ if __name__=="__main__":
     # POI设施点，个数，类似于需求点，小区
     CIPF_COUNT=184
     # 供给点，即充电桩，的个数，与X_num2保持一致
-    x_num2=PROVIDERS_COUNT = 40
+    PENTENTIAL_NEW_PROVIDERS_COUNT = 49
+    OLD_PROVIDERS_COUNT = 40
 
     BEITA = 0.8  # 主要参考A multi-objective optimization approach for health-care facility location-allocation problems in highly developed cities such as Hong Kong
     THROD = 1  # 有效距离或者时间的阈值
 
-    low2 = np.full(fill_value=3,shape=(1, x_num2))    # 最低阈值，至少建设3个
-    up2 = np.full(fill_value=10, shape=(1, x_num2))  # 最高阈值，最多建设10个
+    low2 = 3# 最低阈值，至少建设3个
+    up2 = 10 # 最高阈值，最多建设10个
 
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_np = mongo_operater_obj.find_records_format_in_numpy_gravity(0, COMMUNITIES_COUNT, PROVIDERS_COUNT)  #必须要先创建索引，才可以执行
+    demands_np = mongo_operater_obj.find_records_format_numpy_1(0, COMMUNITIES_COUNT, OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  #必须要先创建索引，才可以执行
     # ????????????????????????????????????  待修改
-    cipf_np=mongo_operater_obj.find_records_format_in_numpy_gravity(0, CIPF_COUNT, PROVIDERS_COUNT)
+    cipf_np=mongo_operater_obj.find_records_format_numpy_1(0, CIPF_COUNT, OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)
 
     # 执行NSGA3
-    nsga3=NSGA3(N_GENERATIONS2, POP_SIZE2, fitness_num2, t12, t22, pc2, pm2, low2, up2, x_num2,THROD,BEITA)
+    nsga3=NSGA3(N_GENERATIONS2, POP_SIZE2, fitness_num2, t12, t22, pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT,PENTENTIAL_NEW_PROVIDERS_COUNT,THROD,BEITA)
     nsga3.excute(demands_np,cipf_np)

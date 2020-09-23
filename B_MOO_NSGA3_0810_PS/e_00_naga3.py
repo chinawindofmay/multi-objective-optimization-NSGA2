@@ -345,7 +345,7 @@ class NSGA3:
 
 if __name__=="__main__":
     #参数设置
-    N_GENERATIONS2 = 300                                 # 迭代次数
+    N_GENERATIONS2 = 750                                 # 迭代次数
     POP_SIZE2 = 200                                      # 种群大小
     function_name2 = 'DTLZ1'                                      # 测试函数选择，目前可供选择DTLZ1,DTLZ2,DTLZ3
     fun_num2 = 8                                               # 目标个数

@@ -13,12 +13,13 @@ import a_mongo_operater
 
 import zlib
 
-conn_string='powerstation/powerstation@192.168.60.41/ORCL'
+conn_string='powerstation/powerstation@192.168.90.2/ORCL'
 
 def initial_providers():
     provider_list=[]
     conn = cx_Oracle.connect(conn_string)
     cursor = conn.cursor()
+    # 第一步:已经建成的，不做调整
     select_providers_sql = '''select key_id,经度 as x ,纬度 as y,快充桩 as quickcharge ,慢充桩 as slowcharge,地址 as address from PS_JY t'''
     # 执行
     cursor.execute(select_providers_sql)
@@ -43,6 +44,32 @@ def initial_providers():
             provider_list.append(provider)
         except:
             continue
+
+    # 第2步:未建的，要做增加
+    select_petential_providers_sql = '''select key_id,locationx as x ,locationy as y,0 as quickcharge ,0 as slowcharge,address from park_jy t where rownum<50'''
+    # 执行
+    cursor.execute(select_petential_providers_sql)
+    rs = cursor.fetchall()
+    for i, row in enumerate(rs):
+        try:
+            key_id = row[0]
+            x = row[1]
+            y = row[2]
+            quickcharge = row[3]
+            slowcharge = row[4]
+            address = row[5]
+
+            provider = {}
+            provider["provider_id"] = key_id
+            provider["x"] = x
+            provider["y"] = y
+            provider["quickcharge"] = quickcharge
+            provider["slowcharge"] = slowcharge
+            provider["address"] = address
+            provider["travel"] = {"D_T": 999}
+            provider_list.append(provider)
+        except:
+            continue
     return provider_list
 
 def get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj):
@@ -61,12 +88,14 @@ def get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj):
             x = row[3]
             y = row[4]
             demand = {}
+            if key_id==None:
+                print("test")
             demand["demand_id"] = key_id
             demand["name"] = name
             demand["x"] = x
             demand["y"] = y
             demand["population"] = population
-            demand["provider"]=provider_list
+            demand["provider"]= provider_list
             mongo_operater_obj.insert_record(demand)
         except:
             continue
@@ -74,6 +103,6 @@ def get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj):
 
 if __name__=="__main__":
     provider_list = initial_providers()
-    mongo_operater_obj = mongo_operater.MongoOperater("admin", "moo_ps")
+    mongo_operater_obj = a_mongo_operater.MongoOperater("admin", "moo_ps")
     get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj)
 

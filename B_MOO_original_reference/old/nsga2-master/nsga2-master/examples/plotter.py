@@ -35,8 +35,8 @@ class Plotter():
         figure = plt.figure()
         axes = figure.add_subplot(111)
 
-        computed_f1 = map(lambda individual: individual.objectives[0], front)
-        computed_f2 = map(lambda individual: individual.objectives[1], front)
+        computed_f1 = map(lambda individual: individual.objectives_fitness[0], front)
+        computed_f2 = map(lambda individual: individual.objectives_fitness[1], front)
         axes.plot(computed_f1, computed_f2, 'g.', label='Computed Pareto Front')
 
         perfect_pareto_front_f1, perfect_pareto_front_f2 = self.problem.perfect_pareto_front()

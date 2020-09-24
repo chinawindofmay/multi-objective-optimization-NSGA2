@@ -29,11 +29,11 @@ class ZDT(Problem):
         return individual
 
     def calculate_objectives(self, individual):
-        individual.objectives = []
-        individual.objectives.append(self.zdt_definitions.f1(individual))
-        individual.objectives.append(self.zdt_definitions.f2(individual))
+        individual.objectives_fitness = []
+        individual.objectives_fitness.append(self.zdt_definitions.f1(individual))
+        individual.objectives_fitness.append(self.zdt_definitions.f2(individual))
         for i in range(2):
-            if self.min_objectives[i] is None or individual.objectives[i] < self.min_objectives[i]:
-                self.min_objectives[i] = individual.objectives[i]
-            if self.max_objectives[i] is None or individual.objectives[i] > self.max_objectives[i]:
-                self.max_objectives[i] = individual.objectives[i]
+            if self.min_objectives[i] is None or individual.objectives_fitness[i] < self.min_objectives[i]:
+                self.min_objectives[i] = individual.objectives_fitness[i]
+            if self.max_objectives[i] is None or individual.objectives_fitness[i] > self.max_objectives[i]:
+                self.max_objectives[i] = individual.objectives_fitness[i]

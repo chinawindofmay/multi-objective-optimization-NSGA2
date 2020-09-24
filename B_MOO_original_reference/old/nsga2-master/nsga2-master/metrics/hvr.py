@@ -3,7 +3,7 @@ def HV(reference_point):
         def volume(individual):
             hyper_cuboid_sides = []
             for i in range(len(reference_point)):
-                side_length = abs(individual.objectives[i] - reference_point[i])
+                side_length = abs(individual.objectives_fitness[i] - reference_point[i])
                 hyper_cuboid_sides.append(side_length)
             return reduce(lambda x, y: x*y, hyper_cuboid_sides, 1)
 

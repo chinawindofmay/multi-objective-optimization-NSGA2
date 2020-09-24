@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/A_SGA_with_quantum_0620" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/B_MOO_NSGA3_0810_PS" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/B_MOO_NSGA2_0817未完成改造" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/B_MOO_NSGA3_0920_THEROY" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/B_MOO_original_reference/python-NSGA3-xiaofeng supply" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>

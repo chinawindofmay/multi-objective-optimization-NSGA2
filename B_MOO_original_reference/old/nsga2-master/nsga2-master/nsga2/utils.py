@@ -42,7 +42,7 @@ class NSGA2Utils(object):
             population.fronts.append(temp)
                     
     def __sort_objective(self, val1, val2, m):
-        return cmp(val1.objectives[m], val2.objectives[m])
+        return cmp(val1.objectives_fitness[m], val2.objectives_fitness[m])
     
     def calculate_crowding_distance(self, front):
         if len(front) > 0:
@@ -50,7 +50,7 @@ class NSGA2Utils(object):
             for individual in front:
                 individual.crowding_distance = 0
             
-            for m in range(len(front[0].objectives)):
+            for m in range(len(front[0].objectives_fitness)):
                 front = sorted(front, cmp=functools.partial(self.__sort_objective, m=m))
                 front[0].crowding_distance = self.problem.max_objectives[m]
                 front[solutions_num-1].crowding_distance = self.problem.max_objectives[m]

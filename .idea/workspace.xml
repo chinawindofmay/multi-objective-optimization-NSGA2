@@ -20,12 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9382d07d-646f-476b-83a3-d445026e5cc9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/E_multi-objective-optimization-NSGA2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/examples/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/examples/plotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/metrics/hvr.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/metrics/hvr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/nsga2/problems/zdt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/nsga2/problems/zdt/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/nsga2/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_original_reference/old/nsga2-master/nsga2-master/nsga2/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +118,7 @@
       <recent name="D:\02-work\000github\E_multi-objective-optimization-NSGA2\GA_with_quantum" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.e_03_nsga2_ps_change_DS_theory">
+  <component name="RunManager" selected="Python.nsga2_muli_test_functions">
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -355,7 +352,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="nsga2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="e_03_nsga2_ps_change_DS_theory_2fitnesses" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="E_multi-objective-optimization-NSGA2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -363,12 +360,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory_2fitnesses.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -434,17 +431,17 @@
       <item itemvalue="Python.a_initial_provider" />
       <item itemvalue="Python.a_initial_provider_theroy" />
       <item itemvalue="Python.e_03_naga3_ps_change_DS_theory" />
-      <item itemvalue="Python.nsga2" />
       <item itemvalue="Python.e_03_nsga2_ps_change_DS_theory" />
       <item itemvalue="Python.nsga2_muli_test_functions" />
+      <item itemvalue="Python.e_03_nsga2_ps_change_DS_theory_2fitnesses" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.nsga2_muli_test_functions" />
+        <item itemvalue="Python.e_03_nsga2_ps_change_DS_theory_2fitnesses" />
         <item itemvalue="Python.e_03_nsga2_ps_change_DS_theory" />
         <item itemvalue="Python.a_initial_provider_theroy" />
-        <item itemvalue="Python.nsga2_muli_test_functions" />
         <item itemvalue="Python.e_03_naga3_ps_change_DS_theory" />
-        <item itemvalue="Python.nsga2" />
       </list>
     </recent_temporary>
   </component>
@@ -467,7 +464,7 @@
       <workItem from="1599462085833" duration="1187000" />
       <workItem from="1599693189487" duration="14663000" />
       <workItem from="1600221782111" duration="21243000" />
-      <workItem from="1600667962089" duration="89606000" />
+      <workItem from="1600667962089" duration="110443000" />
     </task>
     <servers />
   </component>
@@ -503,53 +500,63 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="767" y="213" key="#xdebugger.XInspectDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599701289868" />
-    <state width="1918" height="516" key="DebuggerActiveHint" timestamp="1600679466826">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1438" height="427" key="DebuggerActiveHint" timestamp="1601025988093">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
+    <state width="1438" height="427" key="DebuggerActiveHint/0.0.1440.860@0.0.1440.860" timestamp="1601025988093" />
     <state width="1918" height="516" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1600679466826" />
     <state x="687" y="215" key="FileChooserDialogImpl" timestamp="1598077130946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="687" y="215" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598077130946" />
-    <state width="1867" height="362" key="GridCell.Tab.0.bottom" timestamp="1600958645076">
+    <state width="1867" height="616" key="GridCell.Tab.0.bottom" timestamp="1601076511779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="362" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600958645076" />
-    <state width="1867" height="362" key="GridCell.Tab.0.center" timestamp="1600958645076">
+    <state width="1387" height="220" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1601026606958" />
+    <state width="1867" height="616" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601076511779" />
+    <state width="1867" height="616" key="GridCell.Tab.0.center" timestamp="1601076511777">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="362" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600958645076" />
-    <state width="1867" height="362" key="GridCell.Tab.0.left" timestamp="1600958645076">
+    <state width="1387" height="220" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1601026606958" />
+    <state width="1867" height="616" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601076511777" />
+    <state width="1867" height="616" key="GridCell.Tab.0.left" timestamp="1601076511774">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="362" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600958645076" />
-    <state width="1867" height="362" key="GridCell.Tab.0.right" timestamp="1600958645076">
+    <state width="1387" height="220" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1601026606958" />
+    <state width="1867" height="616" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601076511774" />
+    <state width="1867" height="616" key="GridCell.Tab.0.right" timestamp="1601076511778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="362" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600958645076" />
-    <state width="1867" height="284" key="GridCell.Tab.1.bottom" timestamp="1600958353678">
+    <state width="1387" height="220" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1601026606958" />
+    <state width="1867" height="616" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601076511778" />
+    <state width="1867" height="235" key="GridCell.Tab.1.bottom" timestamp="1601072650948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600958353678" />
-    <state width="1867" height="284" key="GridCell.Tab.1.center" timestamp="1600958353678">
+    <state width="1387" height="157" key="GridCell.Tab.1.bottom/0.0.1440.860@0.0.1440.860" timestamp="1601026277844" />
+    <state width="1867" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601072650948" />
+    <state width="1867" height="235" key="GridCell.Tab.1.center" timestamp="1601072650947">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600958353678" />
-    <state width="1867" height="284" key="GridCell.Tab.1.left" timestamp="1600958353678">
+    <state width="1387" height="157" key="GridCell.Tab.1.center/0.0.1440.860@0.0.1440.860" timestamp="1601026277844" />
+    <state width="1867" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601072650947" />
+    <state width="1867" height="235" key="GridCell.Tab.1.left" timestamp="1601072650946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600958353678" />
-    <state width="1867" height="284" key="GridCell.Tab.1.right" timestamp="1600958353678">
+    <state width="1387" height="157" key="GridCell.Tab.1.left/0.0.1440.860@0.0.1440.860" timestamp="1601026277844" />
+    <state width="1867" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601072650946" />
+    <state width="1867" height="235" key="GridCell.Tab.1.right" timestamp="1601072650947">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1867" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600958353678" />
+    <state width="1387" height="157" key="GridCell.Tab.1.right/0.0.1440.860@0.0.1440.860" timestamp="1601026277844" />
+    <state width="1867" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601072650947" />
     <state x="461" y="155" key="SettingsEditor" timestamp="1600305136122">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="155" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600305136122" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1600955110260">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="726" height="437" key="XDebugger.FullValuePopup" timestamp="1601026081544">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
+    <state width="726" height="437" key="XDebugger.FullValuePopup/0.0.1440.860@0.0.1440.860" timestamp="1601026081544" />
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1600955110260" />
     <state x="586" y="186" width="811" height="668" key="find.popup" timestamp="1600845100170">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -935,28 +942,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py</url>
-          <line>321</line>
+          <line>400</line>
           <option name="timeStamp" value="475" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py</url>
-          <line>170</line>
+          <line>178</line>
           <option name="timeStamp" value="481" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py</url>
-          <line>486</line>
-          <option name="timeStamp" value="482" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/nsga2_muli_test_functions.py</url>
-          <line>405</line>
-          <option name="timeStamp" value="483" />
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory.py</url>
+          <line>580</line>
+          <option name="timeStamp" value="484" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory.py</url>
-          <line>576</line>
-          <option name="timeStamp" value="484" />
+          <line>529</line>
+          <option name="timeStamp" value="488" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY/e_03_nsga2_ps_change_DS_theory.py</url>
+          <line>336</line>
+          <option name="timeStamp" value="489" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2/non_dominated_sort_test.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="493" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1118,6 +1130,10 @@
         <watch expression="print(self.population_child_conbine)" language="Python" />
         <watch expression="print(self.objectives_fitness)" language="Python" />
         <watch expression="print(self.objectives_fitness)" language="Python" />
+        <watch expression="set_sp" />
+        <watch expression="S" />
+        <watch expression="len(fronts[0])" language="Python" />
+        <watch expression="len(fronts[0])" language="Python" />
       </configuration>
     </watches-manager>
   </component>
@@ -1136,7 +1152,7 @@
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2__1_.coverage" NAME="nsga2 (1) Coverage Results" MODIFIED="1597662260343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0817" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$d_NSGA2_PMROA_no_encoding_pandas_numpy.coverage" NAME="d_NSGA2_PMROA_no_encoding_pandas_numpy Coverage Results" MODIFIED="1597587370397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$naga3__1_.coverage" NAME="naga3 (1) Coverage Results" MODIFIED="1597845531775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_original_reference/python-NSGA3-xiaofeng supply" />
-    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_muli_test_functions.coverage" NAME="nsga2_muli_test_functions Coverage Results" MODIFIED="1600957780735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_muli_test_functions.coverage" NAME="nsga2_muli_test_functions Coverage Results" MODIFIED="1601076511767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_original_reference/004-python-spea2-nsga2" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$SPEA2.coverage" NAME="SPEA2 Coverage Results" MODIFIED="1600926622543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_original_reference" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$01_initial_provider.coverage" NAME="01-initial_provider Coverage Results" MODIFIED="1597565011396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_naga3_ps_change_DS.coverage" NAME="e_naga3_ps_change_DS Coverage Results" MODIFIED="1600768764117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
@@ -1145,8 +1161,9 @@
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$a_initial_provider_theroy.coverage" NAME="a_initial_provider_theroy Coverage Results" MODIFIED="1600958613027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_0817__1_.coverage" NAME="nsga2_0817 (1) Coverage Results" MODIFIED="1597663179333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA2_0817" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$b_route_plan_calculator.coverage" NAME="b_route_plan_calculator Coverage Results" MODIFIED="1600679958348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_03_nsga2_ps_change_DS_theory_2fitnesses.coverage" NAME="e_03_nsga2_ps_change_DS_theory_2fitnesses Coverage Results" MODIFIED="1601027574702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$nsga2_JH.coverage" NAME="nsga2_JH Coverage Results" MODIFIED="1600221895144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_03_nsga2_ps_change_DS_theory.coverage" NAME="e_03_nsga2_ps_change_DS_theory Coverage Results" MODIFIED="1600958804275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY" />
+    <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_03_nsga2_ps_change_DS_theory.coverage" NAME="e_03_nsga2_ps_change_DS_theory Coverage Results" MODIFIED="1601026277829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0920_THEROY" />
     <SUITE FILE_PATH="coverage/E_multi_objective_optimization_NSGA2$e_03_naga3_ps_change_DS__1_.coverage" NAME="e_03_naga3_ps_change_DS (1) Coverage Results" MODIFIED="1600783747996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B_MOO_NSGA3_0810_PS" />
   </component>
 </project>

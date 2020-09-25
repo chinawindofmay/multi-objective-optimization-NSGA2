@@ -105,7 +105,7 @@ class NSGA2():
         :return:
         """
         actural_popsize = popu.shape[0]
-        y1_values_double = np.full(shape=(actural_popsize,), fill_value=1, dtype=np.float32)  # 与居民区可达性
+        # y1_values_double = np.full(shape=(actural_popsize,), fill_value=1, dtype=np.float32)  # 与居民区可达性
         y2_values_double = np.full(shape=(actural_popsize,), fill_value=1, dtype=np.float32)  # 与居民区公平性
         y5_values_double = np.full(shape=(actural_popsize,), fill_value=1, dtype=np.float32)  # 覆盖人口
         for i in range(actural_popsize):
@@ -115,13 +115,14 @@ class NSGA2():
             self.update_provider_vj(demands_provider_np, demands_pdd_np, solution_join)
             self.calculate_single_provider_gravity_value_np(demands_provider_np, demands_pdd_np, solution_join)
             # 居民区 可达性适应度值，该值越大越好
-            y1_values_double[i] = self.calculate_global_accessibility_numpy(demands_pdd_np)
+            # y1_values_double[i] = self.calculate_global_accessibility_numpy(demands_pdd_np)
             # 居民区  计算公平性数值，该值越小表示越公平
             y2_values_double[i] = self.calculate_global_equality_numpy(demands_pdd_np)
             # 覆盖人口，越大越好
             y5_values_double[i] = self.calcuate_global_cover_people(demands_provider_np)
         # 统一转成最小化问题
-        pop_fitness = np.vstack((1 / y1_values_double, 1000 * y2_values_double, 20 / y5_values_double)).T
+        # pop_fitness = np.vstack((1 / y1_values_double, 1000 * y2_values_double, 20 / y5_values_double)).T
+        pop_fitness = np.vstack(( 1000 * y2_values_double, 20 / y5_values_double)).T
         return pop_fitness
 
     def calculate_global_accessibility_numpy(self, demands_pdd_np):
@@ -309,13 +310,13 @@ class NSGA2():
             for j in range(population.shape[0]):
                 # temp=[]
                 if j != i:
-                    if (objectives_fitness[j][0] >= objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
-                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >= objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
-                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] >= objectives_fitness[i][2]):
+                    if (objectives_fitness[j][0] >= objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1]) or (
+                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >= objectives_fitness[i][1]) or (
+                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1]):
                         temp.append(j)
-                    elif (objectives_fitness[i][0] >= objectives_fitness[j][0] and objectives_fitness[i][1] > objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
-                            objectives_fitness[i][0] > objectives_fitness[j][0] and objectives_fitness[i][1] >= objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
-                            objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[i][2] >= objectives_fitness[j][2]):
+                    elif (objectives_fitness[i][0] >= objectives_fitness[j][0] and objectives_fitness[i][1] > objectives_fitness[j][1] ) or (
+                            objectives_fitness[i][0] > objectives_fitness[j][0] and objectives_fitness[i][1] >= objectives_fitness[j][1] ) or (
+                            objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] ):
                         npp[i] += 1  # j支配 i，np+1
             set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
             if npp[i] == 0:
@@ -453,27 +454,23 @@ class NSGA2():
                 temp1[j][1] = fronts[i][j]
                 temp2[j][0] = objectives_fitness[fronts[i][j]][1]  # f2赋值
                 temp2[j][1] = fronts[i][j]
-                temp3[j][0] = objectives_fitness[fronts[i][j]][2]  # f3赋值
-                temp3[j][1] = fronts[i][j]
+
 
             # temp3 = temp1.tolist()
             # temp4 = temp2.tolist()
             temp1 = sorted(temp1.tolist())  # f1排序
             temp2 = sorted(temp2.tolist())  # f2排序
-            temp3 = sorted(temp3.tolist())  # f3排序
             crowding_distance[int(temp1[0][1])] = float('inf')
             crowding_distance[int(temp1[len(fronts[i]) - 1][1])] = float('inf')
             f1_min = temp1[0][0]
             f1_max = temp1[len(fronts[i]) - 1][0]
             f2_min = temp2[0][0]
             f2_max = temp2[len(fronts[i]) - 1][0]
-            f3_min = temp3[0][0]
-            f3_max = temp3[len(fronts[i]) - 1][0]
+
             a = 1
             while a < len(fronts[i]) - 1:
                 crowding_distance[int(temp1[a][1])] = (temp1[a + 1][0] - temp1[a - 1][0]) / (f1_max - f1_min+0.0000001) + \
-                                                      (temp2[a + 1][0] - temp2[a - 1][0]) / (f2_max - f2_min+0.0000001) + \
-                                                      (temp3[a + 1][0] - temp3[a - 1][0]) / (f3_max - f3_min+0.0000001) # 个体i的拥挤度等于 f1 + f2 + f3
+                                                      (temp2[a + 1][0] - temp2[a - 1][0]) / (f2_max - f2_min+0.0000001)  # 个体i的拥挤度等于 f1 + f2 + f3
                 a += 1
         return crowding_distance
 
@@ -544,9 +541,9 @@ class NSGA2():
 # NSGA2入口
 if __name__ == '__main__':
     # 参数设置  代
-    N_GENERATIONS2 = 50  # 迭代次数
+    N_GENERATIONS2 = 100  # 迭代次数
     # 区
-    POP_SIZE2 = 200  # 种群大小
+    POP_SIZE2 = 400  # 种群大小
     pc2 = 0.25  # 交叉概率
     pm2 = 0.25  # 变异概率
 

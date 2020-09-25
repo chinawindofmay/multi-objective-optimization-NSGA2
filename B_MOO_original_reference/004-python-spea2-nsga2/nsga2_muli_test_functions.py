@@ -1,7 +1,3 @@
-"""
-参考地址：https://blog.csdn.net/qq_36449201/article/details/81046586
-作者：华电小炸扎
-"""
 
 import random
 import numpy as np
@@ -13,7 +9,7 @@ import matplotlib.pyplot as plt
 class NSGA2():
     def __init__(self, x_dim, pop_size, max_iter):  # 维度，群体数量，迭代次数
         self.pc = 0.25  # 交叉概率
-        self.pm = 0.25  # 变异概率
+        self.pm = 0.25 # 变异概率
         self.x_dim = x_dim  # 搜索维度
         self.pop_size = pop_size  # 总群个体数量
         self.max_iteration = max_iter  # 迭代次数
@@ -137,14 +133,26 @@ class NSGA2():
             for j in range(2 * self.pop_size):
                 # temp=[]
                 if j != i:
-                    if (self.objectives_fitness[i][0] >= self.objectives_fitness[j][0] and self.objectives_fitness[i][1] >= self.objectives_fitness[j][1]) or \
-                        (self.objectives_fitness[i][0] > self.objectives_fitness[j][0] and self.objectives_fitness[i][1] >= self.objectives_fitness[j][1]) or \
-                        (self.objectives_fitness[i][0] >= self.objectives_fitness[j][0] and self.objectives_fitness[i][1] > self.objectives_fitness[j][1]):
-                        self.np[i] += 1  # j支配 i，np+1
-                    if (self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and self.objectives_fitness[j][1] > self.objectives_fitness[i][1]) or \
-                        (self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and self.objectives_fitness[j][1] >= self.objectives_fitness[i][1]) or \
-                        (self.objectives_fitness[j][0] >= self.objectives_fitness[i][0] and self.objectives_fitness[j][1] > self.objectives_fitness[i][1]):
+                    if (self.objectives_fitness[j][0] >= self.objectives_fitness[i][0] and self.objectives_fitness[j][
+                        1] >
+                        self.objectives_fitness[i][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >=
+                            self.objectives_fitness[i][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >
+                            self.objectives_fitness[i][1]):
                         temp.append(j)
+                    elif (self.objectives_fitness[i][0] >= self.objectives_fitness[j][0] and self.objectives_fitness[i][
+                        1] >
+                          self.objectives_fitness[j][1]) or (
+                            self.objectives_fitness[i][0] > self.objectives_fitness[j][0] and
+                            self.objectives_fitness[i][1] >=
+                            self.objectives_fitness[j][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >
+                            self.objectives_fitness[i][1]):
+                        self.np[i] += 1  # j支配 i，np+1
             self.set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
             if self.np[i] == 0:
                 self.fronts[0].append(i)  # 个体序号
@@ -169,7 +177,62 @@ class NSGA2():
             sum_coun += len(self.fronts[kk])
         if sum_coun==20:
             print("test")
+            print(np.array(self.objectives_fitness))
 
+    # def test_fast_non_dominated_sort(self,population):
+    #     self.fronts = []  # Pareto前沿面
+    #     self.objectives_fitness = []  # np.zeros((self.pop,2))
+    #     for i in range(population.shape[0]):  # 越界处理
+    #         for j in range(self.x_dim):
+    #             if population[i][j] < 0:
+    #                 population[i][j] = 0  # 最小值0
+    #             if population[i][j] > 1:
+    #                 population[i][j] = 1  # 最大值1
+    #     for i in range(population.shape[0]):
+    #         position = population[i]
+    #         # self.cal_obj(position)
+    #         self.objectives_fitness.append(self.cal_obj_ZDT6(position))  # [i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
+    #         # self.objectives[i][1] = f2
+    #     objectives_fitness_array=np.array(self.objectives_fitness)
+    #     y1_values = objectives_fitness_array[:,0]
+    #     y2_values = objectives_fitness_array[:,1]
+    #
+    #     S=[[] for i in range(0, np.shape(y1_values)[0])]
+    #     fronts = [[]]
+    #     n=[0 for i in range(0, np.shape(y1_values)[0])]
+    #     rank = [0 for i in range(0, np.shape(y1_values)[0])]
+    #     for p in range(0, np.shape(y1_values)[0]):
+    #         S[p]=[]
+    #         n[p]=0
+    #         for q in range(0, np.shape(y1_values)[0]):
+    #             # 这是目标函数，y1求小值，y2求小值
+    #             if (y1_values[p] < y1_values[q] and y2_values[p] < y2_values[q] )  :
+    #                 if q not in S[p]:
+    #                     # 个体p的支配集合Sp计算
+    #                     S[p].append(q)
+    #             elif (y1_values[p] > y1_values[q] and y2_values[p] > y2_values[q] ) :
+    #                 # 被支配度Np计算
+    #                 # Np越大，则说明p个体越差
+    #                 n[p] = n[p] + 1
+    #         if n[p]==0:
+    #             rank[p] = 0
+    #             if p not in fronts[0]:
+    #                 fronts[0].append(p)
+    #     i = 0
+    #     while(fronts[i] != []):
+    #         Q=[]
+    #         for p in fronts[i]:
+    #             for q in S[p]:
+    #                 n[q] =n[q] - 1
+    #                 if( n[q]==0):
+    #                     rank[q]=i+1
+    #                     if q not in Q:
+    #                         Q.append(q)
+    #         i = i+1
+    #         fronts.append(Q)
+    #
+    #     del fronts[len(fronts)-1]
+    #     self.fronts=fronts
 
     def non_donminate_1(self):  # pop行 快速非支配排序
         self.fronts = []  # Pareto前沿面
@@ -195,12 +258,26 @@ class NSGA2():
             for j in range(self.pop_size):
                 # temp=[]
                 if j != i:
-                    if self.objectives_fitness[i][0] >= self.objectives_fitness[j][0] and self.objectives_fitness[i][1] >= self.objectives_fitness[j][
-                        1]:
-                        self.np[i] += 1  # j支配 i，np+1
-                    if self.objectives_fitness[j][0] >= self.objectives_fitness[i][0] and self.objectives_fitness[j][1] >= self.objectives_fitness[i][
-                        1]:
+                    if (self.objectives_fitness[j][0] >= self.objectives_fitness[i][0] and self.objectives_fitness[j][
+                        1] >
+                        self.objectives_fitness[i][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >=
+                            self.objectives_fitness[i][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >
+                            self.objectives_fitness[i][1]):
                         temp.append(j)
+                    elif (self.objectives_fitness[i][0] >= self.objectives_fitness[j][0] and self.objectives_fitness[i][
+                        1] >
+                          self.objectives_fitness[j][1]) or (
+                            self.objectives_fitness[i][0] > self.objectives_fitness[j][0] and
+                            self.objectives_fitness[i][1] >=
+                            self.objectives_fitness[j][1]) or (
+                            self.objectives_fitness[j][0] > self.objectives_fitness[i][0] and
+                            self.objectives_fitness[j][1] >
+                            self.objectives_fitness[i][1]):
+                        self.np[i] += 1  # j支配 i，np+1
             self.set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
             if self.np[i] == 0:
                 self.fronts[0].append(i)  # 个体序号
@@ -223,6 +300,7 @@ class NSGA2():
 
     def selection(self):  # 轮盘赌选择
         self.non_donminate_1()  # 非支配排序,获得Pareto前沿面
+        # self.test_fast_non_dominated_sort(self.population)
         pi = np.zeros(self.pop_size)  # 个体的概率
         qi = np.zeros(self.pop_size + 1)  # 个体的累积概率
         P = 0
@@ -308,6 +386,7 @@ class NSGA2():
                 if self.population[i][j] > 1:
                     self.population[i][j] = 1  # 最大值1
         self.non_donminate_1()
+        # self.test_fast_non_dominated_sort(self.population)
         for i in range(len(self.fronts[0])):
             position = self.population[self.fronts[0][i]]
             self.objectives_fitness.append(self.cal_obj_ZDT6(position))
@@ -346,6 +425,7 @@ class NSGA2():
             self.conbine_children_parent()
             # 快速非支配排序
             self.non_donminate2()
+            # self.test_fast_non_dominated_sort(self.population_child_conbine)
 
             # 拥挤度计算
             self.crowd_distance()
@@ -361,176 +441,7 @@ class NSGA2():
         # print()
 
 
-def fast_non_dominated_sort(y1_values, y2_values):
-    S=[[] for i in range(0, np.shape(y1_values)[0])]
-    fronts = [[]]
-    n=[0 for i in range(0, np.shape(y1_values)[0])]
-    rank = [0 for i in range(0, np.shape(y1_values)[0])]
-
-    for p in range(0, np.shape(y1_values)[0]):
-        S[p]=[]
-        n[p]=0
-        for q in range(0, np.shape(y1_values)[0]):
-            # 这是目标函数，y1求小值，y2求小值
-            if (y1_values[p] < y1_values[q] and y2_values[p] < y2_values[q] )  :
-                if q not in S[p]:
-                    # 个体p的支配集合Sp计算
-                    S[p].append(q)
-            elif (y1_values[p] > y1_values[q] and y2_values[p] > y2_values[q] ) :
-                # 被支配度Np计算
-                # Np越大，则说明p个体越差
-                n[p] = n[p] + 1
-        if n[p]==0:
-            rank[p] = 0
-            if p not in fronts[0]:
-                fronts[0].append(p)
-
-    i = 0
-    while(fronts[i] != []):
-        Q=[]
-        for p in fronts[i]:
-            for q in S[p]:
-                n[q] =n[q] - 1
-                if( n[q]==0):
-                    rank[q]=i+1
-                    if q not in Q:
-                        Q.append(q)
-        i = i+1
-        fronts.append(Q)
-
-    del fronts[len(fronts)-1]
-    sum_coun = 0
-    for kk in range(len(fronts)):
-        sum_coun += len(fronts[kk])
-    print(sum_coun)
-    return fronts
-
-def test_no_sort():
-    fronts = []  # Pareto前沿面
-    fronts.append([])
-    set_sp = []
-    npp = np.zeros(2*10)
-    rank = np.zeros(2*10)
-    objectives_fitness=np.array([[0.6373723585181119, 9.089424920752537],
-                                 [0.6307563745957109, 9.484134522661321],
-                                 [0.6307726564027054, 9.370453232401315],
-                                 [0.9214017573731662, 8.974173267351892],
-                                 [0.8106208092655269, 9.00814519794432],
-                                 [0.6308299859236132, 9.381311843663337],
-                                 [0.9996933421004693, 8.998732212375378],
-                                 [0.8106208092655269, 9.087298161567794],
-                                 [0.9968206553777186, 9.020037858133483],
-                                 [0.9503113437004427, 9.04519027298749],
-                                 [0.9214017573731662, 8.974173267351892],
-                                 [0.9214017573731662, 9.00187266065025],
-                                 [0.6307563745957109, 9.493829448943414],
-                                 [0.999999999999489, 9.180616877016963],
-                                 [0.8150090640161689, 9.041622216379706],
-                                 [0.9990805452551389, 8.980910429010232],
-                                 [0.9979468094812165, 9.04561922020985],
-                                 [0.7527617476769539, 9.136335451211739],
-                                 [0.6364241984468356, 9.20992553291975],
-                                 [0.8106208092655269, 9.083868693443087]])
-
-    objectives_fitness_20=np.array([[0.9876243312911611, 10.838098629526387],
-                                 [0.991433893626072, 11.175720619772605],
-                                 [0.9870262883942262, 10.920867921752558],
-                                 [0.9529952871492675, 11.042348488543286],
-                                 [0.9967715948628068, 10.792857629818656],
-                                 [0.2914471050280927, 10.71215723744884],
-                                 [0.9989416406019469, 11.121149471714903],
-                                 [0.9887065108630387, 10.905419079122366],
-                                 [0.9820488305486297, 11.361465712166202],
-                                 [0.9996490682834592, 11.26840545995472],
-                                 [0.2914471050280927, 10.707453256474697],
-                                 [0.991433893626072, 11.176351948132849],
-                                 [0.9820488305486297, 11.370681966170503],
-                                 [0.9887065108630387, 10.895256565042377],
-                                 [0.9870262883942262, 10.900449654701166],
-                                 [0.9039846682981595, 11.080658791422916],
-                                 [0.9989416406019469, 11.12991202060966],
-                                 [0.9876243312911611, 10.814608080295447],
-                                 [0.2914471050280927, 10.722602119064524],
-                                 [0.9989209883195167, 10.80882164883729]])
-
-    for i in range(2 * 10):
-        temp = []
-        for j in range(2 * 10):
-            if j != i:
-                if (objectives_fitness[i][0] >= objectives_fitness[j][0] and objectives_fitness[i][1] >=
-                    objectives_fitness[j][1]) :
-                    npp[i] += 1  # j支配 i，np+1
-                if (objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >
-                    objectives_fitness[i][1]) :
-                    temp.append(j)
-        set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
-        if npp[i] == 0:
-            fronts[0].append(i)  # 个体序号
-            rank[i] = 1  # Pareto前沿面 第一层级
-    i = 0
-    while len(fronts[i]) > 0:
-        temp = []
-        for j in range(len(fronts[i])):
-            a = 0
-            while a < len(set_sp[fronts[i][j]]):
-                npp[set_sp[fronts[i][j]][a]] -= 1
-                if npp[set_sp[fronts[i][j]][a]] == 0:
-                    rank[set_sp[fronts[i][j]][a]] = i + 2  # 第二层级
-                    temp.append(set_sp[fronts[i][j]][a])
-                a = a + 1
-        i = i + 1
-        fronts.append(temp)
-    # fronts=fronts[0:-1]
-    # test code
-    sum_coun = 0
-    for kk in range(len(fronts)):
-        sum_coun += len(fronts[kk])
-    print(sum_coun)
-
 # NSGA2入口
 if __name__ == '__main__':
-    # NSGA = NSGA2(30, 10, 500)
-    # NSGA.run()
-    # test_no_sort()
-
-    objectives_fitness = np.array([[0.6373723585181119, 9.089424920752537],
-                                   [0.6307563745957109, 9.484134522661321],
-                                   [0.6307726564027054, 9.370453232401315],
-                                   [0.9214017573731662, 8.974173267351892],
-                                   [0.8106208092655269, 9.00814519794432],
-                                   [0.6308299859236132, 9.381311843663337],
-                                   [0.9996933421004693, 8.998732212375378],
-                                   [0.8106208092655269, 9.087298161567794],
-                                   [0.9968206553777186, 9.020037858133483],
-                                   [0.9503113437004427, 9.04519027298749],
-                                   [0.9214017573731662, 8.974173267351892],
-                                   [0.9214017573731662, 9.00187266065025],
-                                   [0.6307563745957109, 9.493829448943414],
-                                   [0.999999999999489, 9.180616877016963],
-                                   [0.8150090640161689, 9.041622216379706],
-                                   [0.9990805452551389, 8.980910429010232],
-                                   [0.9979468094812165, 9.04561922020985],
-                                   [0.7527617476769539, 9.136335451211739],
-                                   [0.6364241984468356, 9.20992553291975],
-                                   [0.8106208092655269, 9.083868693443087]])
-    objectives_fitness_20 = np.array([[0.9876243312911611, 10.838098629526387],
-                                      [0.991433893626072, 11.175720619772605],
-                                      [0.9870262883942262, 10.920867921752558],
-                                      [0.9529952871492675, 11.042348488543286],
-                                      [0.9967715948628068, 10.792857629818656],
-                                      [0.2914471050280927, 10.71215723744884],
-                                      [0.9989416406019469, 11.121149471714903],
-                                      [0.9887065108630387, 10.905419079122366],
-                                      [0.9820488305486297, 11.361465712166202],
-                                      [0.9996490682834592, 11.26840545995472],
-                                      [0.2914471050280927, 10.707453256474697],
-                                      [0.991433893626072, 11.176351948132849],
-                                      [0.9820488305486297, 11.370681966170503],
-                                      [0.9887065108630387, 10.895256565042377],
-                                      [0.9870262883942262, 10.900449654701166],
-                                      [0.9039846682981595, 11.080658791422916],
-                                      [0.9989416406019469, 11.12991202060966],
-                                      [0.9876243312911611, 10.814608080295447],
-                                      [0.2914471050280927, 10.722602119064524],
-                                      [0.9989209883195167, 10.80882164883729]])
-    fast_non_dominated_sort(objectives_fitness[:,0],objectives_fitness[:,1])
+    NSGA = NSGA2(30, 100, 200)
+    NSGA.run()

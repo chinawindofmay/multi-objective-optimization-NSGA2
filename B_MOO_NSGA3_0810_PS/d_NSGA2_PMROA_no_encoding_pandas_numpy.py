@@ -3,10 +3,10 @@
 关于整个算法的基本说明：
 算法功能：实现对可达性和公平性的帕累托解求解过程。
 算法参照：
-    # Program Name: NSGA-II.py
-    # Description: This is a python implementation of Prof. Kalyanmoy Deb's popular NSGA-II algorithm
-    # Author: Haris Ali Khan
-    # Supervisor: Prof. Manoj Kumar Tiwari
+        # Program Name: NSGA-II.py
+        # Description: This is a python implementation of Prof. Kalyanmoy Deb's popular NSGA-II algorithm
+        # Author: Haris Ali Khan
+        # Supervisor: Prof. Manoj Kumar Tiwari
 算法的改造过程：
     第一步：20200129-20200130，资料收集，NSGA基本原理再理解，调试原有的代码（发现没法验证对错）于是乎github上重新寻找代码
             理解基础的NSGA-II.py，单个x，两个简单数学函数目标，数学制图，详细见SGAII-traditional.py

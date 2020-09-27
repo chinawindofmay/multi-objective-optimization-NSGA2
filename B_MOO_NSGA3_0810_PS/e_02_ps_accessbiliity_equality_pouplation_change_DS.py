@@ -18,7 +18,7 @@ class Accessibility:
         self.low=low
         self.up=up
         self.pop_size=popsize
-        self.old_providers_count=old_providers_count   #已建充电站数量
+        self.old_providers_count=old_providers_count   #已建设施数量
         self.petential_new_providers_count = petential_new_providers_count # 定义自变量个数，候选新建的充电站数量
         self.THROD=THROD
         self.BEITA=BEITA
@@ -51,10 +51,6 @@ class Accessibility:
             y2_values_double[i] = self.calculate_global_equality_numpy(demands_pdd_np)
             # 覆盖人口，越大越好
             y5_values_double[i] = self.calcuate_global_cover_people(demands_provider_np)
-            # if i>10:
-            #     print("test")
-            # end_time1 = time.time()
-            # print('calculate_gravity_value() Running time: %s Seconds' % (end_time1 - start_time))
         # 统一转成最小化问题
         pop_fitness = np.vstack((10/y1_values_double, y2_values_double, 10000000/y5_values_double)).T
         return pop_fitness
@@ -198,7 +194,6 @@ class Accessibility:
 
     # 主函数
     def excute_with_population(self, demands_provider_np, demands_pdd_np):
-        # 产生一致性的参考点和随机初始化种群
         popu = self.initial_population(self.pop_size)  # 生成初始种群，修改了ps
         popu_fitness = self.fitness(demands_provider_np, demands_pdd_np, popu, self.pop_size)  # 计算适应度函数值
 
@@ -207,7 +202,7 @@ class Accessibility:
         return self.fitness(demands_provider_np, demands_pdd_np, popu, self.pop_size)  # 计算适应度函数值
 
 
-def fun1():
+def jianye_ps_accessibility_3values():
     # 区
     POP_SIZE2 = 200  # 种群大小
     DB_NAME = "admin"  # MONGODB数据库的配置
@@ -228,7 +223,7 @@ def fun1():
     acce = Accessibility(low2, up2, POP_SIZE2, OLD_PROVIDERS_COUNT, PENTENTIAL_NEW_PROVIDERS_COUNT, THROD, BEITA)
     acce.excute_with_population(demands_provider_np, demands_pdd_np)
 
-def test():
+def test_self_defined_map_accessibility_3values():
     POP_SIZE2 = 5  # 种群大小
     DEMANDS_COUNT = 4  # 需求点，即小区，个数
     # 供给点，即充电桩，的个数，与X_num2保持一致
@@ -269,5 +264,5 @@ def test():
     nsga3.excute_with_population(demands_provider_np, demands_pdd_np)
 
 if __name__=="__main__":
-    fun1()
+    jianye_ps_accessibility_3values()
     # test()

@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 
 class Test_class():
 
-    def __init__(self):
+    def __init__(self,f_num):
+        self.f_num=f_num
         # 测试代码
         Y1 = [9, 7, 5, 4, 3, 2, 1, 10, 8, 7, 5, 4, 3, 10, 9, 8, 7, 10, 9, 8]
         Y2 = [1, 2, 4, 5, 6, 7, 9, 1,  5, 6, 7, 8, 9,  5, 6, 7, 9,  6, 7, 9]
@@ -192,25 +193,72 @@ class Test_class():
         del fronts[len(fronts)-1]
         self.output_fronts(fronts)
 
+    def test_fast_non_dominated_sort_3(self, objectives_fitness):
+        # 参考MoeaPlat的非支配排序
+        # https://blog.csdn.net/qq_40434430/article/details/82876572
+        fronts = []  # Pareto前沿面
+        fronts.append([])
+        set_sp = []
+        npp = np.zeros(2 * 10)
+        rank = np.zeros(2 * 10)
+        for i in range(2 * 10):
+            temp = []
+            for j in range(2 * 10):
+                if j != i:
+                    less = 0  # y'的目标函数值小于个体的目标函数值数目
+                    equal = 0  # y'的目标函数值等于个体的目标函数值数目
+                    greater = 0  # y'的目标函数值大于个体的目标函数值数目
+                    for k in range(self.f_num):
+                        if (objectives_fitness[i][k] < objectives_fitness[j][k]):
+                            less = less + 1
+                        elif (objectives_fitness[i][k] == objectives_fitness[j][k]):
+                            equal = equal + 1
+                        else:
+                            greater = greater + 1
+                    if (less == 0 and equal != self.f_num):
+                        npp[i] += 1  # j支配 i，np+1
+                    elif (greater == 0 and equal != self.f_num):
+                        temp.append(j)
+            set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
+            if npp[i] == 0:
+                fronts[0].append(i)  # 个体序号
+                rank[i] = 1  # Pareto前沿面 第一层级
+        i = 0
+        while len(fronts[i]) > 0:
+            temp = []
+            for j in range(len(fronts[i])):
+                a = 0
+                while a < len(set_sp[fronts[i][j]]):
+                    npp[set_sp[fronts[i][j]][a]] -= 1
+                    if npp[set_sp[fronts[i][j]][a]] == 0:
+                        rank[set_sp[fronts[i][j]][a]] = i + 2  # 第二层级
+                        temp.append(set_sp[fronts[i][j]][a])
+                    a = a + 1
+            i = i + 1
+            fronts.append(temp)
+        del fronts[len(fronts) - 1]
+        self.output_fronts(fronts)
 
-# NSGA2入口
+
 if __name__ == '__main__':
-    # NSGA = NSGA2(30, 100, 200)
-    # NSGA.run()
-    test_class=Test_class()
+
+    test_class=Test_class(f_num=2)
 
     # test zjh  普通
     print("测试1：普通")
     test_class.test_fast_non_dominated_sort_1(test_class.objectives_fitness_zjh)
     test_class.test_fast_non_dominated_sort_2(test_class.objectives_fitness_zjh)
+    test_class.test_fast_non_dominated_sort_3(test_class.objectives_fitness_zjh)
     test_class.test_fast_non_dominated_sort_error(test_class.objectives_fitness_zjh)
     # test ZDT3 正确
     print("测试2：正确，重点看错误的函数test_fast_non_dominated_sort_error")
     test_class.test_fast_non_dominated_sort_1(test_class.objectives_fitness_20)
     test_class.test_fast_non_dominated_sort_2(test_class.objectives_fitness_20)
+    test_class.test_fast_non_dominated_sort_3(test_class.objectives_fitness_20)
     test_class.test_fast_non_dominated_sort_error(test_class.objectives_fitness_20)
     # test ZDT6 错误
     print("测试3：ZDT6 错误，重点看错误的函数test_fast_non_dominated_sort_error")
     test_class.test_fast_non_dominated_sort_1(test_class.objectives_fitness_8)
     test_class.test_fast_non_dominated_sort_2(test_class.objectives_fitness_8)
+    test_class.test_fast_non_dominated_sort_3(test_class.objectives_fitness_8)
     test_class.test_fast_non_dominated_sort_error(test_class.objectives_fitness_8)

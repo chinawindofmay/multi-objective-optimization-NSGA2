@@ -12,7 +12,7 @@ import a_mongo_operater_theory
 
 
 class NSGA2():
-    def __init__(self, pc, pm, low, up, old_providers_count,  THROD, BEITA, x_dim, pop_size, max_iter):  # 维度，群体数量，迭代次数
+    def __init__(self, pc, pm, low, up, old_providers_count,  THROD, BEITA, x_dim, pop_size, max_iter,f_num):  # 维度，群体数量，迭代次数
         self.pc = pc  # 交叉概率
         self.pm = pm  # 变异概率
         self.old_providers_count = old_providers_count  # 已建充电站数量
@@ -23,6 +23,7 @@ class NSGA2():
         self.x_dim = x_dim  # 搜索维度
         self.pop_size = pop_size  # 总群个体数量
         self.max_iteration = max_iter  # 迭代次数
+        self.f_num=f_num
 
 
     def initial_population(self):  # 初始化种群
@@ -307,16 +308,31 @@ class NSGA2():
         for i in range(population.shape[0]):
             temp = []
             for j in range(population.shape[0]):
-                # temp=[]
                 if j != i:
-                    if (objectives_fitness[j][0] >= objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
-                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >= objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
-                        objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] >= objectives_fitness[i][2]):
-                        temp.append(j)
-                    elif (objectives_fitness[i][0] >= objectives_fitness[j][0] and objectives_fitness[i][1] > objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
-                            objectives_fitness[i][0] > objectives_fitness[j][0] and objectives_fitness[i][1] >= objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
-                            objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[i][2] >= objectives_fitness[j][2]):
+                    # # temp=[]
+                    # if j != i:
+                    #     if (objectives_fitness[j][0] >= objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
+                    #         objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >= objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
+                    #         objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] >= objectives_fitness[i][2]):
+                    #         temp.append(j)
+                    #     elif (objectives_fitness[i][0] >= objectives_fitness[j][0] and objectives_fitness[i][1] > objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
+                    #             objectives_fitness[i][0] > objectives_fitness[j][0] and objectives_fitness[i][1] >= objectives_fitness[j][1] and objectives_fitness[i][2] > objectives_fitness[j][2]) or (
+                    #             objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[i][2] >= objectives_fitness[j][2]):
+                    #         npp[i] += 1  # j支配 i，np+1
+                    less = 0  # y'的目标函数值小于个体的目标函数值数目
+                    equal = 0  # y'的目标函数值等于个体的目标函数值数目
+                    greater = 0  # y'的目标函数值大于个体的目标函数值数目
+                    for k in range(self.f_num):
+                        if (objectives_fitness[i][k] < objectives_fitness[j][k]):
+                            less = less + 1
+                        elif (objectives_fitness[i][k] == objectives_fitness[j][k]):
+                            equal = equal + 1
+                        else:
+                            greater = greater + 1
+                    if (less == 0 and equal != self.f_num):
                         npp[i] += 1  # j支配 i，np+1
+                    elif (greater == 0 and equal != self.f_num):
+                        temp.append(j)
             set_sp.append(temp)  # i支配 j，将 j 加入 i 的支配解集里
             if npp[i] == 0:
                 fronts[0].append(i)  # 个体序号
@@ -544,11 +560,12 @@ class NSGA2():
 # NSGA2入口
 if __name__ == '__main__':
     # 参数设置  代
-    N_GENERATIONS2 = 50  # 迭代次数
+    N_GENERATIONS2 = 200  # 迭代次数
     # 区
-    POP_SIZE2 = 200  # 种群大小
+    POP_SIZE2 = 1000  # 种群大小
     pc2 = 0.25  # 交叉概率
     pm2 = 0.25  # 变异概率
+    f_num=3
 
     DEMANDS_COUNT = 9  # 需求点，即小区，个数
 
@@ -570,7 +587,7 @@ if __name__ == '__main__':
     demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0,
                                                                                                            DEMANDS_COUNT,
                                                                                                            OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
-    NSGA = NSGA2( pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2, N_GENERATIONS2)
+    NSGA = NSGA2( pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2, N_GENERATIONS2,f_num)
     result_popu=NSGA.excute(demands_provider_np, demands_pdd_np)
 
     # 输出popu结果

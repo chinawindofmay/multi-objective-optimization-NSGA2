@@ -1,19 +1,28 @@
 """
 参考地址：https://blog.csdn.net/qq_36449201/article/details/81046586
 作者：华电小炸扎
+主要的修改点在于：
+（1）改了非支配排序的算法；
+（2）改了遗传算子的部分，使之符合site location 的需求；
+（3）改了目标函数评价的部分，使之符合site location的需求；
+（4）改了可视化与评价的部分，使之符合site location的需求
 """
 
 import random
 import numpy as np
 from matplotlib.ticker import MultipleLocator
 import matplotlib.pyplot as plt
+import matplotlib
 import a_mongo_operater_theory
 from mpl_toolkits.mplot3d import Axes3D  # 空间三维画图
 
 
 
 class NSGA2():
-    def __init__(self, pc, pm, low, up, old_providers_count,  THROD, BEITA, x_dim, pop_size, max_iter,f_num):  # 维度，群体数量，迭代次数
+    def __init__(self, pc, pm, low, up, old_providers_count,  THROD, BEITA, x_dim, pop_size, max_iter,f_num,
+                 is_builded_providers_adjust, is_new_building_providers_count_fixed, new_building_providers_count_fixed,
+                 is_every_new_building_providers_scale_equal,
+                 every_new_building_providers_scale ):
         self.pc = pc  # 交叉概率
         self.pm = pm  # 变异概率
         self.old_providers_count = old_providers_count  # 已建充电站数量
@@ -25,32 +34,44 @@ class NSGA2():
         self.pop_size = pop_size  # 总群个体数量
         self.max_iteration = max_iter  # 迭代次数
         self.f_num=f_num
+        self.is_builded_providers_adjust=is_builded_providers_adjust
+        self.is_new_building_providers_count_fixed=is_new_building_providers_count_fixed
+        self.new_building_providers_count_fixed=new_building_providers_count_fixed
+        self.is_every_new_building_providers_scale_equal=is_every_new_building_providers_scale_equal
+        self.every_new_building_providers_scale=every_new_building_providers_scale
 
 
-    def initial_population(self):  # 初始化种群
-        self.population = np.zeros(shape=(self.pop_size, self.x_dim))
-        for i in range(self.pop_size):
-            for j in range(self.x_dim):
-                self.population[i][j] = random.random()
-        print("initial population completed.")
-
-    # 方式1：定规模、定个数
-    def initial_population_with_scale_count(self):
+    def initial_population_by_fixed_providers_count_and_scale(self):
+        """
+           初始化种群： # 方式1：定规模、定个数
+        :return:
+        """
         population = np.full(shape=(self.pop_size, self.x_dim), fill_value=0)
         for m in range(self.pop_size):
-            index_1 = np.random.randint(low=0, high=self.x_dim)
-            index_2 = np.random.randint(low=0, high=self.x_dim)
-            while (index_1 == index_2):
-                index_2 = np.random.randint(low=0, high=self.x_dim)
-            creating_mark = np.full(shape=(self.x_dim), fill_value=0)
-            creating_mark[index_1] = 1
-            creating_mark[index_2] = 1  # 数量是建2个
-            population[m, :] = creating_mark * 10  # 规模都是10
-            if np.argwhere(population[m, :] == 10).flatten().shape[0] < 2:
-                print("test")
+            if self.is_new_building_providers_count_fixed:  #固定的provider count
+                choic_index_list=np.random.choice(a=[i for i in range(self.x_dim)],size=self.new_building_providers_count_fixed,replace=False)
+                creating_mark = np.full(shape=(self.x_dim), fill_value=0)
+                creating_mark[choic_index_list]=1
+                if self.is_every_new_building_providers_scale_equal: #固定的provider 规模
+                    population[m, :] = creating_mark * self.every_new_building_providers_scale  # 规模都是10
+                # else:# 非固定的provider规模
+                #     creating_ps = np.random.randint(low=self.low, high=self.up + 1,
+                #                                     size=(self.x_dim))  # 新建的设施
+                #     population[m, :] = creating_mark * creating_ps  # 规模介于up和low之间
+            # else:#非固定的provider count
+            #     #比较复杂，暂放
+            #下面为测试代码，测试生成的个体中选择新建provider的个数是否与self.new_building_providers_count_fixed一致
+            if np.argwhere(population[m, :] == 10).flatten().shape[0] != self.new_building_providers_count_fixed:
+                print("不等于self.new_building_providers_count_fixed")
         return population
 
-    def conbine_children_parent(self,population,new_population_from_selection_mutation):  # 父代种群和子代种群合并,pop*2
+    def conbine_children_parent(self,population,new_population_from_selection_mutation):
+        """
+        # 父代种群和子代种群合并,pop*2
+        :param population:
+        :param new_population_from_selection_mutation:
+        :return:
+        """
         population_child_conbine = np.zeros((2 * self.pop_size, self.x_dim))  # self.population
         for i in range(self.pop_size):
             for j in range(self.x_dim):
@@ -60,7 +81,14 @@ class NSGA2():
 
 
 
-    def select_population_from_parent(self, population_child_conbine, fronts, crowding_distance):  # 根据排序和拥挤度计算，选取新的父代种群 pop*2 到 pop*1
+    def select_population_from_parent(self, population_child_conbine, fronts, crowding_distance):
+        """
+        # 根据排序和拥挤度计算，选取新的父代种群 pop*2 到 pop*1
+        :param population_child_conbine:
+        :param fronts:
+        :param crowding_distance:
+        :return:
+        """
         population = np.zeros((self.pop_size, self.x_dim))  # 选取新的种群
         try:
             a = len(fronts[0])  # Pareto前沿面第一层 个体的个数
@@ -96,11 +124,9 @@ class NSGA2():
         return population
 
         ##############################################begin:fitness#########################################################
-
-        # fitness计算
     def fitness(self, demands_provider_np, demands_pdd_np, popu):
         """
-        全局的适应度函数
+        # fitness计算，全局的适应度函数
         :param demands_np:
         :param cipf_np:
         :param popu:
@@ -160,7 +186,7 @@ class NSGA2():
         )
         return var
 
-    def calcuate_global_cover_people(self, demands_np):
+    def calcuate_global_cover_people(self, demands_provider_np):
         """
         获取覆盖全局人口的总和
         :param demands_np:
@@ -170,17 +196,6 @@ class NSGA2():
         vj[np.isinf(vj)] = 0
         vj[np.isnan(vj)] = 0
         return np.nansum(vj)  # 获取到每一个的provider的vj值，然后求和，之所以用nan，是为了过滤掉nan的值
-
-
-    def calculate_global_waiting_time_numpy(self, demands_np, solution):
-        """
-        计算全局等候时间
-        :param demands_np:
-        :param solution:
-        :return:
-        """
-        # ？？？？？？？？？？？？？？？？？？？？
-        return 0
 
     def create_providers_np(self, demands_provider_np, demands_pdd_np, solution_join):
         """
@@ -249,58 +264,16 @@ class NSGA2():
         # 更新vj列
         vj_np = np.array(vj_list).reshape(len(vj_list), 1)
         demands_provider_np[:, :, 2] = np.tile(vj_np, (1, demands_provider_np.shape[1]))
-        # print("test")
 
     ##############################################end:fitness#########################################################
 
-    def fast_non_dominated_sort(self,objectives_fitness):
-        y1_values=objectives_fitness[:,0]
-        y2_values=objectives_fitness[:,1]
-        y3_values=objectives_fitness[:,2]
-        S = [[] for i in range(0, np.shape(y1_values)[0])]
-        fronts = [[]]
-        n = [0 for i in range(0, np.shape(y1_values)[0])]
-        rank = [0 for i in range(0, np.shape(y1_values)[0])]
-
-        for p in range(0, np.shape(y1_values)[0]):
-            S[p] = []
-            n[p] = 0
-            for q in range(0, np.shape(y1_values)[0]):
-                # 这是目标函数，y1求小值，y2求小值
-                if (y1_values[p] <= y1_values[q] and y2_values[p] <= y2_values[q] and y3_values[p] <= y3_values[q]):
-                    if q not in S[p]:
-                        # 个体p的支配集合Sp计算
-                        S[p].append(q)
-                elif (y1_values[p] > y1_values[q] and y2_values[p] > y2_values[q] and y3_values[p] > y3_values[q]):
-                    # 被支配度Np计算
-                    # Np越大，则说明p个体越差
-                    n[p] = n[p] + 1
-            if n[p] == 0:
-                rank[p] = 0
-                if p not in fronts[0]:
-                    fronts[0].append(p)
-
-        i = 0
-        while (fronts[i] != []):
-            Q = []
-            for p in fronts[i]:
-                for q in S[p]:
-                    n[q] = n[q] - 1
-                    if (n[q] == 0):
-                        rank[q] = i + 1
-                        if q not in Q:
-                            Q.append(q)
-            i = i + 1
-            fronts.append(Q)
-
-        del fronts[len(fronts) - 1]
-        sum_coun = 0
-        for kk in range(len(fronts)):
-            sum_coun += len(fronts[kk])
-        print(sum_coun)
-        return fronts
-
-    def non_donminate(self,population,objectives_fitness):  # pop*2行
+    def non_donminate(self,population,objectives_fitness):
+        """
+        非支配排序
+        :param population:
+        :param objectives_fitness:
+        :return:
+        """
         fronts = []  # Pareto前沿面
         fronts.append([])
         set_sp = []
@@ -312,6 +285,7 @@ class NSGA2():
                 if j != i:
                     # # temp=[]
                     # if j != i:
+                    # 将传统的逐一判断方式摈弃掉
                     #     if (objectives_fitness[j][0] >= objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
                     #         objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] >= objectives_fitness[i][1] and objectives_fitness[j][2] > objectives_fitness[i][2]) or (
                     #         objectives_fitness[j][0] > objectives_fitness[i][0] and objectives_fitness[j][1] > objectives_fitness[i][1] and objectives_fitness[j][2] >= objectives_fitness[i][2]):
@@ -353,113 +327,97 @@ class NSGA2():
             fronts.append(temp)
         return fronts
 
-
-    # def selection(self, population, demands_provider_np, demands_pdd_np):  # 轮盘赌选择
-    #     fronts, objectives_fitness=self.non_donminate(population, demands_provider_np, demands_pdd_np)  # 非支配排序,获得Pareto前沿面
-    #     pi = np.zeros(self.pop_size)  # 个体的概率
-    #     qi = np.zeros(self.pop_size + 1)  # 个体的累积概率
-    #     P = 0
-    #     for i in range(len(fronts)):
-    #         # for j in range(len(self.fronts[i])):
-    #         P += (1 / (i + 1)) * (len(fronts[i]))  # 累积适应度
-    #     for i in range(len(fronts)):
-    #         for j in range(len(fronts[i])):
-    #             pi[fronts[i][j]] = (1 / (i + 1)) / P  # 个体遗传到下一代的概率
-    #     for i in range(self.pop_size):
-    #         qi[0] = 0
-    #         qi[i + 1] = np.sum(pi[0:i + 1])  # 累积概率
-    #     new_population_from_selection_mutation = np.zeros((self.pop_size, self.x_dim))
-    #     for i in range(self.pop_size):
-    #         r = random.random()  # 生成随机数，
-    #         a = 0
-    #         for j in range(self.pop_size):
-    #             if r > qi[j] and r < qi[j + 1]:
-    #                 while a < self.x_dim:
-    #                     new_population_from_selection_mutation[i][a] =population[j][a]
-    #                     a += 1
-    #             j += 1
-    #     return new_population_from_selection_mutation
-    #
-    # def crossover(self,new_population_from_selection_mutation):  # 交叉,SBX交叉
-    #     for i in range(self.pop_size - 1):
-    #         # temp1 = []
-    #         # temp2 = []
-    #         if random.random() < self.pc:
-    #             # pc_point = random.randint(0,self.dim-1)        #生成交叉点
-    #             # temp1.append(self.population[i][pc_point:self.dim])
-    #             # temp2.append(self.population[i+1][pc_point:self.dim])
-    #             # self.population[i][pc_point:self.dim] = temp2
-    #             # self.population[i+1][pc_point:self.dim] = temp1
-    #             a = random.random()
-    #             for j in range(self.x_dim):
-    #                 new_population_from_selection_mutation[i][j] = a * new_population_from_selection_mutation[i][j] + (1 - a) * new_population_from_selection_mutation[i + 1][j]
-    #                 new_population_from_selection_mutation[i + 1][j] = a * new_population_from_selection_mutation[i + 1][j] + (1 - a) * new_population_from_selection_mutation[i][j]
-    #         i += 2
-    #     return new_population_from_selection_mutation
-    #
-    # def mutation(self,new_population_from_selection_mutation):  # 变异
-    #     for i in range(self.pop_size):
-    #         for j in range(self.x_dim):
-    #             if random.random() < self.pm:
-    #                 new_population_from_selection_mutation[i][j] = new_population_from_selection_mutation[i][j] - 0.1 + np.random.random() * 0.2
-    #                 if new_population_from_selection_mutation[i][j] < 0:
-    #                     new_population_from_selection_mutation[i][j] = 0  # 最小值0
-    #                 if new_population_from_selection_mutation[i][j] > 1:
-    #                     new_population_from_selection_mutation[i][j] = 1  # 最大值1
-    #     return new_population_from_selection_mutation
-
     def sample_index_with_scale_count(self,solution,count=1):
+        """
+         #通过抽样的方式获取到Index
+        :param solution:
+        :param count:
+        :return:
+        """
         effective_index=np.argwhere(solution == 10).flatten()
+        # 测试代码，如果找到了没有有效provider count的solution，则报错
         if effective_index.shape[0]==0:
-            print("test")
+            print("没有有效provider count的solution")
         # 返回一个随机整型数，范围从低（包括）到高（不包括），即[low, high)
-        solution_a_index_1 = np.random.randint(low=0, high=effective_index.shape[0])
+        solution_a_index_1 = np.random.randint(low=0, high=effective_index.shape[0],size=int(count))
         return effective_index[solution_a_index_1]
 
-    # Function to carry out the crossover
     def crossover_with_scale_count(self, solution_a, solution_b, pc):
+        """
+        交叉算子
+        :param solution_a:
+        :param solution_b:
+        :param pc:
+        :return:
+        """
         crossover_prob = random.random()
         if crossover_prob < pc:
-            solution_a_index_1 =self.sample_index_with_scale_count(solution_a,count=1)
-            solution_b_index_1 = self.sample_index_with_scale_count(solution_b,count=1)
-            if solution_a_index_1 != solution_b_index_1:
-                if solution_a[solution_b_index_1]!=10:
-                    solution_a[solution_b_index_1]=10
-                    solution_a[solution_a_index_1]= 0
-            if np.argwhere(solution_a == 10).flatten().shape[0] < 2:
-                print("test")
+            solution_a_index_1 =self.sample_index_with_scale_count(solution_a,count=self.new_building_providers_count_fixed/2)  #通过抽样的方式获取到Index
+            solution_b_index_1 = self.sample_index_with_scale_count(solution_b,count=self.new_building_providers_count_fixed/2)
+            c=(solution_a_index_1 == solution_b_index_1)
+            if c.all():
+                for item in solution_b_index_1:
+                    if solution_a[item]!=10:
+                        solution_a[item]=10
+                        solution_a[solution_a_index_1]= 0
         return solution_a
 
-    # Function to carry out the mutation operator
     def mutation_with_scale_count(self, solution, pm):
+        """
+        变异算子
+        :param solution:
+        :param pm:
+        :return:
+        """
         mutation_prob = random.random()
         if mutation_prob < pm:
-            index_1 = np.random.randint(low=0, high=self.x_dim)
-            index_2 = np.random.randint(low=0, high=self.x_dim)
-            while (index_1 == index_2):
-                index_2 = np.random.randint(low=0, high=self.x_dim)
-            creating_mark = np.full(shape=(self.x_dim), fill_value=0)
-            creating_mark[index_1] = 1
-            creating_mark[index_2] = 1  # 数量是建2个
-            solution = creating_mark * 10  # 规模都是10
+            # index_1 = np.random.randint(low=0, high=self.x_dim)
+            # index_2 = np.random.randint(low=0, high=self.x_dim)
+            # while (index_1 == index_2):
+            #     index_2 = np.random.randint(low=0, high=self.x_dim)
+            # creating_mark = np.full(shape=(self.x_dim), fill_value=0)
+            # creating_mark[index_1] = 1
+            # creating_mark[index_2] = 1  # 数量是建2个
+            # solution = creating_mark * 10  # 规模都是10
+            if self.is_new_building_providers_count_fixed:  #固定的provider count
+                choic_index_list=np.random.choice(a=[i for i in range(self.x_dim)],size=self.new_building_providers_count_fixed,replace=False)
+                creating_mark = np.full(shape=(self.x_dim), fill_value=0)
+                creating_mark[choic_index_list]=1
+                if self.is_every_new_building_providers_scale_equal: #固定的provider 规模
+                    solution = creating_mark * self.every_new_building_providers_scale  # 规模都是10
         return solution
 
-    # 方式1：定规模、定数量   2个，每个建10
+
     def crossover_and_mutation_simple_with_scale_count(self, popu, pc, pm):
+        """
+        # 方式1：定规模、定数量   2个，每个建10
+        :param popu:
+        :param pc:
+        :param pm:
+        :return:
+        """
         off_spring=np.full(shape=(popu.shape[0], self.x_dim), fill_value=0)
         for i in range(popu.shape[0]):
             a1 = random.randint(0, popu.shape[0]-1)
             b1 = random.randint(0, popu.shape[0]-1)
             # 通过crossover和mutation的方式生成新的个体
             solution=self.crossover_with_scale_count(popu[a1,:], popu[b1,:],pc)
-            if np.argwhere(solution  == 10).flatten().shape[0] < 2:
+            # 测试代码
+            if np.argwhere(solution  == 10).flatten().shape[0] != self.new_building_providers_count_fixed:
                 print("test")
             off_spring[i,:]=self.mutation_with_scale_count(solution,pm)
-            if np.argwhere(off_spring[i,:]  == 10).flatten().shape[0] < 2:
+            # 测试代码
+            if np.argwhere(off_spring[i,:]  == 10).flatten().shape[0] != self.new_building_providers_count_fixed:
                 print("test")
         return off_spring
 
-    def crowd_distance(self,fronts,objectives_fitness):  # 拥挤度计算，前沿面每个个体的拥挤度
+    def crowd_distance(self,fronts,objectives_fitness):
+        """
+         # 拥挤度计算，前沿面每个个体的拥挤度
+        :param fronts:
+        :param objectives_fitness:
+        :return:
+        """
         crowding_distance = np.zeros(2 * self.pop_size)
         for i in range(len(fronts) - 1):  # fronts最后一行为空集
             temp1 = np.zeros((len(fronts[i]), 2))
@@ -488,13 +446,63 @@ class NSGA2():
             f3_max = temp3[len(fronts[i]) - 1][0]
             a = 1
             while a < len(fronts[i]) - 1:
+                # 个体i的拥挤度等于 f1 + f2 + f3
                 crowding_distance[int(temp1[a][1])] = (temp1[a + 1][0] - temp1[a - 1][0]) / (f1_max - f1_min+0.0000001) + \
                                                       (temp2[a + 1][0] - temp2[a - 1][0]) / (f2_max - f2_min+0.0000001) + \
-                                                      (temp3[a + 1][0] - temp3[a - 1][0]) / (f3_max - f3_min+0.0000001) # 个体i的拥挤度等于 f1 + f2 + f3
+                                                      (temp3[a + 1][0] - temp3[a - 1][0]) / (f3_max - f3_min+0.0000001)
                 a += 1
         return crowding_distance
 
+    def draw_initial_population_fitness_graph(self, demands_provider_np, demands_pdd_np, initial_population):  # 画图
+        """
+        绘制结果图
+        :param demands_provider_np:
+        :param demands_pdd_np:
+        :param initial_population:
+        :return:
+        """
+        # 评价函数
+        objectives_fitness = self.fitness(demands_provider_np, demands_pdd_np, initial_population)
+        if self.f_num==2:
+            x = []
+            y = []
+            for i in range(objectives_fitness.shape[0]):
+                x.append(objectives_fitness[i][0])
+                y.append(objectives_fitness[i][1])
+            ax = plt.subplot(111)
+            plt.scatter(x, y)
+            # plt.plot(,'--',label='')
+            plt.axis([3.5, 6, 0, 5])
+            xmajorLocator = MultipleLocator(0.1)
+            ymajorLocator = MultipleLocator(0.1)
+            ax.xaxis.set_major_locator(xmajorLocator)
+            ax.yaxis.set_major_locator(ymajorLocator)
+            plt.xlabel('inequality')
+            plt.ylabel('cover population')
+            plt.title('Initial Population Fitness')
+            plt.grid()
+            plt.show()
+            # plt.savefig('nsga2 ZDT2 Pareto Front 2.png')
+        elif self.f_num==3:
+            fig = plt.figure()
+            ax = Axes3D(fig)
+            ax.set_xlabel("accessibility")
+            ax.set_ylabel("inequality")
+            ax.set_zlabel("cover population")
+            ax.set_title('Initial Population Fitness')
+            type1 = ax.scatter(objectives_fitness[:, 0], objectives_fitness[:, 1], objectives_fitness[:, 2], c='g')
+            # plt.legend((type1), (u'Non-dominated solution'))
+            plt.show()
+
+
     def draw_fitness_graph(self, demands_provider_np, demands_pdd_np, population):  # 画图
+        """
+        绘制结果图
+        :param demands_provider_np:
+        :param demands_pdd_np:
+        :param population:
+        :return:
+        """
         # 评价函数
         objectives_fitness = self.fitness(demands_provider_np, demands_pdd_np, population)
         fronts=self.non_donminate(population,objectives_fitness)
@@ -515,15 +523,19 @@ class NSGA2():
             ymajorLocator = MultipleLocator(0.1)
             ax.xaxis.set_major_locator(xmajorLocator)
             ax.yaxis.set_major_locator(ymajorLocator)
-            plt.xlabel('f1')
-            plt.ylabel('f2')
-            plt.title('ZDT3 Pareto Front')
+            plt.xlabel('inequality')
+            plt.ylabel('cover population')
+            plt.title('Pareto Population Fitness')
             plt.grid()
             plt.show()
             # plt.savefig('nsga2 ZDT2 Pareto Front 2.png')
         elif self.f_num==3:
             fig = plt.figure()
             ax = Axes3D(fig)
+            ax.set_xlabel("accessibility")
+            ax.set_ylabel("inequality")
+            ax.set_zlabel("cover population")
+            ax.set_title('Pareto Population Fitness')
             type1 = ax.scatter(objectives_fitness[:, 0], objectives_fitness[:, 1], objectives_fitness[:, 2], c='g')
             # plt.legend((type1), (u'Non-dominated solution'))
             plt.show()
@@ -532,16 +544,76 @@ class NSGA2():
             print(population[fronts[0]][iii,:])
         return population[fronts[0]]
 
-    def excute(self, demands_provider_np, demands_pdd_np):  # 主程序
+    def show_population_frequency_bar_graph(self,result_popu):
+        """
+        输出Pareto非劣解的结果，并采用频率分布图表示
+        :param result_popu:
+        :return:
+        """
+        # 输出popu结果
+        print(provider_id_list[2:])
+        popu_index = []
+        # 输出provider ID
+        result_provider_id_popu = []
+        for i in range(result_popu.shape[0]):
+            popu_index.append(np.argwhere(result_popu[i, :] == 10).flatten())
+            result_provider_id_solution = []
+            for j in range(len(popu_index[i])):
+                result_provider_id_solution.append(provider_id_list[2:][popu_index[i][j]])
+            result_provider_id_popu.append(result_provider_id_solution)
+        # result_provider_id_popu=np.array(result_provider_id_popu)
+        # for i in range(result_provider_id_popu.shape[0]):
+        #     print(result_provider_id_popu[i,:])
+        # 输出频率分布图
+        self.test_frequency_show(result_provider_id_popu)
+
+    def test_get_count(self,file_content):
+        '''
+        计算每组解出现的次数
+        :param file_content: 解集
+        :return:
+        '''
+        for file in file_content:
+            file.sort()
+        count_list = []
+        for file in file_content:
+            count = []
+            count.append(file_content.count(file))
+            count_list.append(count)
+        result = np.hstack((np.array(file_content), np.array(count_list)))
+        uniques = np.unique(result, axis=0)  # 去重
+        return uniques
+
+    def test_show_bar(self,uniques):
+        # 设置matplotlib正常显示中文和负号
+        matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 用黑体显示中文
+        matplotlib.rcParams['axes.unicode_minus'] = False  # 正常显示负号
+        # x_label = ['[' + str(i[0]) + ',' + str(i[1]) + ',' + str(i[2]) + ',' + str(i[3])+ ']' for i in uniques.tolist()]
+        x_label =  ','.join(uniques.tolist())
+        plt.bar(x_label, uniques[:, self.new_building_providers_count_fixed])
+        plt.xticks(size=14, rotation=60)
+        plt.yticks(size=14)
+        plt.show()
+
+    def test_frequency_show(self,result_provider_id_popu):
+        result = self.test_get_count(result_provider_id_popu)
+        self.test_show_bar(result)
+
+    def excute(self, demands_provider_np, demands_pdd_np):
+        """
+        # 主程序
+        :param demands_provider_np:
+        :param demands_pdd_np:
+        :return:
+        """
         # 初始化种群
-        population=self.initial_population_with_scale_count()
+        population=self.initial_population_by_fixed_providers_count_and_scale()
+        # 绘制非劣解的fitness关联图
+        result_population = self.draw_initial_population_fitness_graph(demands_provider_np, demands_pdd_np, population)
         for i in range(self.max_iteration):
             #选择、交叉、变异，生成子代种群
             matingpool = random.sample(range(self.pop_size), self.pop_size)
             new_population_from_selection_mutation = self.crossover_and_mutation_simple_with_scale_count(population[matingpool, :], self.pc,self.pm)  # 遗传算子,模拟二进制交叉和多项式变异
-            # new_population_from_selection_mutation=self.selection(population,demands_provider_np, demands_pdd_np)
-            # new_population_from_selection_mutation=self.crossover(new_population_from_selection_mutation)
-            # new_population_from_selection_mutation=self.mutation(new_population_from_selection_mutation)
             # 父代与子代种群合并
             population_child_conbine = self.conbine_children_parent(population,new_population_from_selection_mutation)
             # 评价函数
@@ -554,45 +626,16 @@ class NSGA2():
             # 根据Pareto等级和拥挤度选取新的父代种群，选择交叉变异
             population=self.select_population_from_parent(population_child_conbine, fronts, crowding_distance)
             print(i,"代")
+        # 绘制非劣解的fitness关联图
         result_population=self.draw_fitness_graph(demands_provider_np, demands_pdd_np, population)
-
-        # print(self.fronts)
-        # print(self.population)
-        # print(self.new_popu)
-        # print(self.popu_child)
-        # print(self.objectives)
-        # print()
-        return result_population
-
-
-def show_population_frequency_bar_graph(result_popu):
-    """
-    输出Pareto非劣解的结果，并采用频率分布图表示
-    :param result_popu:
-    :return:
-    """
-    # 输出popu结果
-    print(provider_id_list[2:])
-    popu_index = []
-    # 输出provider ID
-    result_provider_id_popu = []
-    for i in range(result_popu.shape[0]):
-        popu_index.append(np.argwhere(result_popu[i, :] == 10).flatten())
-        result_provider_id_solution = []
-        for j in range(len(popu_index[i])):
-            result_provider_id_solution.append(provider_id_list[2:][popu_index[i][j]])
-        result_provider_id_popu.append(result_provider_id_solution)
-    # result_provider_id_popu=np.array(result_provider_id_popu)
-    # for i in range(result_provider_id_popu.shape[0]):
-    #     print(result_provider_id_popu[i,:])
-    import e_03_naga3_ps_change_DS_theory
-    e_03_naga3_ps_change_DS_theory.test_frequency_show(result_provider_id_popu)
+        # 绘制频率分布图
+        self.show_population_frequency_bar_graph(result_population)
 
 
 # NSGA2入口
 if __name__ == '__main__':
     # 参数设置  代
-    N_GENERATIONS2 = 10  # 迭代次数
+    N_GENERATIONS2 = 100  # 迭代次数
     # 区
     POP_SIZE2 = 200  # 种群大小
     pc2 = 0.25  # 交叉概率
@@ -613,13 +656,27 @@ if __name__ == '__main__':
 
     DB_NAME = "admin"  # MONGODB数据库的配置
     COLLECTION_NAME = "moo_ps_theory"  # COLLECTION 名称
+
+    # 已建服务设施是否调整
+    is_builded_providers_adjust = False
+    # 是否新建固定数量的provider
+    is_new_building_providers_count_fixed = True
+    new_building_providers_count_fixed = 2
+    # 每个provider的规模是否相同
+    is_every_new_building_providers_scale_equal = True
+    every_new_building_providers_scale = 10
+    # 总规模
+    E_seting = 20
+
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_theory.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
     demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0,
                                                                                                            DEMANDS_COUNT,
                                                                                                            OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
-    NSGA = NSGA2( pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2, N_GENERATIONS2,f_num)
-    result_popu=NSGA.excute(demands_provider_np, demands_pdd_np)
+    # 定义NSGA和执行主程序
+    nsga2_obj = NSGA2(pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2, N_GENERATIONS2, f_num,
+                      is_builded_providers_adjust,is_new_building_providers_count_fixed,new_building_providers_count_fixed,is_every_new_building_providers_scale_equal,
+                      every_new_building_providers_scale)
+    nsga2_obj.excute(demands_provider_np, demands_pdd_np)
 
-    show_population_frequency_bar_graph(result_popu)

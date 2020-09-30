@@ -599,6 +599,35 @@ class NSGA2():
         result = self.test_get_count(result_provider_id_popu)
         self.test_show_bar(result)
 
+    def evalution_result(self):
+        # --------------------Coverage(C-metric)---------------------
+        A = PP #
+        B = chromo
+        number = 0
+        for i in range(len(B)):
+            nn = 0
+            for j in range(len(A)):
+                if (Dominate(A[j], B[i])):
+                    nn = nn + 1  # B[i]被A支配的个体数目+1
+            if (nn != 0):
+                number = number + 1
+        C_AB = float(number / len(B))
+        print("C_AB：%2f" % C_AB)
+        # -----Distance from Representatives in the PF(D-metric)-----
+        A = chromo
+        P = PP
+        min_d = 0
+        for i in range(len(P)):
+            temp = []
+            for j in range(len(A)):
+                dd = 0
+                for k in range(f_num):
+                    dd = dd + float((P[i][k] - A[j].f[k]) ** 2)
+                temp.append(math.sqrt(dd))
+            min_d = min_d + np.min(temp)
+        D_AP = float(min_d / len(P))
+        print("D_AP：%2f" % D_AP)
+
     def excute(self, demands_provider_np, demands_pdd_np):
         """
         # 主程序

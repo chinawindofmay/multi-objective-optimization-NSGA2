@@ -136,5 +136,27 @@ def test_initial_dsf_with_choice():
     print("#####################################################")
     initial_dsf_with_choice(3,10,10,100,10)
 
+
+def calculate_symmetry_indicator( frequency_result):
+    ## 首先定义点序列
+    symmetry_keyid_array = np.array([[1, 3, 4, 8, 10, 15], [2, 7, 6, 9, 14, 16]])
+    ## 将点对的评率填充到上面来
+    frequency_cf_vector = np.full(shape=symmetry_keyid_array.shape, fill_value=0)
+    for ki in range(frequency_cf_vector.shape[0]):
+        for kj in range(frequency_cf_vector.shape[1]):
+            temp = 0
+            for i in range(frequency_result.shape[0]):
+                for j in range(frequency_result.shape[1] - 1):
+                    if frequency_result[i, j] == symmetry_keyid_array[ki, kj]:
+                        temp += frequency_result[i, -1]
+            frequency_cf_vector[ki, kj] = temp
+    print(frequency_cf_vector)
+    ## 其次计算相关系数值
+    print("迭代次数{0}，种群规模{1}，其对称相关系数值为：{2}".format(20, 500, np.corrcoef(frequency_cf_vector)))
+
+def teest_calculate_symmetry_indicator():
+    frequency_result = np.loadtxt('./frequency_result.txt', delimiter=',')
+    calculate_symmetry_indicator(frequency_result)
 if __name__=="__main__":
-    test_initial_dsf_with_choice()
+    # test_initial_dsf_with_choice()
+    teest_calculate_symmetry_indicator()

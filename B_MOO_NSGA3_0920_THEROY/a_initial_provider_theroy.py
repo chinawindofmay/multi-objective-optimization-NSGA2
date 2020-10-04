@@ -21,7 +21,8 @@ def initial_providers():
     conn = cx_Oracle.connect(conn_string)
     cursor = conn.cursor()
     # 第一步:已经建成的，不做调整
-    select_providers_sql = '''select key_id,x ,y,PS from T55_provider_points t order by PS DESC'''
+    # select_providers_sql = '''select key_id,x ,y,PS from T55_provider_points t order by PS DESC'''
+    select_providers_sql = '''select keyid,x ,y,PS from T1919_provider_points t order by PS DESC'''
     # 执行
     cursor.execute(select_providers_sql)
     rs = cursor.fetchall()
@@ -46,7 +47,8 @@ def initial_providers():
 def get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj):
     conn = cx_Oracle.connect(conn_string)
     cursor = conn.cursor()
-    select_demands_sql = '''select KEY_ID,pdd,x,y from T55_demand_points'''
+    # select_demands_sql = '''select KEY_ID,pdd,x,y from T55_demand_points'''
+    select_demands_sql = '''select KEYID,pdd,x,y from T1919_demand_points'''
     # 执行
     cursor.execute(select_demands_sql)
     rs = cursor.fetchall()
@@ -79,6 +81,7 @@ def caculate_distance(provider_list,demand_x,demand_y):
 
 if __name__=="__main__":
     provider_list = initial_providers()
-    mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_theory")
+    # mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_theory")
+    mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_theory19")
     get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj)
 

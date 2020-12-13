@@ -19,15 +19,15 @@ DNA_SIZE = 24#染色体长度
 POP_SIZE = 200#种群规模
 CROSSOVER_RATE = 0.8#交叉概率
 MUTATION_RATE = 0.01#变异概率
-N_GENERATIONS = 50#迭代次数
+N_GENERATIONS = 500#迭代次数
 X_BOUND = [-5, 5]
 Y_BOUND = [-5, 5]
 
 
 def F222(x, y):
-    # return 3 * (1 - x) ** 2 * np.exp(-(x ** 2) - (y + 1) ** 2) - 10 * (x / 5 - x ** 3 - y ** 5) * np.exp(
-    #     -x ** 2 - y ** 2) - 1 / 3 ** np.exp(-(x + 1) ** 2 - y ** 2)
-    return -(20+x**2+y**2-10*(np.cos(2*np.pi*x)+np.cos(2*np.pi*y)))
+    return 3 * (1 - x) ** 2 * np.exp(-(x ** 2) - (y + 1) ** 2) - 10 * (x / 5 - x ** 3 - y ** 5) * np.exp(
+        -x ** 2 - y ** 2) - 1 / 3 ** np.exp(-(x + 1) ** 2 - y ** 2)
+    # return -(20+x**2+y**2-10*(np.cos(2*np.pi*x)+np.cos(2*np.pi*y)))
 
 #绘制3D图形
 def plot_3d(ax,F):
@@ -138,7 +138,8 @@ def traditional_ga(F):
     # 编码
     # pop表示种群矩阵，一行表示一个二进制编码表示的DNA，矩阵的行数为种群数目，DNA_SIZE为编码长度。
     pop = np.random.randint(2, size=(POP_SIZE, DNA_SIZE * 2))  # matrix (POP_SIZE, DNA_SIZE*2)#初始化群体的生产
-    for _ in range(N_GENERATIONS):  # 迭代N代
+    for iii in range(N_GENERATIONS):  # 迭代N代
+        print(iii)
         x, y = translateDNA(pop)  # 二进制解码
         # locals() 函数会以字典类型返回当前位置的全部局部变量。
         # if 'sca' in locals():
@@ -167,23 +168,23 @@ def traditional_ga(F):
     return Z_max_result,Z_mean_result,Z_median_result,Z_result
 if __name__ == "__main__":
     #绘制函数三维图像
-    # fig = plt.figure()
-    # ax = Axes3D(fig)
-    # plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
-    # plot_3d(ax)
-    Z_result, Z_mean_result, Z_median, Z_max_result=traditional_ga(F222)
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
+    # plot_3d(ax,F222)
+    Z_max_result,Z_mean_result,Z_median_result,Z_result=traditional_ga(F222)
 
     #如果在脚本中使用ion()命令开启了交互模式，没有使用ioff()关闭的话，则图像会一闪而过，并不会常留。
-    # plt.ioff()
-    # plot_3d(ax)
-    #plot(z_results)
+    plt.ioff()
+    # plot_3d(ax,F222)
+    # plot(Z_result)
     #二维可视化结果
-   #  axes = plt.subplot()
-   #  axes.plot(Z_result, 'g.')  # 每次循环的目标函数值
-   #  axes.plot( Z_mean_result,'r-',label="mean_funcValue")
-   #  axes.plot(Z_max_result, 'b-', label="max_funcValue")
-   # # axes.plot(z_results, 'b--', label="best_fitness")
-   #  axes.set(xlim=(-1,N_GENERATIONS + 1), xlabel='$iterCount$', ylabel='$value$')
-   #  axes.legend()
-   #  plt.show()
-    #plot(Z/POP_SIZE)
+    axes = plt.subplot()
+    axes.plot(Z_result, 'g.')  # 每次循环的目标函数值
+    # axes.plot( Z_mean_result,'r-',label="mean_funcValue")
+    # axes.plot(Z_max_result, 'b-', label="max_funcValue")
+   # axes.plot(z_results, 'b--', label="best_fitness")
+    axes.set(xlim=(-1,N_GENERATIONS + 1), xlabel='$iterCount$', ylabel='$value$')
+    axes.legend()
+    plt.show()
+    # plot(Z/POP_SIZE)

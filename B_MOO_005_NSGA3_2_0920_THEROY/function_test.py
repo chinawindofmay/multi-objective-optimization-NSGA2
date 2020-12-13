@@ -1,8 +1,25 @@
 import numpy as np
 
 
-def initial_dsf_without_choice(low,up,x_dim,E_setting):
-    solution = np.random.randint(low=low, high=up + 1,size=(x_dim))  # 新建的设施
+def initial_dsf_without_choice(low,up,x_dim,E_setting,bool_random_initial=True,intial_solution=None):
+    """
+    x_dim个盘子划分总量为E_setting个数的苹果，
+    方式1：不给定初始分法，随机分；
+    方式2：给定初始分法，调节分
+    :param low:
+    :param up:
+    :param x_dim:
+    :param E_setting:
+    :param bool_random_initial:
+    :param intial_solution:intial_solution为nparray，且输入的个数需要与x_dim保持一致
+    :return:
+    """
+    if bool_random_initial and intial_solution==None:
+        # 方式1
+        solution = np.random.randint(low=low, high=up + 1,size=(x_dim))  # 新建的设施
+    else:
+        # 方式2
+        solution=intial_solution
     print("第1步：初始随机个体的基因值")
     print(solution)
     print(np.sum(solution))
@@ -44,25 +61,42 @@ def initial_dsf_without_choice(low,up,x_dim,E_setting):
     return solution
 
 def test_initial_dsf_without_choice():
-    #总和值大于等于30，小于等于100
+    # #总和值大于等于30，小于等于100，方式1测试
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,30)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,33)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,36)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,50)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,60)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,70)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,94)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,99)
+    # print("#####################################################")
+    # initial_dsf_without_choice(3,10,10,100)
+    print("方式2测试")
+    # 总和值大于等于30，小于等于100，方式1测试
     print("#####################################################")
-    initial_dsf_without_choice(3,10,10,30)
+    initial_dsf_without_choice(3, 10, 4, 30,bool_random_initial=False,intial_solution=np.array([6,7,8,9]))
     print("#####################################################")
-    initial_dsf_without_choice(3,10,10,33)
+    initial_dsf_without_choice(3, 10, 5, 33,bool_random_initial=False,intial_solution=np.array([1,6,7,8,9]))
     print("#####################################################")
-    initial_dsf_without_choice(3,10,10,36)
+    initial_dsf_without_choice(3, 10, 5, 36,bool_random_initial=False,intial_solution=np.array([10,6,7,8,9]))
     print("#####################################################")
-    initial_dsf_without_choice(3,10,10,50)
+    initial_dsf_without_choice(3, 10, 6, 50,bool_random_initial=False,intial_solution=np.array([30,6,2,7,8,9]))
     print("#####################################################")
-    initial_dsf_without_choice(3,10,10,60)
-    print("#####################################################")
-    initial_dsf_without_choice(3,10,10,70)
-    print("#####################################################")
-    initial_dsf_without_choice(3,10,10,94)
-    print("#####################################################")
-    initial_dsf_without_choice(3,10,10,99)
-    print("#####################################################")
-    initial_dsf_without_choice(3,10,10,100)
+
+
+
+
+
+
 
 
 def initial_dsf_with_choice(low,up,x_dim,E_setting,k):
@@ -158,5 +192,8 @@ def teest_calculate_symmetry_indicator():
     frequency_result = np.loadtxt('./frequency_result.txt', delimiter=',')
     calculate_symmetry_indicator(frequency_result)
 if __name__=="__main__":
+    # 分苹果函数测试
+    test_initial_dsf_without_choice()
+    # 部分盘子分苹果测试
     # test_initial_dsf_with_choice()
-    teest_calculate_symmetry_indicator()
+    # teest_calculate_symmetry_indicator()

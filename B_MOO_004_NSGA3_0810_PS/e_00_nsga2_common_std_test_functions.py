@@ -109,7 +109,7 @@ class NSGA2():
         f2 = g * (1 - (f1 / g) ** 2)
         return [f1,f2]
 
-    def non_donminate2(self):  # pop*2行
+    def non_donminate_twice(self):  # pop*2行
         self.fronts = []  # Pareto前沿面
         self.fronts.append([])
         self.set_sp = []
@@ -126,7 +126,7 @@ class NSGA2():
         for i in range(2 * self.pop_size):
             position = self.population_child_conbine[i]
             # self.cal_obj(position)
-            self.objectives_fitness.append(self.cal_obj_ZDT6(position))  # [i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
+            self.objectives_fitness.append(self.cal_obj_ZDT3(position))  # [i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
             # self.objectives[i][1] = f2
         for i in range(2 * self.pop_size):
             temp = []
@@ -234,7 +234,7 @@ class NSGA2():
     #     del fronts[len(fronts)-1]
     #     self.fronts=fronts
 
-    def non_donminate_1(self):  # pop行 快速非支配排序
+    def non_donminate_single(self):  # pop行 快速非支配排序
         self.fronts = []  # Pareto前沿面
         self.fronts.append([])
         self.set_sp = []
@@ -251,7 +251,7 @@ class NSGA2():
         for i in range(self.pop_size):
             position = self.population[i]
             # self.cal_obj(position)
-            self.objectives_fitness.append(self.cal_obj_ZDT6(position))  # [i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
+            self.objectives_fitness.append(self.cal_obj_ZDT3(position))  # [i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
             # self.objectives[i][1] = f2
         for i in range(self.pop_size):
             temp = []
@@ -299,7 +299,7 @@ class NSGA2():
 
 
     def selection(self):  # 轮盘赌选择
-        self.non_donminate_1()  # 非支配排序,获得Pareto前沿面
+        self.non_donminate_single()  # 非支配排序,获得Pareto前沿面
         # self.test_fast_non_dominated_sort(self.population)
         pi = np.zeros(self.pop_size)  # 个体的概率
         qi = np.zeros(self.pop_size + 1)  # 个体的累积概率
@@ -385,11 +385,11 @@ class NSGA2():
                     self.population[i][j] = 0  # 最小值0
                 if self.population[i][j] > 1:
                     self.population[i][j] = 1  # 最大值1
-        self.non_donminate_1()
+        self.non_donminate_single()
         # self.test_fast_non_dominated_sort(self.population)
         for i in range(len(self.fronts[0])):
             position = self.population[self.fronts[0][i]]
-            self.objectives_fitness.append(self.cal_obj_ZDT6(position))
+            self.objectives_fitness.append(self.cal_obj_ZDT3(position))
         # for i in range(self.pop):
         # position = self.population[i]
         # self.objectives.append(self.cal_obj(position))#[i][0] = f1          #将 f1,f2赋到目标函数值矩阵里
@@ -401,7 +401,7 @@ class NSGA2():
         ax = plt.subplot(111)
         plt.scatter(x, y)
         # plt.plot(,'--',label='')
-        plt.axis([0.0, 1.0, -1, 5])
+        plt.axis([0.0, 1.0, -1, 1])
         xmajorLocator = MultipleLocator(0.1)
         ymajorLocator = MultipleLocator(0.1)
         ax.xaxis.set_major_locator(xmajorLocator)
@@ -424,7 +424,7 @@ class NSGA2():
             # 父代与子代种群合并
             self.conbine_children_parent()
             # 快速非支配排序
-            self.non_donminate2()
+            self.non_donminate_twice()
             # self.test_fast_non_dominated_sort(self.population_child_conbine)
 
             # 拥挤度计算

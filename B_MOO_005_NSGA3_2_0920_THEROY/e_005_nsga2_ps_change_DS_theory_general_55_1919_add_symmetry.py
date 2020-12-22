@@ -17,9 +17,9 @@ import a_mongo_operater_theory
 from mpl_toolkits.mplot3d import Axes3D  # 空间三维画图
 import seaborn as sns
 import pandas as pd
+import os
 sns.set(style='whitegrid', context='notebook')
 # sns.set(style="ticks", color_codes=True)
-
 
 class NSGA2():
     ##############################################begin:fitness#########################################################
@@ -809,6 +809,68 @@ class NSGA2():
     #     print("D_AP：%2f" % D_AP)
     # </editor-fold>
 
+    def calculate_symmetry_indicator(self, frequency_result):
+        """
+        计算对称性
+        :param frequency_result:
+        :return:
+        """
+        ## 首先定义点序列
+        symmetry_keyid_array_55 = np.array([[1, 3, 4, 8, 10, 15], [2, 7, 6, 9, 14, 16]])
+        symmetry_keyid_array_1919 = np.array([[163,164,165,166,
+                                               252,154,253,155,254,156,255,157,256,
+                                               145,146,147,148,
+                                               242,136,243,244,138,245,246,
+                                               127,128,129,130,
+                                               232,118,233,119,234,120,235,121,236,
+                                               109,110,111,112,
+                                               222,100,223,101,224,102,225,103,226,
+                                               91,92,93,94,
+                                               212,82,213,83,214,84,215,85,216,
+                                               73,74,75,76,
+                                               202, 64, 203, 65, 204, 66, 205, 67, 206,
+                                               55, 56, 57, 58,
+                                               192, 46, 193, 47, 194, 48, 195, 49, 196,
+                                               37, 38, 39, 40,
+                                               182, 28, 183, 29, 184, 30, 185, 31, 186,
+                                               19, 20, 21, 22,
+                                               172, 10, 173, 11, 174, 12, 175, 13, 176,
+                                               1, 2, 3, 4],
+                                              [171,170,169,168,
+                                               261,162,260,161,259,160,258,159,257,
+                                               153,152,151,150,
+                                               251,144,250,249,142,248,247,
+                                               135,134,133,132,
+                                               241,126,240,125,239,124,238,123,237,
+                                               117,116,115,114,
+                                               231,108,230,107,229,106,228,105,227,
+                                               99,98,97,96,
+                                               221,90,220,89,219,88,218,87,217,
+                                               81,80,79,78,
+                                               211,72,210,71,209,70,208,69,207,
+                                               63,62,61,60,
+                                               201,54,200,53,199,52,198,51,197,
+                                               45,44,43,42,
+                                               191,36,190,35,189,34,188,33,187,
+                                               27,26,25,24,
+                                               181,18,180,17,179,16,178,15,177,
+                                               9,8,7,6]])
+        symmetry_keyid_array=symmetry_keyid_array_1919
+        ## 将点对的评率填充到上面来
+        frequency_cf_vector = np.full(shape=symmetry_keyid_array.shape, fill_value=0)
+        for ki in range(frequency_cf_vector.shape[0]):
+            for kj in range(frequency_cf_vector.shape[1]):
+                temp = 0
+                for i in range(frequency_result.shape[0]):
+                    for j in range(frequency_result.shape[1] - 1):
+                        if frequency_result[i, j] == symmetry_keyid_array[ki, kj]:
+                            temp += frequency_result[i, -1]
+                frequency_cf_vector[ki, kj] = temp
+        ## 其次计算相关系数值
+        print(
+            "迭代次数{0}，种群规模{1}，其对称相关系数值为：{2}".format(self.max_iteration, self.pop_size, np.corrcoef(frequency_cf_vector)))
+
+
     def __init__(self, pc, pm, low, up, old_providers_count,  THROD, BEITA, x_dim, pop_size, max_iter,f_num,
                  is_builded_providers_adjust, is_new_building_providers_count_fixed, new_building_providers_count_fixed,
                  is_every_new_building_providers_scale_equal,
@@ -862,16 +924,30 @@ class NSGA2():
         # 绘制频率分布图
         frequency_result=self.show_population_frequency_bar_graph(population_front0)
         # 将frequency_result存储到文件夹中
-        np.savetxt("./frequency_result.txt", frequency_result, fmt='%f', delimiter=',')
+        # np.savetxt("./frequency_result.txt", frequency_result, fmt='%f', delimiter=',')
+        # 以下是得到将frequency_result的一种样式
+        # 1.000000, 6.000000, 33.000000
+        # 1.000000, 9.000000, 76.000000
+        # 2.000000, 4.000000, 40.000000
+        # 2.000000, 8.000000, 67.000000
+        # 3.000000, 7.000000, 31.000000
+        # 4.000000, 5.000000, 45.000000
+        # 5.000000, 6.000000, 37.000000
+        # 5.000000, 8.000000, 72.000000
+        # 5.000000, 9.000000, 99.000000
+        # 用shell命令的方式调取python2运行ARCGIS的ARCPy程序
+        # os.system("E:\\ArcGIS\\ArcPy\\ArcGIS10.7\\python.exe ./f_arcgis_update_frequency_value.py")
+        # 计算对称相关系数
+        self.calculate_symmetry_indicator(frequency_result)
 
 
 
 def main_1():
     global provider_id_list
     # 参数设置  代
-    N_GENERATIONS2 = 10  # 迭代次数
+    N_GENERATIONS2 = 20  # 迭代次数
     # 区
-    POP_SIZE2 = 200  # 种群大小
+    POP_SIZE2 = 1000  # 种群大小
     pc2 = 0.25  # 交叉概率
     pm2 = 0.25  # 变异概率
     f_num = 3
@@ -937,9 +1013,9 @@ def main_1():
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_theory.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0,
-                                                                                                           DEMANDS_COUNT,
-                                                                                                           OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
+    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_np_theory(0,
+                                                                                                             DEMANDS_COUNT,
+                                                                                                             OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
     # 定义NSGA和执行主程序
     nsga2_obj = NSGA2(pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2,
                       N_GENERATIONS2, f_num,
@@ -972,9 +1048,9 @@ def main_2():
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_theory.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0,
-                                                                                                           DEMANDS_COUNT,
-                                                                                                           OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
+    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_np_theory(0,
+                                                                                                             DEMANDS_COUNT,
+                                                                                                             OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
     # #测试1：已建服务设施不调整，固定provider count，固定 provider scale
     # # 已建服务设施是否调整
     is_builded_providers_adjust = False
@@ -1086,15 +1162,11 @@ def main_2():
 
 
 def main_1919():
-    """
-    19*19为361，其中100个为demands，Providers为261个，其中已建Provider为4个，待建4个
-    :return:
-    """
     global provider_id_list
     # 参数设置  代
-    N_GENERATIONS2 = 500  # 迭代次数
+    N_GENERATIONS2 = 100  # 迭代次数
     # 区
-    POP_SIZE2 = 1000  # 种群大小
+    POP_SIZE2 = 5000  # 种群大小
     pc2 = 0.25  # 交叉概率
     pm2 = 0.25  # 变异概率
     f_num = 3
@@ -1159,9 +1231,9 @@ def main_1919():
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_theory.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0,
-                                                                                                           DEMANDS_COUNT,
-                                                                                                           OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
+    demands_provider_np, demands_pdd_np, provider_id_list = mongo_operater_obj.find_records_format_np_theory(0,
+                                                                                                             DEMANDS_COUNT,
+                                                                                                             OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  # 必须要先创建索引，才可以执行
     # 定义NSGA和执行主程序
     nsga2_obj = NSGA2(pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT, THROD, BEITA, PENTENTIAL_NEW_PROVIDERS_COUNT, POP_SIZE2,
                       N_GENERATIONS2, f_num,
@@ -1171,5 +1243,7 @@ def main_1919():
     nsga2_obj.excute(demands_provider_np, demands_pdd_np)
 # NSGA2入口
 if __name__ == '__main__':
+    # main_1()
+    # main_2()
     main_1919()
 

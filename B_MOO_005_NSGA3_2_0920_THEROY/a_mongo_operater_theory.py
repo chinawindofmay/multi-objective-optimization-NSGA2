@@ -68,7 +68,7 @@ class MongoOperater:
     """
     函数：基于Numpy存储，查找特定位置段的对象集合，跳过skip_count个，找出splic_count个
     """
-    def find_records_format_numpy_2(self, begin_counter, DEMANDS_COUNT, PROVIDERS_COUNT):
+    def find_records_format_np_theory(self, begin_counter, DEMANDS_COUNT, PROVIDERS_COUNT):
         self.collection.create_index([("demand_id", 1)])
         records_list = list(self.collection.find().sort([("demand_id", 1)]))[begin_counter:DEMANDS_COUNT]
         demands_provider_np = np.full((PROVIDERS_COUNT, DEMANDS_COUNT, 3), 0.000000001)
@@ -85,6 +85,27 @@ class MongoOperater:
         for j in range(PROVIDERS_COUNT):
             provider_id_list.append(records_list[0]["provider"][j]["provider_id"])
         return demands_provider_np,demands_pdd_np,provider_id_list
+
+    """
+    函数：基于Numpy存储，查找特定位置段的对象集合，跳过skip_count个，找出splic_count个
+    """
+    def find_records_format_np_jianye(self, begin_counter, DEMANDS_COUNT, PROVIDERS_COUNT):
+        self.collection.create_index([("demand_id", 1)])
+        records_list = list(self.collection.find().sort([("demand_id", 1)]))[begin_counter:DEMANDS_COUNT]
+        demands_provider_np = np.full((PROVIDERS_COUNT, DEMANDS_COUNT, 3), 0.000000001)
+        demands_pdd_np = np.full((DEMANDS_COUNT, 2), 0.000000001)
+        # demands_provider_np=np.full((89,184,3),0.000000001)
+        for i in range(DEMANDS_COUNT):
+            demands_pdd_np[i, 0] = records_list[i]["population"]
+            demands_provider_np[:, i, 2] = 0.0001  # vj
+            for j in range(PROVIDERS_COUNT):
+                demands_provider_np[j, i, 0] = records_list[i]["provider"][j]["quickcharge"]
+                demands_provider_np[j, i, 1] = records_list[i]["provider"][j]['travel']["D_T"]
+        # 用于后面将结果做展示
+        provider_id_list = []
+        for j in range(PROVIDERS_COUNT):
+            provider_id_list.append(records_list[0]["provider"][j]["provider_id"])
+        return demands_provider_np, demands_pdd_np,provider_id_list
 
     """
     函数：更新特定demand_id值的demand对象的特定的provider_id_value值的provider对象的Travel值

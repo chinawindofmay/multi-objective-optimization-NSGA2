@@ -720,7 +720,7 @@ if __name__=="__main__":
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_theory.MongoOperater(DB_NAME, COLLECTION_NAME)
     # 获取到所有的记录
-    demands_provider_np, demands_pdd_np,provider_id_list = mongo_operater_obj.find_records_format_numpy_2(0, DEMANDS_COUNT, OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  #必须要先创建索引，才可以执行
+    demands_provider_np, demands_pdd_np,provider_id_list = mongo_operater_obj.find_records_format_np_theory(0, DEMANDS_COUNT, OLD_PROVIDERS_COUNT + PENTENTIAL_NEW_PROVIDERS_COUNT)  #必须要先创建索引，才可以执行
     # 执行NSGA3
     nsga3=NSGA3(N_GENERATIONS2, POP_SIZE2, fitness_num2, t12, t22, pc2, pm2, low2, up2, OLD_PROVIDERS_COUNT,PENTENTIAL_NEW_PROVIDERS_COUNT,THROD,BEITA)
     result_popu=nsga3.excute(demands_provider_np, demands_pdd_np)

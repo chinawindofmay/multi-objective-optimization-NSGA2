@@ -191,6 +191,9 @@ def calculate_symmetry_indicator( frequency_result):
 def teest_calculate_symmetry_indicator():
     frequency_result = np.loadtxt('./frequency_result.txt', delimiter=',')
     calculate_symmetry_indicator(frequency_result)
+
+
+
 if __name__=="__main__":
     # 分苹果函数测试
     test_initial_dsf_without_choice()

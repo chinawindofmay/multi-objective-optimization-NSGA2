@@ -17,7 +17,7 @@ import zlib
 def update_solution_to_shp_layer():
     log_file_path = "./log"
     PROVIDERS_COUNT = 49
-    D1_npzfile = np.load(log_file_path + "/jianye_solutions.npz")
+    D1_npzfile = np.load(log_file_path + "/jianye_solutions_300.npz")
     population_front0=D1_npzfile["population_front0"]
     best_y=D1_npzfile["objectives_fitness"]
 

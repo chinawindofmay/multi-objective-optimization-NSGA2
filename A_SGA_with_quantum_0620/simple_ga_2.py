@@ -171,13 +171,13 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = Axes3D(fig)
     plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
-    # plot_3d(ax,F222)
+    plot_3d(ax,F222)
     Z_max_result,Z_mean_result,Z_median_result,Z_result=traditional_ga(F222)
 
     #如果在脚本中使用ion()命令开启了交互模式，没有使用ioff()关闭的话，则图像会一闪而过，并不会常留。
     plt.ioff()
-    # plot_3d(ax,F222)
-    # plot(Z_result)
+    plot_3d(ax,F222)
+    plot(Z_result)
     #二维可视化结果
     axes = plt.subplot()
     axes.plot(Z_result, 'g.')  # 每次循环的目标函数值

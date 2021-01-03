@@ -124,26 +124,34 @@ class MongoOperater:
             demands_pdd_np[i, 3] =  records_list[i]["populist"][21] / 10000  # 单位换成万人
             for j in range(PROVIDERS_COUNT):
                 demands_provider_np[j, i, 0] = records_list[i]["provider"][j]["quickcharge"]
-                # 昆山特有
-                if records_list[i]["provider"][j]['travel']["D_T08"] == 0:
+                #
+                # if records_list[i]["provider"][j]['travel']["D_T08"] == 0:
+                #     demands_provider_np[j, i, 1] = 0.1
+                # else:
+                #     demands_provider_np[j, i, 1] = records_list[i]["provider"][j]['travel']["D_T08"]
+                #
+                # if records_list[i]["provider"][j]['travel']["D_T13"] == 0:
+                #     demands_provider_np[j, i, 2] = 0.1
+                # else:
+                #     demands_provider_np[j, i, 2] = records_list[i]["provider"][j]['travel']["D_T13"]
+                #
+                # if records_list[i]["provider"][j]['travel']["D_T18"] == 0:
+                #     demands_provider_np[j, i, 3] = 0.1
+                # else:
+                #     demands_provider_np[j, i, 3] = records_list[i]["provider"][j]['travel']["D_T18"]
+                #
+                # if records_list[i]["provider"][j]['travel']["D_T22"] == 0:
+                #     demands_provider_np[j, i, 4] = 0.1
+                # else:
+                #     demands_provider_np[j, i, 4] = records_list[i]["provider"][j]['travel']["D_T22"]
+
+                if records_list[i]["provider"][j]['travel']["D_T17"] == 0:
                     demands_provider_np[j, i, 1] = 0.1
                 else:
-                    demands_provider_np[j, i, 1] = records_list[i]["provider"][j]['travel']["D_T08"]
-
-                if records_list[i]["provider"][j]['travel']["D_T13"] == 0:
-                    demands_provider_np[j, i, 2] = 0.1
-                else:
-                    demands_provider_np[j, i, 2] = records_list[i]["provider"][j]['travel']["D_T13"]
-
-                if records_list[i]["provider"][j]['travel']["D_T18"] == 0:
-                    demands_provider_np[j, i, 3] = 0.1
-                else:
-                    demands_provider_np[j, i, 3] = records_list[i]["provider"][j]['travel']["D_T18"]
-
-                if records_list[i]["provider"][j]['travel']["D_T22"] == 0:
-                    demands_provider_np[j, i, 4] = 0.1
-                else:
-                    demands_provider_np[j, i, 4] = records_list[i]["provider"][j]['travel']["D_T22"]
+                    demands_provider_np[j, i, 1] = records_list[i]["provider"][j]['travel']["D_T17"]
+                    demands_provider_np[j, i, 2] = records_list[i]["provider"][j]['travel']["D_T17"]
+                    demands_provider_np[j, i, 3] = records_list[i]["provider"][j]['travel']["D_T17"]
+                    demands_provider_np[j, i, 4] = records_list[i]["provider"][j]['travel']["D_T17"]
 
         # 用于后面将结果做展示
         provider_id_list = []

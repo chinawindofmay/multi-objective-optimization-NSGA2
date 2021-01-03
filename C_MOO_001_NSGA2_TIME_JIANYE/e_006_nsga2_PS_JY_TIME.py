@@ -1127,8 +1127,8 @@ def main_565_186_CUF_SUF_Jianye():
     N_GENERATIONS2 = 100  # 迭代次数
     # 区
     POP_SIZE2 = 400  # 种群大小
-    pc2 = 0.7  # 交叉概率
-    pm2 = 0.25  # 变异概率
+    pc2 = 0.8  # 交叉概率
+    pm2 = 0.1  # 变异概率
     f_num = 3
 
     # # # # 测试4：已建服务设施不调整，非固定provider count，非固定 provider scale
@@ -1141,22 +1141,22 @@ def main_565_186_CUF_SUF_Jianye():
     B_NP_SF = False
     B_NP_S = None   # 无效的变量，不会被用到的
     # 总规模
-    E_seting = 100
+    E_seting = 200
 
     #### 测试建邺快速充电桩的数据
-    DEMANDS_COUNT = 565  # 需求点，即小区，个数
+    DEMANDS_COUNT = 72  # 需求点，即小区，个数
     # 供给点，即充电桩，的个数，与X_num2保持一致
     PENTENTIAL_NP_C = 146
     OLD_PROVIDERS_COUNT = 40
     BEITA = 0.8
     # 主要参考A multi-objective optimization approach for health-care facility location-allocation problems in highly developed cities such as Hong Kong
     THROD = 0.3  # 有效距离或者时间的阈值
-    low2 = 1  # 最低阈值，至少建设1个
+    low2 = 2  # 最低阈值，至少建设1个
     up2 = 10  # 最高阈值，最多建设10个
     SMALL_INF=1e-6
     BIG_INF=1e8
     DB_NAME = "admin"  # MONGODB数据库的配置
-    COLLECTION_NAME = "moo_ps_jy_time"  # COLLECTION 名称
+    COLLECTION_NAME = "moo_ps_jy_time1000"  # COLLECTION 名称
 
     # 初始化mongo对象
     mongo_operater_obj = a_mongo_operater_PS_JY_TIME.MongoOperater(DB_NAME, COLLECTION_NAME)

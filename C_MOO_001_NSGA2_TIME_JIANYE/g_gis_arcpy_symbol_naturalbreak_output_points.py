@@ -35,7 +35,7 @@ author:crazy
 # field_name=["pop08","pop13","pop18","pop22"]#字段名称
 
 file_path="E:\\02research\\002data\\powerstation\\Jianye_TMooPs_1227"#文件路径
-mxd_file_path="{0}\\jianye_TMooPs_1227.mxd".format(file_path) #mxd名称
+mxd_file_path="{0}\\jianye_TMooPs_1227_solutions.mxd".format(file_path) #mxd名称
 lyr_name=u"New charge stations"#图层名称
 field_name=["solution1","solution2","solution3","solution4","solution5",
             "solution6","solution7","solution8","solution9","solution10"]#字段名称

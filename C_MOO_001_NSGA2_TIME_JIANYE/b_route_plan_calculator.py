@@ -16,7 +16,8 @@ python $this_file.py --help
 
 
 DB_NAME="admin"
-COLLECTION_NAME="moo_ps_jy_time"
+# COLLECTION_NAME="moo_ps_jy_time"
+COLLECTION_NAME="moo_ps_jy_time1000"
 
 """
 内置函数：程序入口
@@ -39,7 +40,7 @@ def do_it(from_row,n_rows,time_slot):
                 route_planner_queue += Drivinger(demand_id,item_provider, *coordinates)                   #将每条记录请求体放入请求队列对象中。对于+=号操作，可变对象调用__add__，不可变对象调用的是__iadd__
     return n_fetched
 
-TIME_LIST = ["08"]
+TIME_LIST = ["08","13", "18", "22"]
 
 # , "13", "18", "22"
 

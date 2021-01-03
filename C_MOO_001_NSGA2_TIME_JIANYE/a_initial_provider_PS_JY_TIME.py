@@ -72,10 +72,10 @@ def initial_providers():
 def get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj):
     conn = cx_Oracle.connect(conn_string)
     cursor = conn.cursor()
-    select_demands_sql = '''select KEYID,p041200,p041201,p041202,p041203,p041204,
-                            p041205,p041206,p041207,p041208,p041209,p041210,p041211,p041212,
-                            p041213,p041214,p041215,p041216,p041217,p041218,p041219,p041220,
-                            p041221,p041222,p041223,x,y from pop_grid250_20190412 order by KEYID asc '''
+    select_demands_sql = '''select KEYID,pop041200,pop041201,pop041202,pop041203,pop041204,
+                            pop041205,pop041206,pop041207,pop041208,pop041209,pop041210,pop041211,pop041212,
+                            pop041213,pop041214,pop041215,pop041216,pop041217,pop041218,pop041219,pop041220,
+                            pop041221,pop041222,pop041223,x,y from pop_fishnet1000_20190412 order by KEYID asc  '''
     # 执行
     cursor.execute(select_demands_sql)
     rs = cursor.fetchall()
@@ -107,6 +107,7 @@ def caculate_distance(provider_list,demand_x,demand_y):
 if __name__=="__main__":
     provider_list = initial_providers()
     # mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_theory")
-    mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_jy_time")
+    # mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_jy_time")
+    mongo_operater_obj = a_mongo_operater_theory.MongoOperater("admin", "moo_ps_jy_time1000")
     get_all_demonds_and_save_in_mongodb(provider_list,mongo_operater_obj)
 

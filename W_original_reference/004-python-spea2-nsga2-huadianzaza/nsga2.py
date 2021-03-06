@@ -318,5 +318,5 @@ class NSGA2():
 
 # NSGA2入口
 if __name__ == '__main__':
-    NSGA = NSGA2(30, 100, 500)
+    NSGA = NSGA2(x_dim=30, pop_size=100, max_iter=500)
     NSGA.run()

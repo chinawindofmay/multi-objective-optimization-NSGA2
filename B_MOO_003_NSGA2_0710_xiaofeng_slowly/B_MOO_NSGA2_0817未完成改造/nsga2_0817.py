@@ -404,9 +404,9 @@ class NSGA2:
         equal=0#y1的目标函数值等于y2个体的目标函数值数目
         greater=0#y1的目标函数值大于y2个体的目标函数值数目
         for i in range(len(y1)):
-            if y1[i]>y2.fitness[i]:
+            if y1[i]>y2.fitness_nsga2[i]:
                 greater=greater+1
-            elif y1[i]==y2.fitness[i]:
+            elif y1[i]==y2.fitness_nsga2[i]:
                 equal=equal+1
             else:
                 less=less+1
@@ -425,17 +425,17 @@ class NSGA2:
         z = []
         if f_num == 2:
             for i in range(len(current_population)):
-                x.append(current_population[i].fitness[0])
-                y.append(current_population[i].fitness[1])
+                x.append(current_population[i].fitness_nsga2[0])
+                y.append(current_population[i].fitness_nsga2[1])
             plt.scatter(x, y, marker='o', color='red', s=40)
             plt.xlabel('f1')
             plt.ylabel('f2')
             plt.show()
         elif f_num == 3:
             for i in range(len(current_population)):
-                x.append(current_population[i].fitness[0])
-                y.append(current_population[i].fitness[1])
-                z.append(current_population[i].fitness[2])
+                x.append(current_population[i].fitness_nsga2[0])
+                y.append(current_population[i].fitness_nsga2[1])
+                z.append(current_population[i].fitness_nsga2[2])
             fig = plt.figure()
             ax = Axes3D(fig)
             ax.scatter(x, y, z, c='r')
@@ -465,7 +465,7 @@ class NSGA2:
             for j in range(len(A)):
                 dd = 0
                 for k in range(self.F_NUM):
-                    dd = dd + float((P[i][k] - A[j].fitness[k]) ** 2)
+                    dd = dd + float((P[i][k] - A[j].fitness_nsga2[k]) ** 2)
                 temp.append(math.sqrt(dd))
             min_d = min_d + np.min(temp)
         D_AP = float(min_d / len(P))

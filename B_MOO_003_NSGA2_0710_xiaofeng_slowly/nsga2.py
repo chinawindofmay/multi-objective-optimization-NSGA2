@@ -166,9 +166,9 @@ def non_domination_sort(population, pop_size,  f_num, x_num):
             equal=0#y'的目标函数值等于个体的目标函数值数目
             greater=0#y'的目标函数值大于个体的目标函数值数目
             for k in range(f_num):
-                if (population[i].fitness[k]<population[j].fitness[k]):
+                if (population[i].fitness_nsga2[k]<population[j].fitness_nsga2[k]):
                     less=less+1
-                elif (population[i].fitness[k] == population[j].fitness[k]):
+                elif (population[i].fitness_nsga2[k] == population[j].fitness_nsga2[k]):
                     equal=equal+1
                 else:
                     greater=greater+1
@@ -216,20 +216,20 @@ def crowding_distance_sort( population_non,fronts, f_num, x_num):
         for i in range(f_num):
             #根据该目标函数值对该等级的个体进行排序
             index_objective=[]#通过目标函数排序后的个体索引
-            objective_sort=sorted(y, key=lambda Individual:Individual.fitness[i])#通过目标函数排序后的个体
+            objective_sort=sorted(y, key=lambda Individual:Individual.fitness_nsga2[i])#通过目标函数排序后的个体
             for j in range(len(objective_sort)):
                 index_objective.append(y.index(objective_sort[j]))
             #记fmax为最大值，fmin为最小值
-            fmin=objective_sort[0].fitness[i]
-            fmax=objective_sort[len(objective_sort)-1].fitness[i]
+            fmin=objective_sort[0].fitness_nsga2[i]
+            fmax=objective_sort[len(objective_sort)-1].fitness_nsga2[i]
             #对排序后的两个边界拥挤度设为1d和nd设为无穷
             yF[index_objective[0]][i]=float("inf")
             yF[index_objective[len(index_objective)-1]][i]=float("inf")
             #计算nd=nd+(fm(i+1)-fm(i-1))/(fmax-fmin)
             j=1
             while (j<=(len(index_objective)-2)):
-                pre_f=objective_sort[j-1].fitness[i]
-                next_f=objective_sort[j+1].fitness[i]
+                pre_f=objective_sort[j-1].fitness_nsga2[i]
+                next_f=objective_sort[j+1].fitness_nsga2[i]
                 if (fmax-fmin==0):
                     yF[index_objective[j]][i]=float("inf")
                 else:
@@ -441,9 +441,9 @@ def dominate(y1, y2):
     equal=0#y1的目标函数值等于y2个体的目标函数值数目
     greater=0#y1的目标函数值大于y2个体的目标函数值数目
     for i in range(len(y1)):
-        if y1[i]>y2.fitness[i]:
+        if y1[i]>y2.fitness_nsga2[i]:
             greater=greater+1
-        elif y1[i]==y2.fitness[i]:
+        elif y1[i]==y2.fitness_nsga2[i]:
             equal=equal+1
         else:
             less=less+1
@@ -504,17 +504,17 @@ if __name__=="__main__":
     z=[]
     if F_NUM==2:
         for i in range(len(current_population)):
-            x.append(current_population[i].fitness[0])
-            y.append(current_population[i].fitness[1])
+            x.append(current_population[i].fitness_nsga2[0])
+            y.append(current_population[i].fitness_nsga2[1])
         plt.scatter(x,y,marker='o',color='red',s=40)
         plt.xlabel('f1')
         plt.ylabel('f2')
         plt.show()
     elif F_NUM==3:
         for i in range(len(current_population)):
-            x.append(current_population[i].fitness[0])
-            y.append(current_population[i].fitness[1])
-            z.append(current_population[i].fitness[2])
+            x.append(current_population[i].fitness_nsga2[0])
+            y.append(current_population[i].fitness_nsga2[1])
+            z.append(current_population[i].fitness_nsga2[2])
         fig = plt.figure()
         ax = Axes3D(fig)
         ax.scatter(x,y,z,c='r')
@@ -542,7 +542,7 @@ if __name__=="__main__":
         for j in range(len(A)):
             dd=0
             for k in range(F_NUM):
-                dd=dd+float((P[i][k] - A[j].fitness[k]) ** 2)
+                dd=dd+float((P[i][k] - A[j].fitness_nsga2[k]) ** 2)
             temp.append(math.sqrt(dd))
         min_d=min_d+np.min(temp)
     D_AP=float(min_d/len(P))

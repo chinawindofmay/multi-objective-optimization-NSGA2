@@ -48,22 +48,25 @@ file_path="E:\\02research\\002data\\powerstation_nj_2021"#文件路径
 # round_num=0.1#取整
 # decimal_num=1 #小数位数
 
-#
+
 # ### 可达性
-# mxd_file_path="{0}\\powerstation_njall_2021_accessibility.mxd".format(file_path) #mxd名称
-# lyr_name=u"Accessibility"#图层名称
+# mxd_file_path="{0}\\powerstation_njall_2021_accessibility_chinese.mxd".format(file_path) #mxd名称
+# lyr_name=u"可达性"#图层名称
 # field_name=["access08","access13","access18","access22"]#字段名称
 # nb_class=5#级数
 # round_num=0.0001#取整
 # decimal_num=4 #小数位数
 
 ### 不公平性
-mxd_file_path="{0}\\powerstation_njall_2021_inequity.mxd".format(file_path) #mxd名称
-lyr_name=u"Inequity"#图层名称
+mxd_file_path="{0}\\powerstation_njall_2021_inequity_chinese.mxd".format(file_path) #mxd名称
+lyr_name=u"不公平性值"#图层名称
 field_name=["equity08","equity13","equity18","equity22"]#字段名称
 nb_class=5#级数
 round_num=0.00001#取整
 decimal_num=5 #小数位数
+
+
+
 
 def show_hist_of_breaks(data,break_values):
     '''

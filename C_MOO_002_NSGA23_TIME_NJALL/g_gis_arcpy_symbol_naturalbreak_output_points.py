@@ -172,22 +172,22 @@ if __name__=="__main__":
 
     # # driving time
     # file_path = "E:\\02research\\002data\\powerstation_nj_2021"  # 文件路径
-    # mxd_file_path = "{0}\\powerstation_njall_2021_edit.mxd".format(file_path)  # mxd名称
+    # mxd_file_path = "{0}\\powerstation_njall_2021_drivingtime_chinese.mxd".format(file_path)  # mxd名称
     # lyr_name = u"新建充电桩"  # 图层名称
     # field_name = ["solution1", "solution2", "solution3", "solution4", "solution5",
     #               "solution6", "solution7", "solution8"]  # 字段名称
 
-    # cover people
-    file_path = "E:\\02research\\002data\\powerstation_nj_2021"  # 文件路径
-    mxd_file_path = "{0}\\powerstation_njall_2021_coverpeople.mxd".format(file_path)  # mxd名称
-    lyr_name = u"新建充电桩"  # 图层名称
-    field_name = ["solution1", "solution2", "solution3"]  # 字段名称
+    # # cover people
+    # file_path = "E:\\02research\\002data\\powerstation_nj_2021"  # 文件路径
+    # mxd_file_path = "{0}\\powerstation_njall_2021_coverpeople_chinese.mxd".format(file_path)  # mxd名称
+    # lyr_name = u"新建充电桩"  # 图层名称
+    # field_name = ["solution1", "solution2", "solution3"]  # 字段名称
 
-    # file_path="E:\\02research\\002data\\powerstation_nj_2021"#文件路径
-    # mxd_file_path="{0}\\powerstation_njall_2021_static.mxd".format(file_path) #mxd名称
-    # mxd_file_path="{0}\\powerstation_njall_2021_dynamic.mxd".format(file_path) #mxd名称
-    # lyr_name=u"新建充电桩"#图层名称
-    # field_name=["solution1","solution2"]#字段名称
+    file_path="E:\\02research\\002data\\powerstation_nj_2021"#文件路径
+    # mxd_file_path="{0}\\powerstation_njall_2021_static_chinese.mxd".format(file_path) #mxd名称
+    mxd_file_path="{0}\\powerstation_njall_2021_dynamic_chinese.mxd".format(file_path) #mxd名称
+    lyr_name=u"新建充电桩"#图层名称
+    field_name=["solution1","solution2"]#字段名称
 
     nb_class = 6  # 级数
     round_num = 1.0  # 取整

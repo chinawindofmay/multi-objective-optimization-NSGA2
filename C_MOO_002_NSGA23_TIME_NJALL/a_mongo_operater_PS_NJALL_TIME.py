@@ -320,23 +320,25 @@ class MongoOperater:
         print(np.sum(demands_provider_np[:, :, 1:5]<=0),"-------测试代码 判断是否D_T存在有零的情况，为0则表示没有，不为零则表示有问题")
         return demands_provider_np, demands_pdd_np, provider_id_list,demand_id_list
 
-    def find_records_travel_time_NJALL(self, begin_counter, DEMANDS_COUNT, PROVIDERS_COUNT, SMALL_INF):
+    def find_records_travel_time_NJALL(self, begin_counter, DEMANDS_COUNT, PROVIDERS_COUNT, SMALL_INF,time_slot):
         self.collection.create_index([("demand_id", 1)])
         records_list = list(self.collection.find().sort([("demand_id", 1)]))[begin_counter:DEMANDS_COUNT]
+        if time_slot ==None:
+            time_slot="D_T08"
         # 片，行，列
         travel_time = []
         for i in range(DEMANDS_COUNT):
             for j in range(PROVIDERS_COUNT):
-                if records_list[i]["provider"][j]['travel']["D_T08"]<0.5:
+                if records_list[i]["provider"][j]['travel'][time_slot]<0.5:
                     travel_obj=[]
                     travel_obj.append(records_list[i]["x"])
                     travel_obj.append(records_list[i]["y"])
                     travel_obj.append(records_list[i]["provider"][j]['x'])
                     travel_obj.append(records_list[i]["provider"][j]['y'])
-                    if records_list[i]["provider"][j]['travel']["D_T08"] < 0.001:
+                    if records_list[i]["provider"][j]['travel'][time_slot] < 0.001:
                         travel_obj.append(0.1)
                     else:
-                        travel_obj.append(records_list[i]["provider"][j]['travel']["D_T08"])
+                        travel_obj.append(records_list[i]["provider"][j]['travel'][time_slot])
                     travel_time.append(travel_obj)
         # 用于后面将结果做展示
         provider_id_list = []
